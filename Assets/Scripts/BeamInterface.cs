@@ -8,8 +8,8 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(ParticleSystem))]
 public class BeamInterface : MonoBehaviour {
-    public float length;
-    public bool isHooked;
+    public float length = 5f;
+    public bool isHooked = false;
 
     ParticleSystem beam;
 
@@ -20,6 +20,15 @@ public class BeamInterface : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        
+        ParticleSystem.MainModule mainParams = beam.main;
+
+        ParticleSystem.MinMaxCurve lifetime = mainParams.startLifetime;
+        ParticleSystem.MinMaxCurve speed = mainParams.startSpeed;
+        lifetime.constant = length / speed.constant;
+
+        mainParams.startLifetime = lifetime;
+        mainParams.startSpeed = speed;
+
+
     }
 }
