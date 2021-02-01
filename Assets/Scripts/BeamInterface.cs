@@ -6,6 +6,7 @@ using UnityEngine;
 /// Use this to set properties of the GravBeam like length (under development)
 /// and whether it is free or hooked (under development).
 /// </summary>
+[ExecuteInEditMode]
 [RequireComponent(typeof(ParticleSystem))]
 public class BeamInterface : MonoBehaviour {
     public float length = 5f;
