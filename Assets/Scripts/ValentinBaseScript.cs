@@ -4,33 +4,32 @@ using UnityEngine;
 
 public class ValentinBaseScript : MonoBehaviour
 {
-    /*
+
     private LineRenderer lr;
     private Vector3 grapplePoint;
     public LayerMask whatIsGrappleable;
-    //public Transform gunTip, camera, player;
-    private float maxDistance = 100f;
+    public Transform gunTip, camera, player;
+    private float maxDistance = 10f;
     private SpringJoint joint;
-    float x;
-    float y;
+    private bool isGrappling;
 
     void Awake()
     {
         lr = GetComponent<LineRenderer>();
+        isGrappling = false;
     }
 
     void Update()
     {
-        x = Input.GetAxisRaw("Horizontal");
-        y = Input.GetAxisRaw("Vertical");
-        if (x > 0)
+        if (Input.GetAxis("Horizontal") > 0)
         {
             StartGrapple();
         }
-        else if (x < 0)
+        else if (Input.GetAxis("Horizontal") <= 0)
         {
             StopGrapple();
         }
+
     }
 
     //Called after Update
@@ -39,14 +38,19 @@ public class ValentinBaseScript : MonoBehaviour
         DrawRope();
     }
 
+    /// <summary>
     /// Call whenever we want to start a grapple
-
+    /// </summary>
     void StartGrapple()
     {
-        //need to origin and direction to direction player inputs
+        
+        if (isGrappling)
+            return;
         RaycastHit hit;
-        if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, whatIsGrappleable))
+        if (Physics.Raycast(camera.position, camera.right, out hit, maxDistance, whatIsGrappleable))
         {
+            Debug.Log("here");
+            isGrappling = true;
             grapplePoint = hit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
@@ -65,13 +69,16 @@ public class ValentinBaseScript : MonoBehaviour
 
             lr.positionCount = 2;
             currentGrapplePosition = gunTip.position;
-        
+        }
     }
 
 
+    /// <summary>
     /// Call whenever we want to stop a grapple
+    /// </summary>
     void StopGrapple()
     {
+        isGrappling = false;
         lr.positionCount = 0;
         Destroy(joint);
     }
@@ -98,5 +105,5 @@ public class ValentinBaseScript : MonoBehaviour
     {
         return grapplePoint;
     }
-*/
+
 }
