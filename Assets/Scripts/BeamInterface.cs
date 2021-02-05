@@ -11,12 +11,18 @@ using UnityEngine;
 public class BeamInterface : MonoBehaviour {
     public float length = 5f;
     public bool isHooked = false;
+    public float hookedSpeed;
+    public float freeSpeed;
 
     ParticleSystem beam;
 
     // Start is called before the first frame update
     void Start() {
         beam = GetComponent<ParticleSystem>();
+    }
+
+    void OnDrawGizmos() {
+        Gizmos.DrawLine(transform.position, transform.position + length * transform.forward);
     }
 
     // Update is called once per frame
@@ -30,6 +36,20 @@ public class BeamInterface : MonoBehaviour {
         mainParams.startLifetime = lifetime;
         mainParams.startSpeed = speed;
 
+        ParticleSystem.NoiseModule noise = beam.noise;
+
+        if (isHooked) {
+            speed = hookedSpeed;
+            noise.enabled = false;
+            
+        }
+        else {
+            speed = freeSpeed;
+            noise.enabled = true;
+        }
+
+        mainParams.startLifetime = lifetime;
+        mainParams.startSpeed = speed;
 
     }
 }
