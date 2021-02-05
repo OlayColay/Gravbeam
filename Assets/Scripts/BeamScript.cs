@@ -4,39 +4,54 @@ using UnityEngine;
 
 public class BeamScript : MonoBehaviour
 {
-    float RADIUS = 2;
-    float BEAM_STRENGTH = 10;
+    public float BEAM_STRENGTH = 10;
+    public float BEAM_LOCATION_OFFSET;
+    public GameObject Beam1Location;
     Rigidbody2D rb;
+
+    double timeOfBeam = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    // FixedUpdate is for physics stuff
+    void FixedUpdate()
     {
         Vector3 beam1 = GetDirectionMouse();
         float distance = beam1.magnitude;
         beam1 /= distance;
-        print(beam1);
+
         //Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        Debug.DrawLine(transform.position + beam1 * RADIUS, transform.position + beam1 * distance, Color.cyan, 0.05f);
 
-        if (distance > 0.1)
+
+        Debug.DrawLine(transform.position + beam1 * BEAM_LOCATION_OFFSET, transform.position + beam1 * distance, Color.cyan, 0.05f);
+        //move the beamlocationn to that direction and position
+        Beam1Location.transform.position = transform.position + beam1 * BEAM_LOCATION_OFFSET;
+        Vector3 beam1Point = Beam1Location.transform.position + beam1;
+        Beam1Location.transform.LookAt(beam1Point);
+        //Beam1Location.transform.eulerAngles=
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + beam1 * BEAM_LOCATION_OFFSET, beam1, distance- BEAM_LOCATION_OFFSET);
+        
+        if (hit.collider!=null && hit.collider.gameObject.tag == "Beamable")
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position + beam1 * RADIUS, beam1, distance- RADIUS);
-            if (hit.collider!=null)
-            {
-                Rigidbody2D rbOther = hit.rigidbody;
-                
-                rb.AddForce(beam1* BEAM_STRENGTH);
-                rbOther.AddForce(-beam1* BEAM_STRENGTH);
+            print(hit.collider.gameObject.tag);
+            Rigidbody2D rbOther = hit.rigidbody;
+            float forceStrength = GetForceStrength(hit.distance, 1); //get a strength of beam based on how far away you are from target. may modify later to make circular forces easier.
+            rb.AddForce(beam1* forceStrength);
+            rbOther.AddForce(-beam1* forceStrength);
+            
 
-            }
+        }
+        else
+        {
+            timeOfBeam = 0;
         }
 
-        rb.velocity /= 1.005f;
+        rb.velocity /= 1.005f; 
         rb.AddForce(GetDirection()* BEAM_STRENGTH);
     }
 
@@ -73,9 +88,9 @@ public class BeamScript : MonoBehaviour
 
 
 
-    float GetForceStrength(float distance)
+    float GetForceStrength(float distance, float time)
     {
-        return distance;
+        return 2;
     }
 
 }
