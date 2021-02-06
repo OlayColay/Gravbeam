@@ -6,7 +6,7 @@
             "id": "ecaee42d-6a5a-461a-b926-3f5ca0035042",
             "actions": [
                 {
-                    "name": "Grapple 1",
+                    "name": "Beam1",
                     "type": "Value",
                     "id": "5108f521-da95-4b16-a000-ea9738f99742",
                     "expectedControlType": "Vector2",
@@ -22,7 +22,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grapple 1",
+                    "action": "Beam1",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -33,7 +33,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grapple 1",
+                    "action": "Beam1",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -44,7 +44,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grapple 1",
+                    "action": "Beam1",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -55,7 +55,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grapple 1",
+                    "action": "Beam1",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -66,7 +66,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grapple 1",
+                    "action": "Beam1",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -77,7 +77,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grapple 1",
+                    "action": "Beam1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
