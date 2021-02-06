@@ -9,10 +9,18 @@ using UnityEngine;
 [ExecuteInEditMode]
 [RequireComponent(typeof(ParticleSystem))]
 public class BeamInterface : MonoBehaviour {
+    [Tooltip("The length of the beam, as shown by the gizmo")]
     public float length = 5f;
+    [Tooltip("Whether the beam is hooked onto a surface")]
     public bool isHooked = false;
+    [Tooltip("Speed of the beam particles when hooked")]
     public float hookedSpeed;
+    [Tooltip("Speed of the beam particles when free")]
     public float freeSpeed;
+
+    public Gradient freeColor;
+
+    public Gradient hookedColor;
 
     ParticleSystem beam;
 
@@ -28,25 +36,37 @@ public class BeamInterface : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         ParticleSystem.MainModule mainParams = beam.main;
+        ParticleSystem.NoiseModule noise = beam.noise;
+        ParticleSystem.TrailModule trail = beam.trails;
 
         ParticleSystem.MinMaxCurve lifetime = mainParams.startLifetime;
         ParticleSystem.MinMaxCurve speed = mainParams.startSpeed;
+
+        if (isHooked) {
+            speed = hookedSpeed;
+            noise.enabled = false;
+            trail.dieWithParticles = false;
+
+            ParticleSystem.MinMaxGradient color = trail.colorOverLifetime;
+            color.gradient = hookedColor;
+            trail.colorOverLifetime = color;
+        }
+        else {
+            speed = freeSpeed;
+            noise.enabled = true;
+            trail.dieWithParticles = true;
+
+            ParticleSystem.MinMaxGradient color = trail.colorOverLifetime;
+            color.gradient = freeColor;
+            trail.colorOverLifetime = color;
+        }
+
         lifetime.constant = length / speed.constant;
 
         mainParams.startLifetime = lifetime;
         mainParams.startSpeed = speed;
 
-        ParticleSystem.NoiseModule noise = beam.noise;
 
-        if (isHooked) {
-            speed = hookedSpeed;
-            noise.enabled = false;
-            
-        }
-        else {
-            speed = freeSpeed;
-            noise.enabled = true;
-        }
 
         mainParams.startLifetime = lifetime;
         mainParams.startSpeed = speed;
