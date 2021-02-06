@@ -14,7 +14,7 @@ public class BeamScript : MonoBehaviour
     double timeOfBeam = 0;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
@@ -24,42 +24,55 @@ public class BeamScript : MonoBehaviour
         controls.Gameplay.Beam1.canceled += ctx => beam1 = Vector2.zero;
     }
 
-    // FixedUpdate is for physics stuff
-    void FixedUpdate()
+    void OnEnable()
     {
-        // Vector2 beam1 = GetDirectionMouse();
-        float distance = beam1.magnitude;
-        beam1 /= distance;
+        controls.Gameplay.Enable();
+    }
+    void OnDisable()
+    {
+        controls.Gameplay.Disable();
+    }
 
-        //Vector3 fwd = transform.TransformDirection(Vector3.forward);
+    void Update(){
+        Vector2 beam2 = new Vector2(beam1.x, beam1.y);
+        Debug.Log(beam1);
+    }
 
+    // FixedUpdate is for physics stuff
+    // void FixedUpdate()
+    // {
+    //     // Vector2 beam1 = GetDirectionMouse();
+    //     float distance = beam1.magnitude;
+    //     beam1 /= distance;
 
-        Debug.DrawLine((Vector2)transform.position + beam1 * BEAM_LOCATION_OFFSET, (Vector2)transform.position + beam1 * distance, Color.cyan, 0.05f);
-        //move the beamlocationn to that direction and position
-        Beam1Location.transform.position = (Vector2)transform.position + beam1 * BEAM_LOCATION_OFFSET;
-        Vector2 beam1Point = (Vector2)Beam1Location.transform.position + beam1;
-        Beam1Location.transform.LookAt(beam1Point);
+    //     //Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + beam1 * BEAM_LOCATION_OFFSET, beam1, distance- BEAM_LOCATION_OFFSET);
+    //     Debug.DrawLine((Vector2)transform.position + beam1 * BEAM_LOCATION_OFFSET, (Vector2)transform.position + beam1 * distance, Color.cyan, 0.05f);
+    //     //move the beamlocationn to that direction and position
+    //     Beam1Location.transform.position = (Vector2)transform.position + beam1 * BEAM_LOCATION_OFFSET;
+    //     Vector2 beam1Point = (Vector2)Beam1Location.transform.position + beam1;
+    //     Beam1Location.transform.LookAt(beam1Point);
+
+    //     RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + beam1 * BEAM_LOCATION_OFFSET, beam1, distance- BEAM_LOCATION_OFFSET);
         
-        if (hit.collider!=null && hit.collider.gameObject.tag == "Beamable")
-        {
-            print(hit.collider.gameObject.tag);
-            Rigidbody2D rbOther = hit.rigidbody;
-            float forceStrength = GetForceStrength(hit.distance, 1); //get a strength of beam based on how far away you are from target. may modify later to make circular forces easier.
-            rb.AddForce(beam1* forceStrength);
-            rbOther.AddForce(-beam1* forceStrength);
+    //     if (hit.collider!=null && hit.collider.gameObject.tag == "Beamable")
+    //     {
+    //         print(hit.collider.gameObject.tag);
+    //         Rigidbody2D rbOther = hit.rigidbody;
+    //         float forceStrength = GetForceStrength(hit.distance, 1); //get a strength of beam based on how far away you are from target. may modify later to make circular forces easier.
+    //         rb.AddForce(beam1* forceStrength);
+    //         rbOther.AddForce(-beam1* forceStrength);
             
 
-        }
-        else
-        {
-            timeOfBeam = 0;
-        }
+    //     }
+    //     else
+    //     {
+    //         timeOfBeam = 0;
+    //     }
 
-        rb.velocity /= 1.005f; 
-        rb.AddForce(beam1 * BEAM_STRENGTH);
-    }
+    //     rb.velocity /= 1.005f; 
+    //     rb.AddForce(beam1 * BEAM_STRENGTH);
+    // }
 
 
     // Vector3 GetDirection()
