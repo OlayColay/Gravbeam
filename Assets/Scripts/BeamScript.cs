@@ -48,7 +48,10 @@ public class BeamScript : MonoBehaviour
             Rigidbody2D rbOther = hit.rigidbody;
             float forceStrength = GetForceStrength(hit.distance, 1); //get a strength of beam based on how far away you are from target. may modify later to make circular forces easier.
             rb.AddForce(beam1* forceStrength);
-            rbOther.AddForce(-beam1* forceStrength);
+            if (rbOther)
+            {
+                rbOther.AddForce(-beam1 * forceStrength);
+            }
             
 
         }
