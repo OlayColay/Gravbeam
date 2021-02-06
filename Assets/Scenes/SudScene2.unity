@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe6c41fe1bc045cea089eb5d5abad44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BEAM_STRENGTH: 10
+  BEAM_STRENGTH: 25
   BEAM_LOCATION_OFFSET: 2
   Beam1Location: {fileID: 1268104220}
 --- !u!1 &303603520
@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 543376243}
   m_Layer: 0
   m_Name: Wall (2)
-  m_TagString: Untagged
+  m_TagString: Beamable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 758076234}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Beamable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -766,7 +766,7 @@ GameObject:
   - component: {fileID: 1337538938}
   m_Layer: 0
   m_Name: Wall (1)
-  m_TagString: Untagged
+  m_TagString: Beamable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

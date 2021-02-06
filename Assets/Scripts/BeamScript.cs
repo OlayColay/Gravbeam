@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BeamScript : MonoBehaviour
 {
-    public float BEAM_STRENGTH = 10;
+    public float BEAM_STRENGTH;
     public float BEAM_LOCATION_OFFSET;
     public GameObject Beam1Location;
     Rigidbody2D rb;
@@ -32,7 +32,6 @@ public class BeamScript : MonoBehaviour
         Beam1Location.transform.position = transform.position + beam1 * BEAM_LOCATION_OFFSET;
         Vector3 beam1Point = Beam1Location.transform.position + beam1;
         Beam1Location.transform.LookAt(beam1Point);
-        //Beam1Location.transform.eulerAngles=
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position + beam1 * BEAM_LOCATION_OFFSET, beam1, distance- BEAM_LOCATION_OFFSET);
         
@@ -90,7 +89,7 @@ public class BeamScript : MonoBehaviour
 
     float GetForceStrength(float distance, float time)
     {
-        return 2;
+        return BEAM_STRENGTH;
     }
 
 }
