@@ -49,3 +49,5 @@ sysinfo.txt
 crashlytics-build.properties
 
 Packages/packages-lock.json
+.fake
+.ionide
