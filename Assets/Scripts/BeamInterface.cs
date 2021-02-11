@@ -40,7 +40,7 @@ public class BeamInterface : MonoBehaviour {
         ParticleSystem.TrailModule trail = beam.trails;
 
         ParticleSystem.MinMaxCurve lifetime = mainParams.startLifetime;
-        ParticleSystem.MinMaxCurve speed = mainParams.startSpeed;
+        ParticleSystem.MinMaxCurve speed;
 
         if (isHooked) {
             speed = hookedSpeed;
@@ -65,8 +65,6 @@ public class BeamInterface : MonoBehaviour {
 
         mainParams.startLifetime = lifetime;
         mainParams.startSpeed = speed;
-
-
 
         mainParams.startLifetime = lifetime;
         mainParams.startSpeed = speed;
