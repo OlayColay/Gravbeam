@@ -32,7 +32,9 @@ public class BeamScript : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
         Beam1Interface = Beam1.GetComponent<BeamInterface>();
+
         controls = new PlayerControls();
 
         controls.Gameplay.Beam1.performed += ctx => beam1 = ctx.ReadValue<Vector2>();
@@ -63,8 +65,11 @@ public class BeamScript : MonoBehaviour
 
             RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + beam1 * BEAM_LOCATION_OFFSET, beam1, distance - BEAM_LOCATION_OFFSET);
 
+            Beam1Interface.length = distance;
+
             if (hit.collider != null && hit.collider.gameObject.tag == "Beamable")
             {
+                Beam1Interface.isHooked = true;
                 print(hit.collider.gameObject.tag);
                 Rigidbody2D rbOther = hit.rigidbody;
                 float forceStrength = GetForceStrength(hit.distance, 1); //get a strength of beam based on how far away you are from target. may modify later to make circular forces easier.
@@ -78,6 +83,7 @@ public class BeamScript : MonoBehaviour
             }
             else
             {
+                Beam1Interface.isHooked = false;
                 timeOfBeam = 0;
             }
 
