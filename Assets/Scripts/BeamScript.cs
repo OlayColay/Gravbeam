@@ -14,8 +14,10 @@ public class BeamScript : MonoBehaviour
     public GameObject Beam2;
     BeamInterface Beam1Interface;
     BeamInterface Beam2Interface;
+    Vector2 beamDir1;
+    Vector2 beamDir2;
+
     Rigidbody2D rb;
-    Vector2 beam1;
 
     double timeOfBeam = 0;
 
@@ -34,63 +36,77 @@ public class BeamScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         Beam1Interface = Beam1.GetComponent<BeamInterface>();
+        Beam2Interface = Beam2.GetComponent<BeamInterface>();
+
 
         controls = new PlayerControls();
 
-        controls.Gameplay.Beam1.performed += ctx => beam1 = ctx.ReadValue<Vector2>();
-        controls.Gameplay.Beam1.canceled += ctx => beam1 = Vector2.zero;
+        controls.Gameplay.Beam1.performed += ctx => beamDir1 = ctx.ReadValue<Vector2>();
+        controls.Gameplay.Beam1.canceled += ctx => beamDir1 = Vector2.zero;
+
+        controls.Gameplay.Beam2.performed += ctx => beamDir2 = ctx.ReadValue<Vector2>();
+        controls.Gameplay.Beam2.canceled += ctx => beamDir2 = Vector2.zero;
     }
 
     private void Update()
     {
-        print(beam1);
     }
 
     // FixedUpdate is for physics stuff
     void FixedUpdate()
     {
         // Vector2 beam1 = GetDirectionMouse();
-        float distance = beam1.magnitude * BEAM_LENGTH;
+        float distance1 = beamDir1.magnitude * BEAM_LENGTH;
+        float distance2 = beamDir2.magnitude * BEAM_LENGTH;
+
+        doStuff(distance1, Beam1, Beam1Interface, beamDir1);
+        doStuff(distance2, Beam2, Beam2Interface, beamDir2);
+
         //beam1 /= distance;
 
         //Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        Beam1Interface.length = distance;
+        //Beam1Interface.length = distance;
+
+    }
+
+    void doStuff (float distance, GameObject Beam, BeamInterface beamInterface, Vector2 beamDir)
+    {
         if (distance > 0)
         {
-            Debug.DrawLine((Vector2)transform.position + beam1 * BEAM_LOCATION_OFFSET, (Vector2)transform.position + beam1 * distance, Color.cyan, 0.05f);
+            Debug.DrawLine((Vector2)transform.position + beamDir * BEAM_LOCATION_OFFSET, (Vector2)transform.position + beamDir * distance, Color.cyan, 0.05f);
             //move the beamlocationn to that direction and position
-            Beam1.transform.position = (Vector2)transform.position + beam1 * BEAM_LOCATION_OFFSET;
-            Vector2 beam1Point = (Vector2)Beam1.transform.position + beam1;
-            Beam1.transform.LookAt(beam1Point);
+            Beam.transform.position = (Vector2)transform.position + beamDir * BEAM_LOCATION_OFFSET;
+            Vector2 beamPoint = (Vector2)Beam.transform.position + beamDir;
+            Beam.transform.LookAt(beamPoint);
 
-            RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + beam1 * BEAM_LOCATION_OFFSET, beam1, distance - BEAM_LOCATION_OFFSET);
+            RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + beamDir * BEAM_LOCATION_OFFSET, beamDir, distance - BEAM_LOCATION_OFFSET);
 
-            Beam1Interface.length = distance;
+            beamInterface.length = distance;
 
             if (hit.collider != null && hit.collider.gameObject.tag == "Beamable")
             {
-                Beam1Interface.isHooked = true;
+                beamInterface.isHooked = true;
                 print(hit.collider.gameObject.tag);
                 Rigidbody2D rbOther = hit.rigidbody;
                 float forceStrength = GetForceStrength(hit.distance, 1); //get a strength of beam based on how far away you are from target. may modify later to make circular forces easier.
-                rb.AddForce(beam1 * forceStrength);
+                rb.AddForce(beamDir * forceStrength);
                 if (rbOther)
                 {
-                    rbOther.AddForce(-beam1 * forceStrength);
+                    rbOther.AddForce(-beamDir * forceStrength);
                 }
 
 
             }
             else
             {
-                Beam1Interface.isHooked = false;
+                beamInterface.isHooked = false;
                 timeOfBeam = 0;
             }
 
-            rb.velocity /= 1.005f;
             //rb.AddForce(beam1 * BEAM_STRENGTH);
         }
     }
+
 
 
     Vector3 GetDirection()
