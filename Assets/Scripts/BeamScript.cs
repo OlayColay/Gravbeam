@@ -44,8 +44,8 @@ public class BeamScript : MonoBehaviour
         controls.Gameplay.Beam1.performed += ctx => beamDir1 = ctx.ReadValue<Vector2>();
         controls.Gameplay.Beam1.canceled += ctx => beamDir1 = Vector2.zero;
 
-        controls.Gameplay.Beam1.performed += ctx => beamDir2 = ctx.ReadValue<Vector2>();
-        controls.Gameplay.Beam1.canceled += ctx => beamDir2 = Vector2.zero;
+        controls.Gameplay.Beam2.performed += ctx => beamDir2 = ctx.ReadValue<Vector2>();
+        controls.Gameplay.Beam2.canceled += ctx => beamDir2 = Vector2.zero;
     }
 
     private void Update()
@@ -75,17 +75,17 @@ public class BeamScript : MonoBehaviour
         {
             Debug.DrawLine((Vector2)transform.position + beamDir * BEAM_LOCATION_OFFSET, (Vector2)transform.position + beamDir * distance, Color.cyan, 0.05f);
             //move the beamlocationn to that direction and position
-            Beam1.transform.position = (Vector2)transform.position + beamDir * BEAM_LOCATION_OFFSET;
-            Vector2 beam1Point = (Vector2)Beam1.transform.position + beamDir;
-            Beam1.transform.LookAt(beam1Point);
+            Beam.transform.position = (Vector2)transform.position + beamDir * BEAM_LOCATION_OFFSET;
+            Vector2 beamPoint = (Vector2)Beam.transform.position + beamDir;
+            Beam.transform.LookAt(beamPoint);
 
             RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + beamDir * BEAM_LOCATION_OFFSET, beamDir, distance - BEAM_LOCATION_OFFSET);
 
-            Beam1Interface.length = distance;
+            beamInterface.length = distance;
 
             if (hit.collider != null && hit.collider.gameObject.tag == "Beamable")
             {
-                Beam1Interface.isHooked = true;
+                beamInterface.isHooked = true;
                 print(hit.collider.gameObject.tag);
                 Rigidbody2D rbOther = hit.rigidbody;
                 float forceStrength = GetForceStrength(hit.distance, 1); //get a strength of beam based on how far away you are from target. may modify later to make circular forces easier.
@@ -99,11 +99,10 @@ public class BeamScript : MonoBehaviour
             }
             else
             {
-                Beam1Interface.isHooked = false;
+                beamInterface.isHooked = false;
                 timeOfBeam = 0;
             }
 
-            rb.velocity /= 1.005f;
             //rb.AddForce(beam1 * BEAM_STRENGTH);
         }
     }
