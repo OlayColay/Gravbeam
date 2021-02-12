@@ -21,7 +21,7 @@ public class Centripetal_Test_Ver3 : MonoBehaviour
     private bool captured = false;
     private bool buffered = false;
     private float bufferTimer;
-    private const float BTIME = 0.15f;
+    private const float BTIME = 0.20f;
 
     //private float forceBuf;
 
