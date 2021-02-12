@@ -5550,6 +5550,7 @@ GameObject:
   - component: {fileID: 1755422458}
   - component: {fileID: 1755422457}
   - component: {fileID: 1755422456}
+  - component: {fileID: 1755422459}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5622,6 +5623,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1755422459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755422455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2897f9e32c4e47dfb57c8c5004cf3cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2039977544
 GameObject:
   m_ObjectHideFlags: 0
@@ -5637,7 +5650,7 @@ GameObject:
   - component: {fileID: 2039977545}
   m_Layer: 0
   m_Name: Beter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5670,9 +5683,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe6c41fe1bc045cea089eb5d5abad44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BEAM_LENGTH: 0
   BEAM_STRENGTH: 25
   BEAM_LOCATION_OFFSET: 2
-  Beam1Location: {fileID: 813087911}
+  Beam1: {fileID: 0}
+  Beam2: {fileID: 0}
 --- !u!50 &2039977547
 Rigidbody2D:
   serializedVersion: 4
