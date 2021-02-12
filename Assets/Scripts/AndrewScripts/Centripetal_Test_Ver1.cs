@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Centripetal_Test : MonoBehaviour
+public class Centripetal_Test_Ver1 : MonoBehaviour
 {
     //player components / constant attributes
     private Rigidbody2D rb;
@@ -110,5 +110,4 @@ public class Centripetal_Test : MonoBehaviour
         veloTan = Mathf.Abs(Vector2.Dot(veloPlayer, dirTan));
         veloCen = Mathf.Abs(Vector2.Dot(veloPlayer, dirCen));
     }
-
 }
