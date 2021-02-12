@@ -26,11 +26,13 @@ public class BeamInterface : MonoBehaviour {
 
     ParticleSystem beam;
     bool wasHooked;
+    float lengthBuf;
 
     // Start is called before the first frame update
     void Start() {
         beam = GetComponent<ParticleSystem>();
         wasHooked = isHooked;
+        lengthBuf = length;
     }
 
     void OnDrawGizmosSelected() {
@@ -77,6 +79,11 @@ public class BeamInterface : MonoBehaviour {
             wasHooked = false;
             mainParams.startLifetime = lifetime;
             beam.Play();
+        }
+
+        if(lengthBuf != length) {
+            lifetime.constant = (length + 1.5f) / speed.constant;
+            mainParams.startLifetime = lifetime;
         }
 
         trail.colorOverLifetime = color;
