@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashRing : MonoBehaviour
+public class DashArrow : MonoBehaviour
 {
     private GameObject center;
     private Collider2D other;
@@ -31,7 +31,7 @@ public class DashRing : MonoBehaviour
             other.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             other.GetComponent<Rigidbody2D>().position = center.transform.position;
 
-            other.GetComponent<Rigidbody2D>().AddForce(center.transform.forward * force * 1000);
+            other.GetComponent<Rigidbody2D>().AddForce(center.transform.right * force * 1000);
 
             GetComponent<AudioSource>().Play(0);
         }
