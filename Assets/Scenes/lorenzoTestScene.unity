@@ -254,7 +254,7 @@ MonoBehaviour:
   m_WorldSpaceUV: 0
   m_CornerAngleThreshold: 25.3
   m_ColliderDetail: 16
-  m_ColliderOffset: 0.156
+  m_ColliderOffset: -0.5
   m_UpdateCollider: 1
   m_OptimizeCollider: 1
   m_OptimizeGeometry: 1
@@ -322,8 +322,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &28882857
-PolygonCollider2D:
+--- !u!68 &28882857
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -336,31 +336,22 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_EdgeRadius: 0
   m_Points:
-    m_Paths:
-    - - {x: -3.4843004, y: 1.0527835}
-      - {x: -3.4843004, y: 1.0527835}
-      - {x: -1.9352691, y: 1.8785765}
-      - {x: -1.584, y: 1.8624}
-      - {x: 2, y: 1.8624003}
-      - {x: 3.7782614, y: 2.6708462}
-      - {x: 3.8785827, y: 2.638074}
-      - {x: 10.525243, y: 1.8359977}
-      - {x: 11.843393, y: 1.9154108}
-      - {x: 11.990003, y: 2.1119697}
-      - {x: 12.064537, y: 2.4313784}
-      - {x: 14.33591, y: 2.4386137}
-      - {x: 18.018873, y: 1.4901425}
-      - {x: 18.06685, y: 1.4778467}
+  - {x: -3.3608577, y: 0.8212329}
+  - {x: -3.3608577, y: 0.8212329}
+  - {x: -1.9000381, y: 1.5999999}
+  - {x: 2, y: 1.6000001}
+  - {x: 2.3468447, y: 1.7197065}
+  - {x: 3.785338, y: 2.3850133}
+  - {x: 10.493787, y: 1.5754899}
+  - {x: 11.859622, y: 1.653513}
+  - {x: 12.225956, y: 1.9684312}
+  - {x: 12.272909, y: 2.169641}
+  - {x: 14.336745, y: 2.176215}
+  - {x: 14.896668, y: 2.0194554}
+  - {x: 17.953728, y: 1.2359577}
+  - {x: 18.001703, y: 1.2236621}
 --- !u!1 &98896584
 GameObject:
   m_ObjectHideFlags: 0
@@ -5321,7 +5312,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340645163}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.43, y: -3.18, z: 0}
+  m_LocalPosition: {x: -6.31, y: -3.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
