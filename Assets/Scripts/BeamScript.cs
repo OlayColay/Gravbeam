@@ -4,54 +4,92 @@ using UnityEngine;
 
 public class BeamScript : MonoBehaviour
 {
+    PlayerControls controls;
+    public float BEAM_LENGTH;
     public float BEAM_STRENGTH;
     public float BEAM_LOCATION_OFFSET;
-    public GameObject Beam1Location;
+
+
+    public GameObject Beam1;
+    public GameObject Beam2;
+    BeamInterface Beam1Interface;
+    BeamInterface Beam2Interface;
     Rigidbody2D rb;
+    Vector2 beam1;
 
     double timeOfBeam = 0;
 
+
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
+    private void OnDisable()
+    {
+        controls.Gameplay.Disable();
+    }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        Beam1Interface = Beam1.GetComponent<BeamInterface>();
+
+        controls = new PlayerControls();
+
+        controls.Gameplay.Beam1.performed += ctx => beam1 = ctx.ReadValue<Vector2>();
+        controls.Gameplay.Beam1.canceled += ctx => beam1 = Vector2.zero;
+    }
+
+    private void Update()
+    {
+        print(beam1);
     }
 
     // FixedUpdate is for physics stuff
     void FixedUpdate()
     {
-        Vector3 beam1 = GetDirectionMouse();
-        float distance = beam1.magnitude;
-        beam1 /= distance;
+        // Vector2 beam1 = GetDirectionMouse();
+        float distance = beam1.magnitude * BEAM_LENGTH;
+        //beam1 /= distance;
 
         //Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-
-        Debug.DrawLine(transform.position + beam1 * BEAM_LOCATION_OFFSET, transform.position + beam1 * distance, Color.cyan, 0.05f);
-        //move the beamlocationn to that direction and position
-        Beam1Location.transform.position = transform.position + beam1 * BEAM_LOCATION_OFFSET;
-        Vector3 beam1Point = Beam1Location.transform.position + beam1;
-        Beam1Location.transform.LookAt(beam1Point);
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + beam1 * BEAM_LOCATION_OFFSET, beam1, distance- BEAM_LOCATION_OFFSET);
-        
-        if (hit.collider!=null && hit.collider.gameObject.tag == "Beamable")
+        Beam1Interface.length = distance;
+        if (distance > 0)
         {
-            print(hit.collider.gameObject.tag);
-            Rigidbody2D rbOther = hit.rigidbody;
-            float forceStrength = GetForceStrength(hit.distance, 1); //get a strength of beam based on how far away you are from target. may modify later to make circular forces easier.
-            rb.AddForce(beam1* forceStrength);
-            rbOther.AddForce(-beam1* forceStrength);
-            
+            Debug.DrawLine((Vector2)transform.position + beam1 * BEAM_LOCATION_OFFSET, (Vector2)transform.position + beam1 * distance, Color.cyan, 0.05f);
+            //move the beamlocationn to that direction and position
+            Beam1.transform.position = (Vector2)transform.position + beam1 * BEAM_LOCATION_OFFSET;
+            Vector2 beam1Point = (Vector2)Beam1.transform.position + beam1;
+            Beam1.transform.LookAt(beam1Point);
 
-        }
-        else
-        {
-            timeOfBeam = 0;
-        }
+            RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + beam1 * BEAM_LOCATION_OFFSET, beam1, distance - BEAM_LOCATION_OFFSET);
 
-        rb.velocity /= 1.005f; 
-        rb.AddForce(GetDirection()* BEAM_STRENGTH);
+            Beam1Interface.length = distance;
+
+            if (hit.collider != null && hit.collider.gameObject.tag == "Beamable")
+            {
+                Beam1Interface.isHooked = true;
+                print(hit.collider.gameObject.tag);
+                Rigidbody2D rbOther = hit.rigidbody;
+                float forceStrength = GetForceStrength(hit.distance, 1); //get a strength of beam based on how far away you are from target. may modify later to make circular forces easier.
+                rb.AddForce(beam1 * forceStrength);
+                if (rbOther)
+                {
+                    rbOther.AddForce(-beam1 * forceStrength);
+                }
+
+
+            }
+            else
+            {
+                Beam1Interface.isHooked = false;
+                timeOfBeam = 0;
+            }
+
+            rb.velocity /= 1.005f;
+            //rb.AddForce(beam1 * BEAM_STRENGTH);
+        }
     }
 
 

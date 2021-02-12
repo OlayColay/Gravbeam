@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/PlayerControls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/PlayerControls.inputactions'
 
 using System;
 using System.Collections;
@@ -22,15 +22,15 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": ""Beam1"",
                     ""type"": ""Value"",
                     ""id"": ""5108f521-da95-4b16-a000-ea9738f99742"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""dd6653ed-a48d-4001-8cb8-eb5cb6ff853d"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""Beam2"",
+                    ""type"": ""Value"",
+                    ""id"": ""b3623e98-b2ab-4cb1-b4e1-a89e9e065b7e"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -103,24 +103,68 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""8631a7b4-9b6d-44fc-a32f-376996f321f5"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""name"": ""Arrow Keys"",
+                    ""id"": ""52ec4498-ba15-467b-b253-ca7fe8c9be3f"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
+                    ""action"": ""Beam2"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""78ed115a-9345-4364-94d1-520b855cd2a4"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""name"": ""up"",
+                    ""id"": ""5ee6587e-277a-4c4c-867d-c946f5482a87"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
+                    ""action"": ""Beam2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""28edabbc-a13d-4e5d-8355-2327f611f445"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Beam2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""52a6cf10-edfb-4760-a432-8a4a8b9a6598"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Beam2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""06b9a77f-9ef3-4673-95b7-a1e9a08087c4"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Beam2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf5f37f6-f710-4fcb-9b8e-72b104d76dcb"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Beam2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -132,7 +176,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Beam1 = m_Gameplay.FindAction("Beam1", throwIfNotFound: true);
-        m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
+        m_Gameplay_Beam2 = m_Gameplay.FindAction("Beam2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,13 +227,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Beam1;
-    private readonly InputAction m_Gameplay_Jump;
+    private readonly InputAction m_Gameplay_Beam2;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Beam1 => m_Wrapper.m_Gameplay_Beam1;
-        public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
+        public InputAction @Beam2 => m_Wrapper.m_Gameplay_Beam2;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -202,9 +246,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Beam1.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBeam1;
                 @Beam1.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBeam1;
                 @Beam1.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBeam1;
-                @Jump.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
+                @Beam2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBeam2;
+                @Beam2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBeam2;
+                @Beam2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBeam2;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -212,9 +256,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Beam1.started += instance.OnBeam1;
                 @Beam1.performed += instance.OnBeam1;
                 @Beam1.canceled += instance.OnBeam1;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
+                @Beam2.started += instance.OnBeam2;
+                @Beam2.performed += instance.OnBeam2;
+                @Beam2.canceled += instance.OnBeam2;
             }
         }
     }
@@ -222,6 +266,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     public interface IGameplayActions
     {
         void OnBeam1(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
+        void OnBeam2(InputAction.CallbackContext context);
     }
 }
