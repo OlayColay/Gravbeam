@@ -6,7 +6,7 @@ using UnityEngine;
 /// Use this to set properties of the GravBeam like length (under development)
 /// and whether it is free or hooked (under development).
 /// </summary>
-[ExecuteInEditMode]
+[ExecuteAlways]
 [RequireComponent(typeof(ParticleSystem))]
 public class BeamInterface : MonoBehaviour {
     [Tooltip("The length of the beam, as shown by the gizmo")]
@@ -22,14 +22,18 @@ public class BeamInterface : MonoBehaviour {
 
     public Gradient hookedColor;
 
+    //public AnimationCurve sizeOverTime;
+
     ParticleSystem beam;
+    bool wasHooked;
 
     // Start is called before the first frame update
     void Start() {
         beam = GetComponent<ParticleSystem>();
+        wasHooked = isHooked;
     }
 
-    void OnDrawGizmos() {
+    void OnDrawGizmosSelected() {
         Gizmos.DrawLine(transform.position, transform.position + length * transform.forward);
     }
 
@@ -38,36 +42,45 @@ public class BeamInterface : MonoBehaviour {
         ParticleSystem.MainModule mainParams = beam.main;
         ParticleSystem.NoiseModule noise = beam.noise;
         ParticleSystem.TrailModule trail = beam.trails;
+        ParticleSystem.VelocityOverLifetimeModule velocity = beam.velocityOverLifetime;
 
         ParticleSystem.MinMaxCurve lifetime = mainParams.startLifetime;
-        ParticleSystem.MinMaxCurve speed;
+        ParticleSystem.MinMaxCurve speed = mainParams.startSpeed;
+        ParticleSystem.MinMaxGradient color = trail.colorOverLifetime;
 
-        if (isHooked) {
-            speed = hookedSpeed;
+        if (isHooked && !wasHooked) {
+            beam.Stop();
+            beam.Clear();
+
+            speed.constant = hookedSpeed;
             noise.enabled = false;
             trail.dieWithParticles = false;
-
-            ParticleSystem.MinMaxGradient color = trail.colorOverLifetime;
+            velocity.enabled = true;
             color.gradient = hookedColor;
-            trail.colorOverLifetime = color;
+            lifetime.constant = length / hookedSpeed;
+            mainParams.startSpeed = speed;
+            wasHooked = true;
+            mainParams.startLifetime = lifetime;
+            beam.Play();
         }
-        else {
-            speed = freeSpeed;
+        else if (!isHooked && wasHooked) {
+            beam.Stop();
+            beam.Clear();
+
+            speed.constant = freeSpeed;
             noise.enabled = true;
             trail.dieWithParticles = true;
-
-            ParticleSystem.MinMaxGradient color = trail.colorOverLifetime;
+            velocity.enabled = false;
             color.gradient = freeColor;
-            trail.colorOverLifetime = color;
+            lifetime.constant = (length + 1.5f) / freeSpeed;
+            mainParams.startSpeed = speed;
+            wasHooked = false;
+            mainParams.startLifetime = lifetime;
+            beam.Play();
         }
 
-        lifetime.constant = length / speed.constant;
+        trail.colorOverLifetime = color;
 
-        mainParams.startLifetime = lifetime;
-        mainParams.startSpeed = speed;
-
-        mainParams.startLifetime = lifetime;
-        mainParams.startSpeed = speed;
-
+        
     }
 }
