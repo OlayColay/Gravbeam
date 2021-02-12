@@ -33,6 +33,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""b40ad5a3-8d9a-403e-bf0f-753148b55193"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -167,6 +175,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Beam2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72832bdc-21a5-4ecc-a9d6-5ddb8d92f5b6"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""835128d7-4999-4d0b-abc4-1f4aedbe32dd"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -177,6 +207,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Beam1 = m_Gameplay.FindAction("Beam1", throwIfNotFound: true);
         m_Gameplay_Beam2 = m_Gameplay.FindAction("Beam2", throwIfNotFound: true);
+        m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -228,12 +259,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Beam1;
     private readonly InputAction m_Gameplay_Beam2;
+    private readonly InputAction m_Gameplay_Interact;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Beam1 => m_Wrapper.m_Gameplay_Beam1;
         public InputAction @Beam2 => m_Wrapper.m_Gameplay_Beam2;
+        public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -249,6 +282,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Beam2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBeam2;
                 @Beam2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBeam2;
                 @Beam2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBeam2;
+                @Interact.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -259,6 +295,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Beam2.started += instance.OnBeam2;
                 @Beam2.performed += instance.OnBeam2;
                 @Beam2.canceled += instance.OnBeam2;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -267,5 +306,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnBeam1(InputAction.CallbackContext context);
         void OnBeam2(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
