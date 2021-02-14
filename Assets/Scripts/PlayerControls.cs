@@ -199,6 +199,170 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Gravity"",
+            ""id"": ""c67305ac-acb4-4133-a3c5-9b66a0c1d10b"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""c70071df-bf72-484e-b353-b87972bc9fe2"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Web"",
+                    ""type"": ""Value"",
+                    ""id"": ""1b8163bf-7f51-430e-be74-1406c48d8d93"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ed6aab5-a1a5-4ecd-8264-e197d75d389a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""93bc5d7e-581f-4e6e-8008-1c8ca70ec03c"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""97e517e3-c38e-4085-b945-4e397e851709"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""e24b3646-1f77-4f18-9462-6c075a6bdb98"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""08000499-a9aa-41b8-9f13-a5e11ef09c11"",
+                    ""path"": ""<Gamepad>/leftStick/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Arrow Keys"",
+                    ""id"": ""71c10d08-a25d-4de1-8aaa-0814d2184114"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Web"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""a1e45872-3669-40ff-a98e-554064f6bd92"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Web"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""63c9f5b9-166d-40de-b660-7096dea05a17"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Web"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""36577c5b-a62f-4330-a76a-8ceecef9ced6"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Web"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""1792f96f-f30c-4937-9d3c-8fc158179d28"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Web"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b8c3bd5-0645-4d60-a548-7d4fd57ca219"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Web"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""438da936-4599-4a31-9f54-3967a6ea5649"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""75856bf0-8ec6-439b-a0e1-df31425167c0"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -208,6 +372,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Beam1 = m_Gameplay.FindAction("Beam1", throwIfNotFound: true);
         m_Gameplay_Beam2 = m_Gameplay.FindAction("Beam2", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
+        // Gravity
+        m_Gravity = asset.FindActionMap("Gravity", throwIfNotFound: true);
+        m_Gravity_Move = m_Gravity.FindAction("Move", throwIfNotFound: true);
+        m_Gravity_Web = m_Gravity.FindAction("Web", throwIfNotFound: true);
+        m_Gravity_Jump = m_Gravity.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -302,10 +471,65 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // Gravity
+    private readonly InputActionMap m_Gravity;
+    private IGravityActions m_GravityActionsCallbackInterface;
+    private readonly InputAction m_Gravity_Move;
+    private readonly InputAction m_Gravity_Web;
+    private readonly InputAction m_Gravity_Jump;
+    public struct GravityActions
+    {
+        private @PlayerControls m_Wrapper;
+        public GravityActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Gravity_Move;
+        public InputAction @Web => m_Wrapper.m_Gravity_Web;
+        public InputAction @Jump => m_Wrapper.m_Gravity_Jump;
+        public InputActionMap Get() { return m_Wrapper.m_Gravity; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GravityActions set) { return set.Get(); }
+        public void SetCallbacks(IGravityActions instance)
+        {
+            if (m_Wrapper.m_GravityActionsCallbackInterface != null)
+            {
+                @Move.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnMove;
+                @Web.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnWeb;
+                @Web.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnWeb;
+                @Web.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnWeb;
+                @Jump.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnJump;
+            }
+            m_Wrapper.m_GravityActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Web.started += instance.OnWeb;
+                @Web.performed += instance.OnWeb;
+                @Web.canceled += instance.OnWeb;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+            }
+        }
+    }
+    public GravityActions @Gravity => new GravityActions(this);
     public interface IGameplayActions
     {
         void OnBeam1(InputAction.CallbackContext context);
         void OnBeam2(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface IGravityActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnWeb(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
