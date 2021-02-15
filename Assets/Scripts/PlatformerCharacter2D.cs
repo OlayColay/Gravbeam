@@ -5,13 +5,14 @@ public class PlatformerCharacter2D : MonoBehaviour
 {
     [SerializeField] private float maxSpeed = 10f;      // The fastest the player can travel in the x axis.
     [SerializeField] private float jumpForce = 400f;    // Amount of force added when the player jumps.
-    [SerializeField] private bool airControl = false;   // Whether or not a player can steer while jumping;
+    [SerializeField] private bool airControl = false;   // Whether or not a player can steer while jumping
     [SerializeField] private LayerMask whatIsGround;    // A mask determining what is ground to the character
     [SerializeField] private float maxJumpTime = 1f;    // How long a player can move upwards in a jump
     [SerializeField] private float minJumpTime = 0.1f;  // The minimum time in a jump
     [SerializeField] private float wallSlideSpeed = 1f; // Speed a player slides down a wall
     [SerializeField] private float wallJumpMult = 0.7f; // The multiplier of jumpForce for a wall jump
     [SerializeField] private float wallScrambleMult;    // Multiplier of maxJumpTime for climbing up a wall
+    [SerializeField] private float jumpDamper = 0.1f;   // Slowly dampens the jumpForce as the player goes up
 
     PlayerControls controls;
     private float move = 0f;            // The value of horizontal movement (from -1 to 1)
@@ -30,6 +31,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     private bool isWalled = false;      // If the player is touching a wall
     private bool isSliding = false;     // If the player is sliding down a wall
     private bool isWallJumping = false; // If the player has jumped off a wall
+    private float curJumpForce;         // Jump force that changes based on jumpDamper
     
 
     private void Awake()
@@ -102,8 +104,9 @@ public class PlatformerCharacter2D : MonoBehaviour
         {
             if(jumpTimeCounter < maxJumpTime * (isSliding ? wallScrambleMult : 1f))
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce * (isWallJumping ? wallJumpMult : 1));
+                rb.velocity = new Vector2(rb.velocity.x, curJumpForce);
                 jumpTimeCounter += Time.deltaTime;
+                curJumpForce -= jumpDamper;
             }
             else 
                 isJumping = isWallJumping = false;
@@ -133,7 +136,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 
             // Move the character
             if ((move > 0 && rb.velocity.x < maxSpeed) || (move < 0 && rb.velocity.x > -maxSpeed))
-                rb.AddForce(new Vector2(move * maxSpeed * 10, rb.velocity.y));
+                rb.AddForce(new Vector2(move * maxSpeed * 10, 0));
         }
     }
 
@@ -144,7 +147,6 @@ public class PlatformerCharacter2D : MonoBehaviour
         {
             JumpHelper();
             // Add a vertical force to the player.
-            // rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
         // If the player is jumping from a wall...
         else if (isSliding && anim.GetBool("Walled"))
@@ -154,7 +156,6 @@ public class PlatformerCharacter2D : MonoBehaviour
             isWallJumping = true;
             anim.SetBool("Walled", false);
             rb.AddForce(new Vector2(maxSpeed * (facingRight ? -75 : 75), 0));
-            // rb.velocity = new Vector2(rb.velocity.x, jumpForce * wallJumpMult);
             if(airControl)
                 StartCoroutine(delayAirControl());
         }
@@ -163,6 +164,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     {
         isJumping = canJumpMore = true;
         isGrounded = false;
+        curJumpForce = jumpForce * (isWallJumping ? wallJumpMult : 1);
         anim.SetBool("Ground", false);
         jumpTimeCounter = 0;
     }

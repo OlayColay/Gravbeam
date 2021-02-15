@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 7.5
-  jumpForce: 12
+  jumpForce: 16
   airControl: 1
   whatIsGround:
     serializedVersion: 2
@@ -200,7 +200,8 @@ MonoBehaviour:
   minJumpTime: 0.15
   wallSlideSpeed: 3
   wallJumpMult: 0.75
-  wallScrambleMult: 1.75
+  wallScrambleMult: 2
+  jumpDamper: 0.3
 --- !u!58 &153840002
 CircleCollider2D:
   m_ObjectHideFlags: 0

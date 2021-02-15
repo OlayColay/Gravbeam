@@ -665,7 +665,7 @@ TextMesh:
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 0
+  m_FontSize: 13
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
@@ -791,6 +791,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GroundedSkreech
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463734154516516966, guid: c7a9b0614aa391b4ca7ea83be1156975,
+        type: 3}
+      propertyPath: jumpForce
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463734154516516966, guid: c7a9b0614aa391b4ca7ea83be1156975,
+        type: 3}
+      propertyPath: jumpDamper
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463734154516516966, guid: c7a9b0614aa391b4ca7ea83be1156975,
+        type: 3}
+      propertyPath: wallScrambleMult
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7a9b0614aa391b4ca7ea83be1156975, type: 3}
