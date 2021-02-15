@@ -134,11 +134,11 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 6
+  m_LinearDrag: 5
+  m_AngularDrag: 0
+  m_GravityScale: 12
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d08f91df3bd212f429df17f53ce2f364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 7.5
+  maxSpeed: 10
   jumpForce: 16
   airControl: 1
   whatIsGround:
@@ -200,8 +200,8 @@ MonoBehaviour:
   minJumpTime: 0.15
   wallSlideSpeed: 3
   wallJumpMult: 0.75
-  wallScrambleMult: 2
-  jumpDamper: 0.3
+  wallScrambleMult: 1.5
+  jumpDamper: 0
 --- !u!58 &153840002
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7463734154242988827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.49, z: 0}
+  m_LocalPosition: {x: 0, y: -0.491, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 586366251230067395}

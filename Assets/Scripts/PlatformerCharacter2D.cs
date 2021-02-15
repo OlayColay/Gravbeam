@@ -17,7 +17,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     PlayerControls controls;
     private float move = 0f;            // The value of horizontal movement (from -1 to 1)
     private Transform groundCheck;      // A position marking where to check if the player is grounded.
-    const float groundedRadius = .2f;   // Radius of the overlap circle to determine if grounded
+    const float groundedRadius = .5f;   // Radius of the overlap circle to determine if grounded
     private bool isGrounded;            // Whether or not the player is grounded.
     private Transform ceilingCheck;     // A position marking where to check for ceilings
     const float ceilingRadius = .01f;   // Radius of the overlap circle to determine if the player can stand up
@@ -32,6 +32,8 @@ public class PlatformerCharacter2D : MonoBehaviour
     private bool isSliding = false;     // If the player is sliding down a wall
     private bool isWallJumping = false; // If the player has jumped off a wall
     private float curJumpForce;         // Jump force that changes based on jumpDamper
+    private bool canWJLeft = true;      // If the player can wall jump of a wall on the left
+    private bool canWJRight = true;      // If the player can wall jump of a wall on the right
     
 
     private void Awake()
@@ -75,7 +77,7 @@ public class PlatformerCharacter2D : MonoBehaviour
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
-                isGrounded = true;
+                isGrounded = canWJLeft = canWJRight = true;
         }
         anim.SetBool("Ground", isGrounded);
 
@@ -87,7 +89,7 @@ public class PlatformerCharacter2D : MonoBehaviour
         }
 
         // If the player should be sliding down a wall...
-        if (isWalled && !isGrounded && move != 0)
+        if (isWalled && !isGrounded && move != 0 && ((facingRight && canWJRight) || (!facingRight && canWJLeft)))
             isSliding = true;
         else
             isSliding = false;
@@ -146,7 +148,6 @@ public class PlatformerCharacter2D : MonoBehaviour
         if (isGrounded && anim.GetBool("Ground"))
         {
             JumpHelper();
-            // Add a vertical force to the player.
         }
         // If the player is jumping from a wall...
         else if (isSliding && anim.GetBool("Walled"))
@@ -157,24 +158,27 @@ public class PlatformerCharacter2D : MonoBehaviour
             anim.SetBool("Walled", false);
             rb.AddForce(new Vector2(maxSpeed * (facingRight ? -75 : 75), 0));
             if(airControl)
-                StartCoroutine(delayAirControl());
+            {
+                if (facingRight)
+                {
+                    canWJLeft = true;
+                    canWJRight = false;
+                }
+                else
+                {
+                    canWJLeft = false;
+                    canWJRight = true;
+                }
+            }
         }
     }
     private void JumpHelper()
     {
         isJumping = canJumpMore = true;
         isGrounded = false;
+        // Add a vertical force to the player.
         curJumpForce = jumpForce * (isWallJumping ? wallJumpMult : 1);
         anim.SetBool("Ground", false);
         jumpTimeCounter = 0;
-    }
-
-    // Temporarily disable airControl so that a player can't infinitely climb a single wall
-    private IEnumerator delayAirControl()
-    {
-        airControl = false;
-        while(isWallJumping)
-            yield return null;
-        airControl = true;
     }
 }
