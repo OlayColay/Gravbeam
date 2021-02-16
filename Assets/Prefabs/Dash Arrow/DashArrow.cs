@@ -4,47 +4,43 @@ using UnityEngine;
 
 public class DashArrow : MonoBehaviour
 {
-    private GameObject center;
-    private Collider2D other;
-    public float force = 10.0f;
-    public bool disableControls = false;
-    public float disableLength = 1.0f;
-    private bool canFire = true;
+    [SerializeField] private float velocity = 1.0f; // Velocity to give player while the arrow is active
+    [SerializeField] private float length = 1.0f; // How long an arrow is active without another interupting
+    [SerializeField] private bool setPositionToCenter = false; // If the player is moved to the arrow's center on first frame
+
+    private Rigidbody2D other;
+    private float timeLeft;
+    private Vector2 velocityVec;
+
     void Start()
     {
-        center = this.gameObject.transform.GetChild(0).gameObject;
+        velocityVec = transform.right * velocity;
     }
+
     void OnTriggerEnter2D(Collider2D o)
     {
-        Debug.Log("triggered");
-        other = o;
+        other = o.GetComponent<Rigidbody2D>();
 
-        if(other.tag == "Player" && canFire)
+        if(o.tag == "Player")
         {
-            if(other.tag == "Player" && disableControls)
+            if (setPositionToCenter)
             {
-                // other.GetComponent<DroneCharacterController>().canControl = false;
-                StartCoroutine("Wait");
+                other.position = transform.position;
             }
-            //canFire = false;
 
-            other.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            other.GetComponent<Rigidbody2D>().position = center.transform.position;
-
-            other.GetComponent<Rigidbody2D>().AddForce(center.transform.right * force * 1000);
+            Globals.curDashArrowVel = velocityVec;
+            timeLeft = length;
 
             GetComponent<AudioSource>().Play(0);
         }
     }
 
-    IEnumerator Wait()
+    private void Update()
     {
-        yield return new WaitForSeconds(disableLength);
-        
-        canFire = true;
-        if(other.tag == "Player")
+        if (timeLeft > 0)
         {
-            // other.GetComponent<DroneCharacterController>().canControl = true;
+            other.velocity = Globals.curDashArrowVel;
+            timeLeft -= Time.deltaTime;
         }
     }
 }
