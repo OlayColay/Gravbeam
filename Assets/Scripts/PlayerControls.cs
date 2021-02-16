@@ -268,7 +268,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""id"": ""08000499-a9aa-41b8-9f13-a5e11ef09c11"",
                     ""path"": ""<Gamepad>/leftStick/x"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone"",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
