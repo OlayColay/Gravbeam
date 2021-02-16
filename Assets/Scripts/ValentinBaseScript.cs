@@ -8,7 +8,7 @@ public class ValentinBaseScript : MonoBehaviour
     private LineRenderer lr;
     private Vector3 grapplePoint;
     public LayerMask whatIsGrappleable;
-    public Transform gunTip, camera, player;
+    public Transform gunTip, cam, player;
     private float maxDistance = 10f;
     private SpringJoint joint;
     private bool isGrappling;
@@ -47,7 +47,7 @@ public class ValentinBaseScript : MonoBehaviour
         if (isGrappling)
             return;
         RaycastHit hit;
-        if (Physics.Raycast(camera.position, camera.right, out hit, maxDistance, whatIsGrappleable))
+        if (Physics.Raycast(cam.position, cam.right, out hit, maxDistance, whatIsGrappleable))
         {
             Debug.Log("here");
             isGrappling = true;
