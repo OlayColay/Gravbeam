@@ -6,6 +6,7 @@ public class CameraTrigger : MonoBehaviour
 {
     [SerializeField] private bool scrollX = false;
     [SerializeField] private bool scrollY = false;
+    [SerializeField] private bool yViewSizeIsTriggerHeight = true;
     [SerializeField] private float yViewSize;
 
     private ChangeCamWindow cameraScript;
@@ -17,13 +18,15 @@ public class CameraTrigger : MonoBehaviour
     {
         cameraScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ChangeCamWindow>();
         startingPosition = transform.GetChild(0).transform.position;
-        yViewSize = GetComponent<BoxCollider2D>().size.y;
+        if (yViewSizeIsTriggerHeight)
+            yViewSize = GetComponent<BoxCollider2D>().size.y;
         minPositions = transform.GetChild(1).transform.position;
         maxPositions = transform.GetChild(2).transform.position;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(yViewSize);
         if (other.tag == "Player")
             cameraScript.changeWindow(scrollX, scrollY, startingPosition, yViewSize, minPositions, maxPositions);
     }
