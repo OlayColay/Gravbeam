@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class CameraTrigger : MonoBehaviour
 {
-    [SerializeField] private Vector2 startingPosition;
-    [SerializeField] private float ySize = 10f;
     [SerializeField] private bool scrollX = false;
     [SerializeField] private bool scrollY = false;
 
-    private CameraScript cameraScript;
+    private ChangeCamWindow cameraScript;
+    private Vector2 startingPosition;
+    private float ySize;
 
     void Awake()
     {
-        cameraScript = GameObject.FindGameObjectWithTag("Camera").GetComponent<CameraScript>();
+        cameraScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ChangeCamWindow>();
+        startingPosition = transform.GetChild(0).transform.position;
+        ySize = GetComponent<BoxCollider2D>().size.y;
     }
 
-    void OnCollisionEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
-        {
-            cameraScript.NewAngle(startingPosition, ySize, scrollX, scrollY);
-        }
+            cameraScript.changeWindow(scrollX, scrollY, startingPosition, ySize);
     }
 }
