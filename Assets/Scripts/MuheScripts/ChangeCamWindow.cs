@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// This script is used to change the camera's "window"
+/// This script is used to change the camera's "window." Probably doesn't work yet
 /// </summary>
 public class ChangeCamWindow : MonoBehaviour {
 
@@ -29,12 +29,17 @@ public class ChangeCamWindow : MonoBehaviour {
         cameraTransform = transform;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         cam = GetComponent<Camera>();
+        currentCoroutine = followPlayer();
+        StartCoroutine(currentCoroutine);
     }
 
     // Update is called once per frame
     void Update() {
+        // TODO Work in progress
         if (moveDone) {
-
+            StopCoroutine(currentCoroutine);
+            currentCoroutine = followPlayer();
+            StartCoroutine(currentCoroutine);
         }
     }
 
@@ -45,14 +50,18 @@ public class ChangeCamWindow : MonoBehaviour {
     /// <param name="followAlongY">Whether the camera follows the player's y position</param>
     /// <param name="windowCenterPos">The position (Vector2) of the center of the window</param>
     /// <param name="windowSizeY">The height of the window (aspect ratio 16:9)</param>
-    public void changeWindow(bool followAlongX, bool followAlongY, Vector2 windowCenterPos, float windowSizeY, Vector2 camBounds) {
+    public void changeWindow(bool followAlongX, bool followAlongY, Vector2 windowCenterPos, float windowSizeY, Vector2 camBoundsMin, Vector2 cameraBoundsMax) {
+        // TODO Work in progress
+        moveDone = false;
         this.followAlongX = followAlongX;
         this.followAlongY = followAlongY;
         this.windowCenterPos = windowCenterPos;
 
         cam.orthographicSize = windowSizeY / 2;
 
-        StartCoroutine(moveToNewWindow());
+        currentCoroutine = moveToNewWindow();
+
+        StartCoroutine(currentCoroutine);
     }
 
     IEnumerator moveToNewWindow() {
@@ -61,6 +70,8 @@ public class ChangeCamWindow : MonoBehaviour {
             cameraTransform.position = Vector2.MoveTowards(cameraTransform.position, windowCenterPos, speedVariation.Evaluate(speedOfChange * Time.deltaTime));
             yield return null;
         }
+
+        moveDone = true;
     }
 
     IEnumerator followPlayer() {
