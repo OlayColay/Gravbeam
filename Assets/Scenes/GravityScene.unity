@@ -343,7 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 121084440}
   - component: {fileID: 121084442}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer3 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 121915661}
   - component: {fileID: 121915663}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -922,7 +922,7 @@ GameObject:
   m_Component:
   - component: {fileID: 298791084}
   - component: {fileID: 298791086}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1646,7 +1646,7 @@ GameObject:
   m_Component:
   - component: {fileID: 535656200}
   - component: {fileID: 535656202}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer4 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1728,7 +1728,7 @@ GameObject:
   - component: {fileID: 564225176}
   - component: {fileID: 564225178}
   - component: {fileID: 564225177}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2148,7 +2148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 808533675}
   - component: {fileID: 808533677}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2342,7 +2342,7 @@ GameObject:
   - component: {fileID: 1052155837}
   - component: {fileID: 1052155839}
   - component: {fileID: 1052155838}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2446,7 +2446,7 @@ GameObject:
   - component: {fileID: 1153338318}
   - component: {fileID: 1153338320}
   - component: {fileID: 1153338319}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2685,7 +2685,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1369992990}
   - component: {fileID: 1369992992}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer5 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2851,7 +2851,7 @@ GameObject:
   - component: {fileID: 1419366982}
   - component: {fileID: 1419366984}
   - component: {fileID: 1419366983}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2948,7 +2948,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1431867664}
   - component: {fileID: 1431867666}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer5 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3141,7 +3141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1553332532}
   - component: {fileID: 1553332534}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3222,7 +3222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1577056618}
   - component: {fileID: 1577056620}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer4 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3387,7 +3387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1832095618}
   - component: {fileID: 1832095620}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3475,7 +3475,7 @@ GameObject:
   - component: {fileID: 1852642489}
   - component: {fileID: 1852642491}
   - component: {fileID: 1852642490}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: bg layer2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3689,7 +3689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1993774397}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4368,6 +4368,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GroundedSkreech
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463734154242988828, guid: c7a9b0614aa391b4ca7ea83be1156975,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7a9b0614aa391b4ca7ea83be1156975, type: 3}

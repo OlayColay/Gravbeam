@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6478614957771026751}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Minimum Y Pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6478614957992105899}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Maximum Y Pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6478614958003958732}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Minimum X Pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6478614958073131303}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Starting Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 6478614958195244595}
   - component: {fileID: 6478614958195244592}
   - component: {fileID: 6478614958195244593}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CameraTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollX: 0
   scrollY: 0
+  yViewSizeIsTriggerHeight: 1
   yViewSize: 10
 --- !u!61 &6478614958195244593
 BoxCollider2D:
@@ -207,7 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6478614958769891154}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Maximum X Pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

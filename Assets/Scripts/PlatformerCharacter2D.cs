@@ -78,7 +78,10 @@ public class PlatformerCharacter2D : MonoBehaviour
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
+            {
+                // Debug.Log("Ground found: " + colliders[i].name);
                 isGrounded = canWJLeft = canWJRight = true;
+            }
         }
         anim.SetBool("Ground", isGrounded);
 
@@ -86,7 +89,10 @@ public class PlatformerCharacter2D : MonoBehaviour
         for (int i = 0; i < wallColliders.Length; i++)
         {
             if (wallColliders[i].gameObject != gameObject)
+            {
+                // Debug.Log("Wall found: " + colliders[i].name);
                 isWalled = true;
+            }
         }
 
         // If the player should be sliding down a wall...
