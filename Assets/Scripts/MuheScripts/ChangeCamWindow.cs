@@ -7,13 +7,17 @@ using UnityEngine;
 /// </summary>
 public class ChangeCamWindow : MonoBehaviour {
 
-    public float speedOfChange = 5f;
-    public AnimationCurve speedVariation;
+    public float transitionTime = 1f;
+    public AnimationCurve speedVariation = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
-    bool followAlongX;
-    bool followAlongY;
+    [SerializeField]
+    bool followAlongX = true;
+    [SerializeField]
+    bool followAlongY = true;
     
     Vector2 windowCenterPos;
+    float windowInitialSizeY;
+    float windowFinalSizeY;
 
     Transform cameraTransform;
     Transform playerTransform;
@@ -36,11 +40,11 @@ public class ChangeCamWindow : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         // TODO Work in progress
-        if (moveDone) {
-            StopCoroutine(currentCoroutine);
-            currentCoroutine = followPlayer();
-            StartCoroutine(currentCoroutine);
-        }
+        //if (moveDone) {
+        //    StopCoroutine(currentCoroutine);
+        //    currentCoroutine = followPlayer();
+        //    StartCoroutine(currentCoroutine);
+       // }
     }
 
     /// <summary>
@@ -57,7 +61,8 @@ public class ChangeCamWindow : MonoBehaviour {
         this.followAlongY = followAlongY;
         this.windowCenterPos = windowCenterPos;
 
-        cam.orthographicSize = windowSizeY / 2;
+        windowInitialSizeY = cam.orthographicSize;
+        windowFinalSizeY = windowSizeY;
 
         currentCoroutine = moveToNewWindow();
 
@@ -66,8 +71,15 @@ public class ChangeCamWindow : MonoBehaviour {
 
     IEnumerator moveToNewWindow() {
         Vector2 camPos = cameraTransform.position;
-        while ((camPos - windowCenterPos).magnitude > 0.01) {
-            cameraTransform.position = Vector2.MoveTowards(cameraTransform.position, windowCenterPos, speedVariation.Evaluate(speedOfChange * Time.deltaTime));
+
+        float timer = 0f;
+
+        while (timer < transitionTime) {
+            Vector2 tempCamPos = Vector2.Lerp(camPos, windowCenterPos, speedVariation.Evaluate(timer / transitionTime));
+            cameraTransform.position = new Vector3(tempCamPos.x, tempCamPos.y, cameraTransform.position.z);
+            cam.orthographicSize = Mathf.Lerp(windowInitialSizeY, windowFinalSizeY, speedVariation.Evaluate(timer / transitionTime));
+            
+            timer += Time.deltaTime;
             yield return null;
         }
 
