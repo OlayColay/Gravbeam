@@ -315,8 +315,12 @@ public class BeamScript : MonoBehaviour
 
 
 
-    float GetForceStrength(Vector2 vectorToAttachPoint, Vector2 velocity, float time)
+    float GetForceStrength(Vector2 vectorToAttachPoint, Vector2 velocity, float amountOfTimeAttached)
     {
+        //increase force a bit with velocity. will feel better when making turns at fast speed.
+        //insert "cheating" aka centripital force helping hand
+
+        //ramp up the force in the first 0.5 seconds (or so) of the beam. Make it feel like attaching a grapple hook, thenn tugginng onn it to go real fast.
 
         return BEAM_STRENGTH;
     }
