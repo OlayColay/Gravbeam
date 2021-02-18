@@ -62,7 +62,7 @@ public class ChangeCamWindow : MonoBehaviour {
         this.windowCenterPos = windowCenterPos;
 
         windowInitialSizeY = cam.orthographicSize;
-        windowFinalSizeY = windowSizeY;
+        windowFinalSizeY = windowSizeY / 2;
 
         currentCoroutine = moveToNewWindow();
 
