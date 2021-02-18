@@ -19,7 +19,7 @@ public class CameraScript : MonoBehaviour
         Vector3 temp = new Vector3(0,0,-1);
         temp = playerTransform.position;
         temp.x = playerTransform.position.x;
-        temp.y = playerTransform.position.y;
+        temp.y = 0;
         temp.z = -1; // to show the scene
 
 
