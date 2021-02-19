@@ -39,8 +39,10 @@ public class DashArrow : MonoBehaviour
     {
         if (timeLeft > 0)
         {
+            // Debug.Log(Globals.curDashArrowVel);
             other.velocity = Globals.curDashArrowVel;
             timeLeft -= Time.deltaTime;
+            Globals.canControl = (timeLeft <= 0);
         }
     }
 }

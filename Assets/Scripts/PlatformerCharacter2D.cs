@@ -11,6 +11,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     [SerializeField] private float minJumpTime = 0.1f;  // The minimum time in a jump
     [SerializeField] private float wallSlideSpeed = 1f; // Speed a player slides down a wall
     [SerializeField] private float wallJumpMult = 0.7f; // The multiplier of jumpForce for a wall jump
+    [SerializeField] private float wallJumpXForce = 100f; // How much X-force is applied after WJ
     [SerializeField] private float wallScrambleMult;    // Multiplier of maxJumpTime for climbing up a wall
     [SerializeField] private float jumpDamper = 0.1f;   // Slowly dampens the jumpForce as the player goes up
 
@@ -77,7 +78,10 @@ public class PlatformerCharacter2D : MonoBehaviour
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
+            {
+                // Debug.Log("Ground found: " + colliders[i].name);
                 isGrounded = canWJLeft = canWJRight = true;
+            }
         }
         anim.SetBool("Ground", isGrounded);
 
@@ -85,7 +89,10 @@ public class PlatformerCharacter2D : MonoBehaviour
         for (int i = 0; i < wallColliders.Length; i++)
         {
             if (wallColliders[i].gameObject != gameObject)
+            {
+                // Debug.Log("Wall found: " + colliders[i].name);
                 isWalled = true;
+            }
         }
 
         // If the player should be sliding down a wall...
@@ -119,19 +126,19 @@ public class PlatformerCharacter2D : MonoBehaviour
         // Set the vertical animation
         anim.SetFloat("vSpeed", rb.velocity.y);
 
-        if((facingRight && rb.velocity.x < -1) || (!facingRight && rb.velocity.x > 1))
-        {
-            // Switch the way the player is labelled as facing.
-            facingRight = !facingRight;
-            // Rotate by 180 degrees
-            transform.Rotate(new Vector3(0,180,0));
-        }
+        // If currently facing right and (getting forced left or moving left into a wall)...
+        if (facingRight && (rb.velocity.x < -1.0f || 
+        (rb.velocity.x >= -0.001f && rb.velocity.x <= 0.001f && Globals.canControl && move < 0)))
+            Flip();
+        else if (!facingRight && (rb.velocity.x > 1.0f || 
+        (rb.velocity.x >= -0.001f && rb.velocity.x <= 0.001f && Globals.canControl && move > 0)))
+            Flip();
     }
 
     public void Move(float move)
     {
         // Only control the player if grounded or airControl is turned on
-        if (isGrounded || airControl || isSliding)
+        if (Globals.canControl && (isGrounded || airControl || isSliding))
         {
             // The Speed animator parameter is set to the absolute value of the horizontal input.
             anim.SetFloat("Speed", Mathf.Abs(move));
@@ -144,30 +151,33 @@ public class PlatformerCharacter2D : MonoBehaviour
 
     public void Jump()
     {
-        // If the player should jump...
-        if (isGrounded && anim.GetBool("Ground"))
+        if (Globals.canControl)
         {
-            JumpHelper();
-        }
-        // If the player is jumping from a wall...
-        else if (isSliding && anim.GetBool("Walled"))
-        {
-            JumpHelper();
-            isSliding = false;
-            isWallJumping = true;
-            anim.SetBool("Walled", false);
-            rb.AddForce(new Vector2(maxSpeed * (facingRight ? -75 : 75), 0));
-            if(airControl)
+            // If the player should jump...
+            if (isGrounded && anim.GetBool("Ground"))
             {
-                if (facingRight)
+                JumpHelper();
+            }
+            // If the player is jumping from a wall...
+            else if (isSliding && anim.GetBool("Walled"))
+            {
+                JumpHelper();
+                isSliding = false;
+                isWallJumping = true;
+                anim.SetBool("Walled", false);
+                rb.AddForce(new Vector2(maxSpeed * (facingRight ? -wallJumpXForce : wallJumpXForce), 0));
+                if(airControl)
                 {
-                    canWJLeft = true;
-                    canWJRight = false;
-                }
-                else
-                {
-                    canWJLeft = false;
-                    canWJRight = true;
+                    if (facingRight)
+                    {
+                        canWJLeft = true;
+                        canWJRight = false;
+                    }
+                    else
+                    {
+                        canWJLeft = false;
+                        canWJRight = true;
+                    }
                 }
             }
         }
@@ -180,5 +190,13 @@ public class PlatformerCharacter2D : MonoBehaviour
         curJumpForce = jumpForce * (isWallJumping ? wallJumpMult : 1);
         anim.SetBool("Ground", false);
         jumpTimeCounter = 0;
+    }
+
+    public void Flip()
+    {
+        // Switch the way the player is labelled as facing.
+        facingRight = !facingRight;
+        // Rotate by 180 degrees
+        transform.Rotate(new Vector3(0,180,0));
     }
 }
