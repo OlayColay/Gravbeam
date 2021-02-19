@@ -43,6 +43,10 @@ public class Centripetal_Test_Ver4 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            captured = false;
+        }
         //timer for buffer zone
         /*
         if (captured && !buffered)
