@@ -63,8 +63,10 @@ public class Centripetal_Test_Ver4 : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (captured)
+        if (captured)   //Equivalent to that the player pivots a beam on an object
         {
+            //The player's transform, mass and the pivot object's transform will be needed
+            
             Vector2 dirCen, dirTan;
             Vector2 veloPlayer;
             float veloCen;
@@ -77,26 +79,32 @@ public class Centripetal_Test_Ver4 : MonoBehaviour
             float speedLevel = 0.2f;
 
             distance = Vector2.Distance(pivot.transform.position, player.transform.position);
+            //Get the distance from the player to the pivot
 
             dirCen = (pivot.transform.position - player.transform.position).normalized;
             dirTan.x = -dirCen.y;
             dirTan.y = dirCen.x;
+            //Get unit vector for radial and tangential directions
 
             veloPlayer = rb.velocity;
             veloTan = Vector2.Dot(veloPlayer, dirTan);
             veloCen = Vector2.Dot(veloPlayer, dirCen);
+            //Get the player's radial and tangential velocities
 
             forceCen = 0.95f * (mass * veloTan * veloTan) / (distance);
-            //Added a calibration factor of 0.95
-            //If above 0.95, the motion will curve inward
-            //If below 0.95, the motion will curve outward
+            //Original centripetal force
+            //Added a calibration factor of 0.95 (it just works .-.)
 
             if (veloTan > 1000f)
                 speedLevel = 0.1f;
+            //A stronger modification force is needed for a faster moving player 
 
             forceBuf = -(mass * veloCen)/speedLevel;
             forceCen += forceBuf;
+            //Calculate the modification force that reduces the player's radial velocity and 'push' the player onto perfect orbit, add it to the centripetal force
+
             rb.AddForce(dirCen * forceCen);
+            //Apply the modified centripetal force
         }
     }
 
