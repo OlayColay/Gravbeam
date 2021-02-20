@@ -7,24 +7,37 @@ using UnityEngine;
 /// </summary>
 public class ChangeCamWindow : MonoBehaviour {
 
+    // Transition parameters
     public float transitionTime = 1f;
-    public AnimationCurve speedVariation = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+    public AnimationCurve transitionSpeedVariation = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
-    [SerializeField]
     bool followAlongX = true;
-    [SerializeField]
     bool followAlongY = true;
-    
+
+    // Camera player tracking stuff
+    public float damping = 1;
+    public float lookAheadFactor = 3;
+    public float lookAheadReturnSpeed = 0.5f;
+    public float lookAheadMoveThreshold = 0.1f;
+
+    private float m_OffsetZ;
+    private Vector3 m_LastTargetPosition;
+    private Vector3 m_CurrentVelocity;
+    private Vector3 m_LookAheadPos;
+
+    // Window details
     Vector2 windowCenterPos;
     float windowInitialSizeY;
     float windowFinalSizeY;
 
+    // transforms
     Transform cameraTransform;
     Transform playerTransform;
 
     Camera cam;
 
     bool moveDone = true;
+    //UnityStandardAssets._2D.Camera2DFollow playerFollow;
 
     IEnumerator currentCoroutine;
 
@@ -33,18 +46,38 @@ public class ChangeCamWindow : MonoBehaviour {
         cameraTransform = transform;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         cam = GetComponent<Camera>();
-        currentCoroutine = followPlayer();
-        StartCoroutine(currentCoroutine);
+        
+        // Standard assets camera tracking code
+        m_LastTargetPosition = playerTransform.position;
+        m_OffsetZ = (transform.position - playerTransform.position).z;
+        transform.parent = null;
     }
 
     // Update is called once per frame
     void Update() {
         // TODO Work in progress
-        //if (moveDone) {
-        //    StopCoroutine(currentCoroutine);
-        //    currentCoroutine = followPlayer();
-        //    StartCoroutine(currentCoroutine);
-       // }
+        if (moveDone) {
+            // StandardAssets camera tracking code
+
+            // only update lookahead pos if accelerating or changed direction
+            float xMoveDelta = (playerTransform.position - m_LastTargetPosition).x;
+
+            bool updateLookAheadTarget = Mathf.Abs(xMoveDelta) > lookAheadMoveThreshold;
+
+            if (updateLookAheadTarget) {
+                m_LookAheadPos = lookAheadFactor * Vector3.right * Mathf.Sign(xMoveDelta);
+            }
+            else {
+                m_LookAheadPos = Vector3.MoveTowards(m_LookAheadPos, Vector3.zero, Time.deltaTime * lookAheadReturnSpeed);
+            }
+
+            Vector3 aheadTargetPos = playerTransform.position + m_LookAheadPos + Vector3.forward * m_OffsetZ;
+            Vector3 newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref m_CurrentVelocity, damping);
+
+            transform.position = newPos;
+
+            m_LastTargetPosition = playerTransform.position;
+        }
     }
 
     /// <summary>
@@ -64,9 +97,7 @@ public class ChangeCamWindow : MonoBehaviour {
         windowInitialSizeY = cam.orthographicSize;
         windowFinalSizeY = windowSizeY / 2;
 
-        currentCoroutine = moveToNewWindow();
-
-        StartCoroutine(currentCoroutine);
+        StartCoroutine(moveToNewWindow());
     }
 
     IEnumerator moveToNewWindow() {
@@ -75,28 +106,15 @@ public class ChangeCamWindow : MonoBehaviour {
         float timer = 0f;
 
         while (timer < transitionTime) {
-            Vector2 tempCamPos = Vector2.Lerp(camPos, windowCenterPos, speedVariation.Evaluate(timer / transitionTime));
+            Vector2 tempCamPos = Vector2.Lerp(camPos, windowCenterPos, transitionSpeedVariation.Evaluate(timer / transitionTime));
             cameraTransform.position = new Vector3(tempCamPos.x, tempCamPos.y, cameraTransform.position.z);
-            cam.orthographicSize = Mathf.Lerp(windowInitialSizeY, windowFinalSizeY, speedVariation.Evaluate(timer / transitionTime));
+            cam.orthographicSize = Mathf.Lerp(windowInitialSizeY, windowFinalSizeY, transitionSpeedVariation.Evaluate(timer / transitionTime));
             
             timer += Time.deltaTime;
             yield return null;
         }
 
         moveDone = true;
-    }
-
-    IEnumerator followPlayer() {
-        while (true) {
-            // TODO implement camera bounds
-            if (followAlongX) {
-                cameraTransform.position.Set(playerTransform.position.x, cameraTransform.position.y, cameraTransform.position.z);
-            }
-
-            if (followAlongY) {
-                cameraTransform.position.Set(cameraTransform.position.x, playerTransform.position.y, cameraTransform.position.z);
-            }
-            yield return null;
-        }
+        yield return null;
     }
 }
