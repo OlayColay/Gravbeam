@@ -26,7 +26,7 @@ public class CameraTrigger : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(yViewSize);
+        // Debug.Log(yViewSize);
         if (other.tag == "Player")
             cameraScript.changeWindow(scrollX, scrollY, startingPosition, yViewSize, minPositions, maxPositions);
     }
