@@ -30,6 +30,10 @@ public class ChangeCamWindow : MonoBehaviour {
     float windowInitialSizeY;
     float windowFinalSizeY;
 
+    // Relevant only for player following
+    Vector2 windowMinConstraint;
+    Vector2 windowMaxConstraint;
+
     // transforms
     Transform cameraTransform;
     Transform playerTransform;
@@ -78,6 +82,13 @@ public class ChangeCamWindow : MonoBehaviour {
 
             m_LastTargetPosition = playerTransform.position;
         }
+
+        // Clamp to specified min and max bounds
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x, windowMinConstraint.x, windowMaxConstraint.x),
+            Mathf.Clamp(transform.position.y, windowMinConstraint.y, windowMaxConstraint.y),
+            transform.position.z
+        );
     }
 
     /// <summary>
@@ -87,7 +98,9 @@ public class ChangeCamWindow : MonoBehaviour {
     /// <param name="followAlongY">Whether the camera follows the player's y position</param>
     /// <param name="windowCenterPos">The position (Vector2) of the center of the window</param>
     /// <param name="windowSizeY">The height of the window (aspect ratio 16:9)</param>
-    public void changeWindow(bool followAlongX, bool followAlongY, Vector2 windowCenterPos, float windowSizeY, Vector2 camBoundsMin, Vector2 cameraBoundsMax) {
+    /// <param name="camBoundsMin">The minimum x and y cordinates of the camera</param>
+    /// <param name="camBoundsMax">The maximum x and y coordinates of the camera</param>
+    public void changeWindow(bool followAlongX, bool followAlongY, Vector2 windowCenterPos, float windowSizeY, Vector2 camBoundsMin, Vector2 camBoundsMax) {
         // TODO Work in progress
         moveDone = false;
         this.followAlongX = followAlongX;
@@ -96,6 +109,9 @@ public class ChangeCamWindow : MonoBehaviour {
 
         windowInitialSizeY = cam.orthographicSize;
         windowFinalSizeY = windowSizeY / 2;
+
+        windowMinConstraint = camBoundsMin;
+        windowMaxConstraint = camBoundsMax;
 
         StartCoroutine(moveToNewWindow());
     }
