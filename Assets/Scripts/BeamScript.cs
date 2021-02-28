@@ -393,22 +393,24 @@ public class BeamScript : MonoBehaviour
         forceCen += forceBuf;
         //Calculate the modification force that reduces the player's radial velocity and 'push' the player onto perfect orbit, add it to the centripetal force
 
-        float angle = Vector2.Angle(velocity, dirTan);
+        float angle = Vector2.Angle(velocity, dirCen);
 
-        print(numOfBeamsAttached);
-        
-        if (Mathf.Abs(angle) < 30)
-        {
+        print(angle);
 
-            //print(forceCen);
-            float forceToReturn = (BEAM_STRENGTH + 2*forceCen) / 3 / numOfBeamsAttached;
-            return forceToReturn;
-    
-        }
-        else
+        //return BEAM_STRENGTH / 2 + BEAM_STRENGTH / distance / 2;
+        float beforeBeamsMod = ((forceCen + 2 * BEAM_STRENGTH) / 3);
+        if(beforeBeamsMod< (2* BEAM_STRENGTH/3))
         {
-            return BEAM_STRENGTH;
+            beforeBeamsMod = 2 * BEAM_STRENGTH / 3;
         }
+
+        float returnForce = beforeBeamsMod / (float)(((float)numOfBeamsAttached) / 2 + 0.5);
+        print(forceCen);
+
+        return returnForce;
+
+
+
         //forceCen *= Mathf.Sin(angle);
 
         //return forceCen;
