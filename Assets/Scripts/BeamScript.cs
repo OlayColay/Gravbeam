@@ -8,6 +8,7 @@ public class BeamScript : MonoBehaviour
     public float BEAM_LENGTH;
     public float BEAM_STRENGTH;
     public float BEAM_LOCATION_OFFSET;
+    public bool hasTwoBeams;
 
 
     public GameObject Beam1;
@@ -49,6 +50,10 @@ public class BeamScript : MonoBehaviour
 
         Beam1Interface = Beam1.GetComponent<BeamInterface>();
         Beam2Interface = Beam2.GetComponent<BeamInterface>();
+        Beam1Interface.isHooked = false;
+        Beam1Interface.length = 0;
+        Beam2Interface.isHooked = false;
+        Beam2Interface.length = 0;
 
         bool Beam1Attached=false;
         bool Beam2Attached=false;
@@ -64,11 +69,13 @@ public class BeamScript : MonoBehaviour
 
     private void Update()
     {
+
     }
 
     // FixedUpdate is for physics stuff
     void FixedUpdate()
     {
+
         int numOfBeamsAttached = 0;
         if(BeamAttached1)
         {
@@ -80,7 +87,8 @@ public class BeamScript : MonoBehaviour
         }
 
         doStuff(Beam1, Beam1Interface, beamDir1, ref beamAttachedTime1, ref BeamAttached1, numOfBeamsAttached) ;
-        doStuff(Beam2, Beam2Interface, beamDir2, ref beamAttachedTime2, ref BeamAttached2, numOfBeamsAttached) ;
+        if(hasTwoBeams)
+            doStuff(Beam2, Beam2Interface, beamDir2, ref beamAttachedTime2, ref BeamAttached2, numOfBeamsAttached) ;
 
         //beam1 /= distance;
 
@@ -144,7 +152,7 @@ public class BeamScript : MonoBehaviour
 
                 Vector2 endHitLoc = Vector2.zero;
 
-                int NUMBER_OF_RAYS = 20;
+                int NUMBER_OF_RAYS = 30;
                 float TOTAL_ANGLE = 90;
                 bool beamableNotFound = true;
                 int i = 1;
@@ -208,19 +216,23 @@ public class BeamScript : MonoBehaviour
 
             }
 
+            
+            
             if (forceStrength > 0)
             {
                 beamInterface.isHooked = true;
-                
 
-                rb.AddForce(beamDirFinal.normalized * forceStrength);
-                
-                if (rbOther != null)
+                if (beamDirFinal.magnitude > 0.1)
                 {
-                    
-                    rbOther.AddForce(-beamDirFinal.normalized * forceStrength);
+                    rb.AddForce(beamDirFinal.normalized * forceStrength);
+
+                    if (rbOther != null)
+                    {
+
+                        rbOther.AddForce(-beamDirFinal.normalized * forceStrength);
 
 
+                    }
                 }
                 beamAttachedTime += Time.deltaTime;
             }
@@ -364,11 +376,6 @@ public class BeamScript : MonoBehaviour
 
         distance = vectorToAttachPoint.magnitude;
 
-        if (distance<4)
-        {
-            distance = 4;
-            return BEAM_STRENGTH;
-        }
         //Get the distance from the player to the pivot
 
         dirCen = vectorToAttachPoint.normalized;
@@ -398,13 +405,22 @@ public class BeamScript : MonoBehaviour
         print(angle);
 
         //return BEAM_STRENGTH / 2 + BEAM_STRENGTH / distance / 2;
-        float beforeBeamsMod = ((forceCen + 2 * BEAM_STRENGTH) / 3);
-        if(beforeBeamsMod< (2* BEAM_STRENGTH/3))
+
+        if(forceCen<0)
         {
-            beforeBeamsMod = 2 * BEAM_STRENGTH / 3;
+            forceCen = 0;
+        }
+        if (forceCen > (2*BEAM_STRENGTH / 3))
+        {
+            forceCen = (2*BEAM_STRENGTH / 3);
         }
 
-        float returnForce = beforeBeamsMod / (float)(((float)numOfBeamsAttached) / 2 + 0.5);
+        forceCen /= numOfBeamsAttached;
+
+        float returnForce = ((forceCen + 2 * BEAM_STRENGTH) / 3);
+
+
+
         print(forceCen);
 
         return returnForce;
