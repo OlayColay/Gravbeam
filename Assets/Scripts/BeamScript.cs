@@ -28,6 +28,9 @@ public class BeamScript : MonoBehaviour
     float beamTimeFromLastAttached1;
     float beamTimeFromLastAttached2;
 
+    bool BeamAttached1;
+    bool BeamAttached2;
+
     Rigidbody2D rb;
 
 
@@ -47,6 +50,8 @@ public class BeamScript : MonoBehaviour
         Beam1Interface = Beam1.GetComponent<BeamInterface>();
         Beam2Interface = Beam2.GetComponent<BeamInterface>();
 
+        bool Beam1Attached=false;
+        bool Beam2Attached=false;
 
         controls = new PlayerControls();
 
@@ -63,10 +68,19 @@ public class BeamScript : MonoBehaviour
 
     // FixedUpdate is for physics stuff
     void FixedUpdate()
-    {        
+    {
+        int numOfBeamsAttached = 0;
+        if(BeamAttached1)
+        {
+            numOfBeamsAttached++;
+        }
+        if (BeamAttached2)
+        {
+            numOfBeamsAttached++;
+        }
 
-        doStuff(Beam1, Beam1Interface, beamDir1, ref beamAttachedTime1);
-        doStuff(Beam2, Beam2Interface, beamDir2, ref beamAttachedTime2);
+        doStuff(Beam1, Beam1Interface, beamDir1, ref beamAttachedTime1, ref BeamAttached1, numOfBeamsAttached) ;
+        doStuff(Beam2, Beam2Interface, beamDir2, ref beamAttachedTime2, ref BeamAttached2, numOfBeamsAttached) ;
 
         //beam1 /= distance;
 
@@ -75,8 +89,11 @@ public class BeamScript : MonoBehaviour
 
     }
 
-    void doStuff (GameObject Beam, BeamInterface beamInterface, Vector2 beamDir, ref float beamAttachedTime)
+    void doStuff (GameObject Beam, BeamInterface beamInterface, Vector2 beamDir, ref float beamAttachedTime, ref bool BeamAttached, int numOfBeamsAttached)
     {
+        BeamAttached = false;
+        numOfBeamsAttached--;
+
         float distance = beamDir.magnitude * BEAM_LENGTH;
         
 
@@ -110,7 +127,10 @@ public class BeamScript : MonoBehaviour
 
                 beamDirFinal = beamDir.normalized * hit.distance;
 
-                forceStrength = GetForceStrength(beamStartLoc + beamDirFinal, rb.velocity, beamAttachedTime);
+                BeamAttached = true;
+                numOfBeamsAttached++;
+                forceStrength = GetForceStrength(beamDirFinal, rb.velocity, beamAttachedTime, numOfBeamsAttached);
+
 
 
 
@@ -175,7 +195,9 @@ public class BeamScript : MonoBehaviour
                 if (anyHit)
                 {
                     beamDirFinal = endHitLoc - beamStartLoc;//this is the vector representing the beam
-                    forceStrength = GetForceStrength(beamStartLoc + beamDirFinal, rb.velocity, beamAttachedTime);
+                    BeamAttached = true;
+                    numOfBeamsAttached++;
+                    forceStrength = GetForceStrength(beamDirFinal, rb.velocity, beamAttachedTime, numOfBeamsAttached);
                 }
                 else
                 {
@@ -192,9 +214,12 @@ public class BeamScript : MonoBehaviour
                 
 
                 rb.AddForce(beamDirFinal.normalized * forceStrength);
+                
                 if (rbOther != null)
                 {
+                    
                     rbOther.AddForce(-beamDirFinal.normalized * forceStrength);
+
 
                 }
                 beamAttachedTime += Time.deltaTime;
@@ -311,18 +336,96 @@ public class BeamScript : MonoBehaviour
 
         return mousePosition - transform.position;
     }
-    
 
 
 
-    float GetForceStrength(Vector2 vectorToAttachPoint, Vector2 velocity, float amountOfTimeAttached)
+
+    float GetForceStrength(Vector2 vectorToAttachPoint, Vector2 velocity, float amountOfTimeAttached, int numOfBeamsAttached)
     {
+
+        if(numOfBeamsAttached==0)
+        {
+            return 0;
+        }
+        //The player's transform, mass and the pivot object's transform will be needed
+
+        Vector2 dirCen, dirTan;
+
+        float veloCen;
+        float veloTan;
+        float distance;
+
+        float forceCen;
+        float forceBuf;
+
+        float speedLevel = 0.2f;
+
+        //pivot is the transform of the hooked object?
+
+        distance = vectorToAttachPoint.magnitude;
+
+        if (distance<4)
+        {
+            distance = 4;
+            return BEAM_STRENGTH;
+        }
+        //Get the distance from the player to the pivot
+
+        dirCen = vectorToAttachPoint.normalized;
+
+        dirTan.x = -dirCen.y;
+        dirTan.y = dirCen.x;
+        //Get unit vector for radial and tangential directions
+
+        veloTan = Vector2.Dot(velocity, dirTan);
+        veloCen = Vector2.Dot(velocity, dirCen);
+        //Get the player's radial and tangential velocities
+
+        forceCen = 0.95f * (rb.mass * veloTan * veloTan) / (distance);
+        //Original centripetal force
+        //Added a calibration factor of 0.95 (it just works .-.)
+
+        if (veloTan > 1000f)
+            speedLevel = 0.1f;
+        //A stronger modification force is needed for a faster moving player 
+
+        forceBuf = -(rb.mass * veloCen) / speedLevel;
+        forceCen += forceBuf;
+        //Calculate the modification force that reduces the player's radial velocity and 'push' the player onto perfect orbit, add it to the centripetal force
+
+        float angle = Vector2.Angle(velocity, dirTan);
+
+        print(numOfBeamsAttached);
+        
+        if (Mathf.Abs(angle) < 30)
+        {
+
+            //print(forceCen);
+            float forceToReturn = (BEAM_STRENGTH + 2*forceCen) / 3 / numOfBeamsAttached;
+            return forceToReturn;
+    
+        }
+        else
+        {
+            return BEAM_STRENGTH;
+        }
+        //forceCen *= Mathf.Sin(angle);
+
+        //return forceCen;
+
+
+
+        //return modified centripetal force
+
+
+
+        /////////////////////////to do??
         //increase force a bit with velocity. will feel better when making turns at fast speed.
         //insert "cheating" aka centripital force helping hand
 
         //ramp up the force in the first 0.5 seconds (or so) of the beam. Make it feel like attaching a grapple hook, thenn tugginng onn it to go real fast.
 
-        return BEAM_STRENGTH;
+        //return BEAM_STRENGTH;
     }
 
 }
