@@ -8,16 +8,22 @@ using UnityEngine;
 public class ChangeCamWindow : MonoBehaviour {
 
     // Transition parameters
+    [Tooltip("The total time taken to change windows")]
     public float transitionTime = 1f;
+    [Tooltip("Curve the motion of the camera between windows")]
     public AnimationCurve transitionSpeedVariation = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
     bool followAlongX = true;
     bool followAlongY = true;
 
     // Camera player tracking stuff
+    [Tooltip("Amount of damping of the player tracking routine")]
     public float damping = 1;
+    [Tooltip("The amount by which camera leads player during movement")]
     public float lookAheadFactor = 3;
+    [Tooltip("Speed at which the camera returns back when player stops")]
     public float lookAheadReturnSpeed = 0.5f;
+    [Tooltip("Minimum speed above which camera starts to lead player")]
     public float lookAheadMoveThreshold = 0.1f;
 
     private float m_OffsetZ;
@@ -60,7 +66,12 @@ public class ChangeCamWindow : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         // TODO Work in progress
-        if (moveDone) {
+        if (moveDone && 
+            (playerTransform.position.x >= windowMinConstraint.x
+            && playerTransform.position.y >= windowMinConstraint.y
+            && playerTransform.position.x <= windowMaxConstraint.x
+            && playerTransform.position.y <= windowMaxConstraint.y)) {
+
             // StandardAssets camera tracking code
 
             // only update lookahead pos if accelerating or changed direction
@@ -82,13 +93,6 @@ public class ChangeCamWindow : MonoBehaviour {
 
             m_LastTargetPosition = playerTransform.position;
         }
-
-        // Clamp to specified min and max bounds
-        transform.position = new Vector3(
-            Mathf.Clamp(transform.position.x, windowMinConstraint.x, windowMaxConstraint.x),
-            Mathf.Clamp(transform.position.y, windowMinConstraint.y, windowMaxConstraint.y),
-            transform.position.z
-        );
     }
 
     /// <summary>
@@ -98,8 +102,8 @@ public class ChangeCamWindow : MonoBehaviour {
     /// <param name="followAlongY">Whether the camera follows the player's y position</param>
     /// <param name="windowCenterPos">The position (Vector2) of the center of the window</param>
     /// <param name="windowSizeY">The height of the window (aspect ratio 16:9)</param>
-    /// <param name="camBoundsMin">The minimum x and y cordinates of the camera</param>
-    /// <param name="camBoundsMax">The maximum x and y coordinates of the camera</param>
+    /// <param name="camBoundsMin">The minimum x and y coordinates of the center of the camera</param>
+    /// <param name="camBoundsMax">The maximum x and y coordinates of the center of the camera</param>
     public void changeWindow(bool followAlongX, bool followAlongY, Vector2 windowCenterPos, float windowSizeY, Vector2 camBoundsMin, Vector2 camBoundsMax) {
         // TODO Work in progress
         moveDone = false;
