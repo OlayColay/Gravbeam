@@ -114,8 +114,8 @@ public class ChangeCamWindow : MonoBehaviour {
         windowInitialSizeY = cam.orthographicSize;
         windowFinalSizeY = windowSizeY / 2;
 
-        windowMinConstraint = camBoundsMin;
-        windowMaxConstraint = camBoundsMax;
+        //windowMinConstraint = camBoundsMin;
+        //windowMaxConstraint = camBoundsMax;
 
         StartCoroutine(moveToNewWindow());
     }

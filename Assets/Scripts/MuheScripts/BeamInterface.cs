@@ -10,7 +10,7 @@ using UnityEngine;
 [RequireComponent(typeof(ParticleSystem))]
 public class BeamInterface : MonoBehaviour {
     [Tooltip("The length of the beam, as shown by the gizmo")]
-    public float length = 5f;
+    public float length = 10f;
     [Tooltip("Whether the beam is hooked onto a surface")]
     public bool isHooked = false;
     [Tooltip("Speed of the beam particles when hooked")]
@@ -28,11 +28,20 @@ public class BeamInterface : MonoBehaviour {
     bool wasHooked;
     float lengthBuf;
 
+    float transverseScale;
+    float longScale;
+    float scaleFactor;
+
     // Start is called before the first frame update
     void Start() {
         beam = GetComponent<ParticleSystem>();
         wasHooked = isHooked;
         lengthBuf = length;
+
+        transverseScale = transform.localScale.y;
+        longScale = transform.localScale.z;
+
+        scaleFactor = longScale / transverseScale;
     }
 
     void OnDrawGizmosSelected() {
@@ -41,6 +50,10 @@ public class BeamInterface : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        transverseScale = transform.localScale.y;
+        
+
         ParticleSystem.MainModule mainParams = beam.main;
         ParticleSystem.NoiseModule noise = beam.noise;
         ParticleSystem.TrailModule trail = beam.trails;
@@ -59,7 +72,7 @@ public class BeamInterface : MonoBehaviour {
             trail.dieWithParticles = false;
             velocity.enabled = true;
             color.gradient = hookedColor;
-            lifetime.constant = length / hookedSpeed;
+            lifetime.constant = 10f / hookedSpeed;
             mainParams.startSpeed = speed;
             wasHooked = true;
             mainParams.startLifetime = lifetime;
@@ -74,18 +87,20 @@ public class BeamInterface : MonoBehaviour {
             trail.dieWithParticles = true;
             velocity.enabled = false;
             color.gradient = freeColor;
-            lifetime.constant = (length + 1.5f) / freeSpeed;
+            lifetime.constant = (11.5f) / freeSpeed;
             mainParams.startSpeed = speed;
             wasHooked = false;
             mainParams.startLifetime = lifetime;
             beam.Play();
         }
 
-        if(lengthBuf != length) {
-            lifetime.constant = (length + 1.5f) / speed.constant;
-            mainParams.startLifetime = lifetime;
-        }
+        //if(lengthBuf != length) {
+        //    lifetime.constant = (11.5f) / speed.constant;
+        //    mainParams.startLifetime = lifetime;
+        //}
 
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, scaleFactor * transverseScale * length / lengthBuf);
+        
         trail.colorOverLifetime = color;
 
         
