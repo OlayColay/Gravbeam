@@ -118,7 +118,7 @@ public class PlatformerCharacter2D : MonoBehaviour
         }
 
         // If the player should be sliding down a wall...
-        if (isWalled && !isGrounded && move != 0 && ((facingRight && canWJRight) || (!facingRight && canWJLeft)))
+        if (isWalled && !isGrounded /*&& move != 0*/ && ((facingRight && canWJRight) || (!facingRight && canWJLeft)))
             isSliding = true;
         else
             isSliding = false;
