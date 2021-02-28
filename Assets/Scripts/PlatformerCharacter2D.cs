@@ -1,19 +1,41 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlatformerCharacter2D : MonoBehaviour
 {
-    [SerializeField] private float maxSpeed = 10f;      // The fastest the player can travel in the x axis.
-    [SerializeField] private float jumpForce = 400f;    // Amount of force added when the player jumps.
-    [SerializeField] private bool airControl = false;   // Whether or not a player can steer while jumping
-    [SerializeField] private LayerMask whatIsGround;    // A mask determining what is ground to the character
-    [SerializeField] private float maxJumpTime = 1f;    // How long a player can move upwards in a jump
-    [SerializeField] private float minJumpTime = 0.1f;  // The minimum time in a jump
-    [SerializeField] private float wallSlideSpeed = 1f; // Speed a player slides down a wall
-    [SerializeField] private float wallJumpMult = 0.7f; // The multiplier of jumpForce for a wall jump
-    [SerializeField] private float wallJumpXForce = 100f; // How much X-force is applied after WJ
-    [SerializeField] private float wallScrambleMult;    // Multiplier of maxJumpTime for climbing up a wall
-    [SerializeField] private float jumpDamper = 0.1f;   // Slowly dampens the jumpForce as the player goes up
+    [Tooltip("The fastest the player can travel in the x axis")]
+    [SerializeField] private float maxSpeed = 10f;
+
+    [Tooltip("Amount of force added when the player jumps")]
+    [SerializeField] private float jumpForce = 400f;
+    
+    [Tooltip("Whether or not a player can steer while jumping")]
+    [SerializeField] private bool airControl = false;
+    
+    [Tooltip("A mask determining what is ground to the character")]
+    [SerializeField] private LayerMask whatIsGround;
+    
+    [Tooltip("How long a player can move upwards in a jump")]
+    [SerializeField] private float maxJumpTime = 1f;
+    
+    [Tooltip("The minimum time travelling upwards in a jump")]
+    [SerializeField] private float minJumpTime = 0.1f;
+    
+    [Tooltip("Speed a player slides down a wall")]
+    [SerializeField] private float wallSlideSpeed = 1f;
+    
+    [Tooltip("The multiplier of the upward jumpForce for a wall jump")]
+    [SerializeField] private float wallJumpMult = 0.7f;
+    
+    [Tooltip("How much X-force is applied after a wall jump")]
+    [SerializeField] private float wallJumpXForce = 100f;
+    
+    [Tooltip("Multiplier of maxJumpTime for climbing up a wall")]
+    [SerializeField] private float wallScrambleMult;
+    
+    [Tooltip("Slowly dampens the jumpForce as the player goes up")]
+    [SerializeField] private float jumpDamper = 0.1f;
 
     PlayerControls controls;
     private float move = 0f;            // The value of horizontal movement (from -1 to 1)
@@ -78,7 +100,10 @@ public class PlatformerCharacter2D : MonoBehaviour
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
+            {
+                // Debug.Log("Ground found: " + colliders[i].name);
                 isGrounded = canWJLeft = canWJRight = true;
+            }
         }
         anim.SetBool("Ground", isGrounded);
 
@@ -86,7 +111,10 @@ public class PlatformerCharacter2D : MonoBehaviour
         for (int i = 0; i < wallColliders.Length; i++)
         {
             if (wallColliders[i].gameObject != gameObject)
+            {
+                // Debug.Log("Wall found: " + colliders[i].name);
                 isWalled = true;
+            }
         }
 
         // If the player should be sliding down a wall...
