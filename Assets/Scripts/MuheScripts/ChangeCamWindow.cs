@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// This script is used to change the camera's "window." Probably doesn't work yet
 /// </summary>
+[RequireComponent(typeof(BoxCollider2D))]
 public class ChangeCamWindow : MonoBehaviour {
 
     // Transition parameters
@@ -30,6 +31,7 @@ public class ChangeCamWindow : MonoBehaviour {
     private Vector3 m_LastTargetPosition;
     private Vector3 m_CurrentVelocity;
     private Vector3 m_LookAheadPos;
+    private BoxCollider2D cameraBox;
 
     // Window details
     Vector2 windowCenterPos;
@@ -55,6 +57,7 @@ public class ChangeCamWindow : MonoBehaviour {
     void Start() {
         cameraTransform = transform;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        cameraBox = GetComponent<BoxCollider2D>();
         cam = GetComponent<Camera>();
         
         // Standard assets camera tracking code
@@ -66,6 +69,31 @@ public class ChangeCamWindow : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         // TODO Work in progress
+
+        AspectRatioChange();
+
+        if (GameObject.FindGameObjectWithTag("CamBound"))
+        {
+            Bounds curBound = GameObject.FindGameObjectWithTag("CamBound").GetComponent<BoxCollider2D>().bounds;
+
+            if (curBound.max.x - curBound.min.x < cameraBox.size.x - 0.01f)
+            {
+                Debug.Log("Screen is too small horizontally to contain camera!");
+            }
+            if (curBound.max.y - curBound.min.y < cameraBox.size.y - 0.01f)
+            {
+                Debug.Log("Screen is too small vertically to contain camera!");
+            }
+
+            transform.position = new Vector3(Mathf.Clamp(
+                                                playerTransform.position.x, curBound.min.x + cameraBox.size.x / 2, 
+                                                curBound.max.x - cameraBox.size.x / 2),
+                                                Mathf.Clamp(
+                                                playerTransform.position.y, curBound.min.y + cameraBox.size.y / 2, 
+                                                curBound.max.y - cameraBox.size.y / 2),
+                                                transform.position.z);
+        }
+
         if (moveDone && 
             (playerTransform.position.x >= windowMinConstraint.x
             && playerTransform.position.y >= windowMinConstraint.y
@@ -93,6 +121,22 @@ public class ChangeCamWindow : MonoBehaviour {
 
             m_LastTargetPosition = playerTransform.position;
         }
+    }
+
+    void AspectRatioChange()
+    {
+        GetComponent<Camera>().orthographicSize = Globals.camYSize / 2;
+
+        if (Camera.main.aspect >= 1.25f && Camera.main.aspect < 1.3f) // 5:4 ratio
+            cameraBox.size = new Vector2((5f/4f) * Globals.camYSize, Globals.camYSize);
+        else if (Camera.main.aspect < 1.4f) // 4:3 ratio
+            cameraBox.size = new Vector2((4f/3f) * Globals.camYSize, Globals.camYSize);
+        else if (Camera.main.aspect < 1.6f) // 3:2 ratio
+            cameraBox.size = new Vector2((3f/2f) * Globals.camYSize, Globals.camYSize);
+        else if (Camera.main.aspect < 1.7f) // 16:10 ratio
+            cameraBox.size = new Vector2((16f/10f) * Globals.camYSize, Globals.camYSize);
+        else /*if (Camera.main.aspect < 1.8f)*/ // 16:9 ratio
+            cameraBox.size = new Vector2((16f/9f) * Globals.camYSize, Globals.camYSize);
     }
 
     /// <summary>

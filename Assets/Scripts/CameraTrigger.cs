@@ -2,39 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class CameraTrigger : MonoBehaviour
 {
-    [Tooltip("Whether the camera will be allowed to scroll horizontally")]
-    [SerializeField] private bool scrollX = false;
+    // [Tooltip("Whether the camera will be allowed to scroll horizontally")]
+    // [SerializeField] private bool scrollX = false;
     
-    [Tooltip("Whether the camera will be allowed to scroll vertically")]
-    [SerializeField] private bool scrollY = false;
+    // [Tooltip("Whether the camera will be allowed to scroll vertically")]
+    // [SerializeField] private bool scrollY = false;
     
     [Tooltip("Whether the height of the box collider will be the height of the camera")]
     [SerializeField] private bool yViewSizeIsTriggerHeight = true;
     
-    [Tooltip("The fastest the player can travel in the x axis")]
+    [Tooltip("The y-size of the new camera view, if it is NOT the trigger height")]
     [SerializeField] private float yViewSize;
 
-    private ChangeCamWindow cameraScript;
-    private Vector2 startingPosition;
-    private Vector2 minPositions;
-    private Vector2 maxPositions;
+    private Bounds managerBox;   // The BoxCollider2D of the parent object
+    private Transform player;    // The player's transform
+    public GameObject boundary;  // The actual camera boundary
 
-    void Awake()
+    void Start()
     {
-        cameraScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ChangeCamWindow>();
-        startingPosition = transform.GetChild(0).transform.position;
+        managerBox = GetComponent<BoxCollider2D>().bounds;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        boundary.GetComponent<BoxCollider2D>().enabled = true;
+        boundary.GetComponent<BoxCollider2D>().offset = GetComponent<BoxCollider2D>().offset;
+        boundary.GetComponent<BoxCollider2D>().size = GetComponent<BoxCollider2D>().size;
+
         if (yViewSizeIsTriggerHeight)
             yViewSize = GetComponent<BoxCollider2D>().size.y;
-        minPositions = transform.GetChild(1).transform.position;
-        maxPositions = transform.GetChild(2).transform.position;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void Update()
     {
-        // Debug.Log(yViewSize);
-        if (other.tag == "Player")
-            cameraScript.changeWindow(scrollX, scrollY, startingPosition, yViewSize, minPositions, maxPositions);
-    }
+        if (managerBox.min.x < player.position.x && player.position.x < managerBox.max.x &&
+          managerBox.min.y < player.position.y && player.position.y < managerBox.max.y)
+        {
+            boundary.SetActive(true);
+            Globals.camYSize = yViewSize;
+        }
+        else
+            boundary.SetActive(false);
+    }  
 }

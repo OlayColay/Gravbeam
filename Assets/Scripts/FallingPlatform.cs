@@ -19,7 +19,7 @@ public class FallingPlatform : MonoBehaviour
     private IEnumerator Fall()
     {
         yield return new WaitForSeconds(timeBeforeFall);
-        Debug.Log("Fall!");
+        // Debug.Log("Fall!");
         GetComponent<Rigidbody2D>().isKinematic = false;
     }
 }
