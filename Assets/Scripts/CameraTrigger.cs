@@ -45,6 +45,7 @@ public class CameraTrigger : MonoBehaviour
 
             if(gameObject != Globals.curCamBound)
             {
+                // Debug.Log("curCamBound changed to " + gameObject);
                 camScript.changeWindow(yViewSize);
                 Globals.curCamBound = gameObject;
             }

@@ -32,6 +32,7 @@ public class ChangeCamWindow : MonoBehaviour {
     private Vector3 m_CurrentVelocity;
     private Vector3 m_LookAheadPos;
     private BoxCollider2D cameraBox;
+    private Bounds curBound;
 
     // Window details
     Vector2 windowCenterPos;
@@ -72,18 +73,9 @@ public class ChangeCamWindow : MonoBehaviour {
 
         if (moveDone && GameObject.FindGameObjectWithTag("CamBound"))
         {
+            curBound = GameObject.FindGameObjectWithTag("CamBound").GetComponent<BoxCollider2D>().bounds;
+
             AspectRatioChange();
-
-            Bounds curBound = GameObject.FindGameObjectWithTag("CamBound").GetComponent<BoxCollider2D>().bounds;
-
-            if (curBound.max.x - curBound.min.x < cameraBox.size.x - 0.01f)
-            {
-                Debug.Log("Screen is too small horizontally to contain camera!");
-            }
-            if (curBound.max.y - curBound.min.y < cameraBox.size.y - 0.01f)
-            {
-                Debug.Log("Screen is too small vertically to contain camera!");
-            }
 
             // only update lookahead pos if accelerating or changed direction
             float xMoveDelta = (playerTransform.position - m_LastTargetPosition).x;
@@ -117,16 +109,18 @@ public class ChangeCamWindow : MonoBehaviour {
 
     void AspectRatioChange()
     {
-        if (Camera.main.aspect >= 1.25f && Camera.main.aspect < 1.3f) // 5:4 ratio
-            cameraBox.size = 2 * (new Vector2((5f/4f) * windowFinalSizeY, windowFinalSizeY));
-        else if (Camera.main.aspect < 1.4f) // 4:3 ratio
-            cameraBox.size = 2 * (new Vector2((4f/3f) * windowFinalSizeY, windowFinalSizeY));
-        else if (Camera.main.aspect < 1.6f) // 3:2 ratio
-            cameraBox.size = 2 * (new Vector2((3f/2f) * windowFinalSizeY, windowFinalSizeY));
-        else if (Camera.main.aspect < 1.7f) // 16:10 ratio
-            cameraBox.size = 2 * (new Vector2((16f/10f) * windowFinalSizeY, windowFinalSizeY));
-        else /*if (Camera.main.aspect < 1.8f)*/ // 16:9 ratio
-            cameraBox.size = 2 * (new Vector2((16f/9f) * windowFinalSizeY, windowFinalSizeY));
+        if (curBound.max.x - curBound.min.x < (2 * windowFinalSizeY * cam.aspect) - 0.01f)
+        {
+            // Debug.Log("Camera size is too large horizontally!");
+            windowFinalSizeY = (curBound.max.x - curBound.min.x) / 2 / cam.aspect;
+        }
+        if (curBound.max.y - curBound.min.y < (2 * windowFinalSizeY) - 0.01f)
+        {
+            // Debug.Log("Camera size is too large vertically!");
+            windowFinalSizeY = (curBound.max.y - curBound.min.y) / 2;
+        }
+
+        cameraBox.size = 2 * (new Vector2(cam.aspect * windowFinalSizeY, windowFinalSizeY));
     }
 
     /// <summary>
