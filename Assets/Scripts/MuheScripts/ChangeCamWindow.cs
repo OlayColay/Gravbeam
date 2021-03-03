@@ -14,8 +14,8 @@ public class ChangeCamWindow : MonoBehaviour {
     [Tooltip("Curve the motion of the camera between windows")]
     public AnimationCurve transitionSpeedVariation = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
-    bool followAlongX = true;
-    bool followAlongY = true;
+    // bool followAlongX = true;
+    // bool followAlongY = true;
 
     // Camera player tracking stuff
     [Tooltip("Amount of damping of the player tracking routine")]
@@ -70,10 +70,10 @@ public class ChangeCamWindow : MonoBehaviour {
     void Update() {
         // TODO Work in progress
 
-        AspectRatioChange();
-
-        if (GameObject.FindGameObjectWithTag("CamBound"))
+        if (moveDone && GameObject.FindGameObjectWithTag("CamBound"))
         {
+            AspectRatioChange();
+
             Bounds curBound = GameObject.FindGameObjectWithTag("CamBound").GetComponent<BoxCollider2D>().bounds;
 
             if (curBound.max.x - curBound.min.x < cameraBox.size.x - 0.01f)
@@ -84,23 +84,6 @@ public class ChangeCamWindow : MonoBehaviour {
             {
                 Debug.Log("Screen is too small vertically to contain camera!");
             }
-
-            transform.position = new Vector3(Mathf.Clamp(
-                                                playerTransform.position.x, curBound.min.x + cameraBox.size.x / 2, 
-                                                curBound.max.x - cameraBox.size.x / 2),
-                                                Mathf.Clamp(
-                                                playerTransform.position.y, curBound.min.y + cameraBox.size.y / 2, 
-                                                curBound.max.y - cameraBox.size.y / 2),
-                                                transform.position.z);
-        }
-
-        if (moveDone && 
-            (playerTransform.position.x >= windowMinConstraint.x
-            && playerTransform.position.y >= windowMinConstraint.y
-            && playerTransform.position.x <= windowMaxConstraint.x
-            && playerTransform.position.y <= windowMaxConstraint.y)) {
-
-            // StandardAssets camera tracking code
 
             // only update lookahead pos if accelerating or changed direction
             float xMoveDelta = (playerTransform.position - m_LastTargetPosition).x;
@@ -115,6 +98,15 @@ public class ChangeCamWindow : MonoBehaviour {
             }
 
             Vector3 aheadTargetPos = playerTransform.position + m_LookAheadPos + Vector3.forward * m_OffsetZ;
+            aheadTargetPos = new Vector3(Mathf.Clamp(
+                                                aheadTargetPos.x, 
+                                                curBound.min.x + cameraBox.size.x / 2, 
+                                                curBound.max.x - cameraBox.size.x / 2),
+                                            Mathf.Clamp(
+                                                aheadTargetPos.y, 
+                                                curBound.min.y + cameraBox.size.y / 2, 
+                                                curBound.max.y - cameraBox.size.y / 2),
+                                            transform.position.z);
             Vector3 newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref m_CurrentVelocity, damping);
 
             transform.position = newPos;
@@ -125,18 +117,16 @@ public class ChangeCamWindow : MonoBehaviour {
 
     void AspectRatioChange()
     {
-        GetComponent<Camera>().orthographicSize = Globals.camYSize / 2;
-
         if (Camera.main.aspect >= 1.25f && Camera.main.aspect < 1.3f) // 5:4 ratio
-            cameraBox.size = new Vector2((5f/4f) * Globals.camYSize, Globals.camYSize);
+            cameraBox.size = 2 * (new Vector2((5f/4f) * windowFinalSizeY, windowFinalSizeY));
         else if (Camera.main.aspect < 1.4f) // 4:3 ratio
-            cameraBox.size = new Vector2((4f/3f) * Globals.camYSize, Globals.camYSize);
+            cameraBox.size = 2 * (new Vector2((4f/3f) * windowFinalSizeY, windowFinalSizeY));
         else if (Camera.main.aspect < 1.6f) // 3:2 ratio
-            cameraBox.size = new Vector2((3f/2f) * Globals.camYSize, Globals.camYSize);
+            cameraBox.size = 2 * (new Vector2((3f/2f) * windowFinalSizeY, windowFinalSizeY));
         else if (Camera.main.aspect < 1.7f) // 16:10 ratio
-            cameraBox.size = new Vector2((16f/10f) * Globals.camYSize, Globals.camYSize);
+            cameraBox.size = 2 * (new Vector2((16f/10f) * windowFinalSizeY, windowFinalSizeY));
         else /*if (Camera.main.aspect < 1.8f)*/ // 16:9 ratio
-            cameraBox.size = new Vector2((16f/9f) * Globals.camYSize, Globals.camYSize);
+            cameraBox.size = 2 * (new Vector2((16f/9f) * windowFinalSizeY, windowFinalSizeY));
     }
 
     /// <summary>
@@ -148,12 +138,12 @@ public class ChangeCamWindow : MonoBehaviour {
     /// <param name="windowSizeY">The height of the window (aspect ratio 16:9)</param>
     /// <param name="camBoundsMin">The minimum x and y coordinates of the center of the camera</param>
     /// <param name="camBoundsMax">The maximum x and y coordinates of the center of the camera</param>
-    public void changeWindow(bool followAlongX, bool followAlongY, Vector2 windowCenterPos, float windowSizeY, Vector2 camBoundsMin, Vector2 camBoundsMax) {
+    public void changeWindow(/*bool followAlongX, bool followAlongY, Vector2 windowCenterPos, */float windowSizeY/*, Vector2 camBoundsMin, Vector2 camBoundsMax*/) {
         // TODO Work in progress
-        moveDone = false;
-        this.followAlongX = followAlongX;
-        this.followAlongY = followAlongY;
-        this.windowCenterPos = windowCenterPos;
+        // moveDone = false;
+        // this.followAlongX = followAlongX;
+        // this.followAlongY = followAlongY;
+        // this.windowCenterPos = windowCenterPos;
 
         windowInitialSizeY = cam.orthographicSize;
         windowFinalSizeY = windowSizeY / 2;
@@ -165,20 +155,20 @@ public class ChangeCamWindow : MonoBehaviour {
     }
 
     IEnumerator moveToNewWindow() {
-        Vector2 camPos = cameraTransform.position;
+        // Vector2 camPos = cameraTransform.position;
 
         float timer = 0f;
 
         while (timer < transitionTime) {
-            Vector2 tempCamPos = Vector2.Lerp(camPos, windowCenterPos, transitionSpeedVariation.Evaluate(timer / transitionTime));
-            cameraTransform.position = new Vector3(tempCamPos.x, tempCamPos.y, cameraTransform.position.z);
+            // Vector2 tempCamPos = Vector2.Lerp(camPos, windowCenterPos, transitionSpeedVariation.Evaluate(timer / transitionTime));
+            // cameraTransform.position = new Vector3(tempCamPos.x, tempCamPos.y, cameraTransform.position.z);
             cam.orthographicSize = Mathf.Lerp(windowInitialSizeY, windowFinalSizeY, transitionSpeedVariation.Evaluate(timer / transitionTime));
             
             timer += Time.deltaTime;
             yield return null;
         }
 
-        moveDone = true;
+        // moveDone = true;
         yield return null;
     }
 }
