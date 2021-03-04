@@ -37,6 +37,9 @@ public class PlatformerCharacter2D : MonoBehaviour
     [Tooltip("Slowly dampens the jumpForce as the player goes up")]
     [SerializeField] private float jumpDamper = 0.1f;
 
+    [Tooltip("Multiplier for gravity when the parachute is active")]
+    [SerializeField] private float parachuteMult = 0.25f;
+
     PlayerControls controls;
     private float move = 0f;            // The value of horizontal movement (from -1 to 1)
     private Transform groundCheck;      // A position marking where to check if the player is grounded.
@@ -56,8 +59,9 @@ public class PlatformerCharacter2D : MonoBehaviour
     private bool isWallJumping = false; // If the player has jumped off a wall
     private float curJumpForce;         // Jump force that changes based on jumpDamper
     private bool canWJLeft = true;      // If the player can wall jump of a wall on the left
-    private bool canWJRight = true;      // If the player can wall jump of a wall on the right
-    
+    private bool canWJRight = true;     // If the player can wall jump of a wall on the right
+    private bool isGliding = false;     // If the player is gliding with the parachute
+    private float gravity;
 
     private void Awake()
     {
@@ -67,6 +71,7 @@ public class PlatformerCharacter2D : MonoBehaviour
         wallCheck = transform.Find("WallCheck");
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        gravity = rb.gravityScale;
 
         controls = new PlayerControls();
 
@@ -77,7 +82,7 @@ public class PlatformerCharacter2D : MonoBehaviour
         // controls.Gravity.Beam2.canceled += ctx => beamDir2 = Vector2.zero;
 
         controls.Gravity.Jump.started += ctx => Jump();
-        controls.Gravity.Jump.canceled += ctx => isJumping = false;
+        controls.Gravity.Jump.canceled += ctx => JumpCancel();
     }
 
     private void OnEnable()
@@ -103,6 +108,7 @@ public class PlatformerCharacter2D : MonoBehaviour
             {
                 // Debug.Log("Ground found: " + colliders[i].name);
                 isGrounded = canWJLeft = canWJRight = true;
+                isGliding = false;
             }
         }
         anim.SetBool("Ground", isGrounded);
@@ -114,12 +120,15 @@ public class PlatformerCharacter2D : MonoBehaviour
             {
                 // Debug.Log("Wall found: " + colliders[i].name);
                 isWalled = true;
+                isGliding = false;
             }
         }
 
         // If the player should be sliding down a wall...
         if (isWalled && !isGrounded /*&& move != 0*/ && ((facingRight && canWJRight) || (!facingRight && canWJLeft)))
+        {
             isSliding = true;
+        }    
         else
             isSliding = false;
         anim.SetBool("Walled", isSliding);
@@ -131,9 +140,9 @@ public class PlatformerCharacter2D : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed, float.MaxValue));
 
         // If the player continues jumping...
-        if(canJumpMore && (isJumping || jumpTimeCounter < minJumpTime)) 
+        if (canJumpMore && (isJumping || jumpTimeCounter < minJumpTime)) 
         {
-            if(jumpTimeCounter < maxJumpTime * (isSliding ? wallScrambleMult : 1f))
+            if (jumpTimeCounter < maxJumpTime * (isSliding ? wallScrambleMult : 1f))
             {
                 rb.velocity = new Vector2(rb.velocity.x, curJumpForce);
                 jumpTimeCounter += Time.deltaTime;
@@ -144,6 +153,11 @@ public class PlatformerCharacter2D : MonoBehaviour
         }
         else 
             canJumpMore = isJumping = isWallJumping = false;
+
+        if (isGliding)
+            rb.gravityScale = gravity * parachuteMult;
+        else
+            rb.gravityScale = gravity;
 
         // Set the vertical animation
         anim.SetFloat("vSpeed", rb.velocity.y);
@@ -202,6 +216,10 @@ public class PlatformerCharacter2D : MonoBehaviour
                     }
                 }
             }
+            else if (!isGrounded && !isSliding)
+            {
+                isGliding = true;
+            }
         }
     }
     private void JumpHelper()
@@ -212,6 +230,11 @@ public class PlatformerCharacter2D : MonoBehaviour
         curJumpForce = jumpForce * (isWallJumping ? wallJumpMult : 1);
         anim.SetBool("Ground", false);
         jumpTimeCounter = 0;
+    }
+
+    private void JumpCancel()
+    {
+        isJumping = isGliding = false;
     }
 
     public void Flip()
