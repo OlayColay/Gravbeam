@@ -110,10 +110,20 @@ public class BeamInterface : MonoBehaviour {
     }
 
     public void SetLength(float length) {
-        if (length < 0.01f)
-            length = 0.01f;
+
+        float xScale = 1;
+        float yScale = 1;
+        if (length < 0.1f)
+        {
+            length = 0.1f;
+            beam.Stop();
+
+            xScale = 0.00001f;
+            yScale = 0.00001f;
+        }
+
         this.length = length;
         Debug.Log(length / lengthBuf);
-        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, length / lengthBuf);
+        transform.localScale = new Vector3(xScale, yScale, length / lengthBuf);
     }
 }

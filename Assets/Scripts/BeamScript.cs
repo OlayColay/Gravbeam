@@ -19,11 +19,11 @@ public class BeamScript : MonoBehaviour
 
     float[] beamAttachedTime = new float[2];
 
-    Vector2[] lastAttachedBeamDir = new Vector2[2];
+    //Vector2[] lastAttachedBeamDir = new Vector2[2];
 
-    Vector2[] lastAttachedBeamEnd = new Vector2[2];
+    //Vector2[] lastAttachedBeamEnd = new Vector2[2];
 
-    float[] beamTimeFromLastAttached = new float[2];
+    //float[] beamTimeFromLastAttached = new float[2];
 
     bool[] beamAttached = new bool[2];
 
@@ -47,9 +47,9 @@ public class BeamScript : MonoBehaviour
         BeamInterface[0] = BeamObject[0].GetComponent<BeamInterface>();
         BeamInterface[1] = BeamObject[1].GetComponent<BeamInterface>();
         BeamInterface[0].isHooked = false;
-        BeamInterface[0].length = 0;
+        BeamInterface[0].SetLength(0);
         BeamInterface[1].isHooked = false;
-        BeamInterface[1].length = 0;
+        BeamInterface[1].SetLength(0);
 
         bool Beam1Attached=false;
         bool Beam2Attached=false;
@@ -234,15 +234,16 @@ public class BeamScript : MonoBehaviour
             }
             else
             {
+                print("non hooked");
                 beamInterface.isHooked = false;
-                beamInterface.length = 0;
                 beamAttachedTime = 0;
 
             }
 
 
             //draw the beam
-            beamInterface.length = beamDirFinal.magnitude;
+            print(beamDirFinal);
+            beamInterface.SetLength(beamDirFinal.magnitude);
             Beam.transform.position = beamStartLoc;
             Beam.transform.LookAt(beamStartLoc + beamDirFinal);
             Debug.DrawLine(beamStartLoc, beamStartLoc + beamDirFinal, Color.cyan, 0.025f);
@@ -250,66 +251,10 @@ public class BeamScript : MonoBehaviour
 
 
 
-
-
-
-            //if(noneHit)
-            //{
-            //    //raycast to find nearest attachable object
-
-            //    bool anyHit = false;
-            //    float minDistance = 100f;
-            //    Vector2 endHitLoc = Vector2.zero;
-
-            //    int NUMBER_OF_RAYS = 24;
-            //    float angle = 0; //in radians!
-            //    for (int i = 0; i < NUMBER_OF_RAYS; i++)
-            //    {
-            //        float x = Mathf.Sin(angle);
-            //        float y = Mathf.Cos(angle);
-            //        angle += 2 * Mathf.PI / NUMBER_OF_RAYS; //add the right ammount of radians
-
-            //        Vector2 dir = new Vector2(x, y).normalized;
-            //        Vector2 extendedEndPoint;
-
-            //        //search for objects a small distance away from the max end point. Small distance is proportional to the max end point distance. about 1/5 of it? Must test.
-
-            //        RaycastHit2D hitExtended = Physics2D.Raycast(maxEndPoint, dir, distance / 2);
-
-            //        Debug.DrawLine(maxEndPoint, maxEndPoint + dir*(distance / 2), Color.red, 0.025f);
-
-            //        if (hitExtended.collider != null && hitExtended.collider.gameObject.tag == "Beamable")
-            //        {
-            //            if (hitExtended.distance < minDistance)
-            //            {
-            //                Debug.DrawLine(maxEndPoint, maxEndPoint + dir * hitExtended.distance, Color.yellow, 0.025f);
-
-            //                minDistance = hitExtended.distance;
-            //                endHitLoc = maxEndPoint + dir * hitExtended.distance;
-            //                anyHit = true;
-            //                rbOther = hitExtended.rigidbody;
-            //            }
-            //        }
-
-            //    }
-            //    if (anyHit)
-            //    {
-            //        beamDirFinal =  endHitLoc-beamStartLoc;//this is the vector representing the beam
-            //        forceStrength = GetForceStrength(beamDirFinal.magnitude, 1);
-            //    }
-            //    else
-            //    {
-            //        beamDirFinal = beamDir * BEAM_LENGTH;
-            //    }
-            //}
-
-            //that was all for a circle of rays. useless now haha
-
-
-
         }//if distance>0
         else
         {
+            beamInterface.SetLength(0);
             beamAttachedTime = 0;
         }
     }
@@ -398,7 +343,6 @@ public class BeamScript : MonoBehaviour
 
         float angle = Vector2.Angle(velocity, dirCen);
 
-        print(angle);
 
         //return BEAM_STRENGTH / 2 + BEAM_STRENGTH / distance / 2;
 
@@ -417,7 +361,6 @@ public class BeamScript : MonoBehaviour
 
 
 
-        print(forceCen);
 
         return returnForce;
 

@@ -6316,12 +6316,12 @@ PrefabInstance:
     - target: {fileID: 7573099955712674276, guid: 1b1c46809efbceb4da8e919cccef50f0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.78
+      value: 1.89
       objectReference: {fileID: 0}
     - target: {fileID: 7573099955712674276, guid: 1b1c46809efbceb4da8e919cccef50f0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7573099955712674276, guid: 1b1c46809efbceb4da8e919cccef50f0,
         type: 3}
@@ -6360,8 +6360,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7573099955712674281, guid: 1b1c46809efbceb4da8e919cccef50f0,
         type: 3}
+      propertyPath: hasTwoBeams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573099955712674281, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
       propertyPath: BEAM_STRENGTH
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573099955712674281, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
+      propertyPath: BEAM_LOCATION_OFFSET
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7573099955712674281, guid: 1b1c46809efbceb4da8e919cccef50f0,
         type: 3}
@@ -6377,6 +6387,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skreech
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573099955712674282, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573099956199265218, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573099956199265246, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573099956199265246, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573099956317608225, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573099956317608225, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573099956317608229, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b1c46809efbceb4da8e919cccef50f0, type: 3}
