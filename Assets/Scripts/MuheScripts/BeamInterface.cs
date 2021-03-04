@@ -6,7 +6,7 @@ using UnityEngine;
 /// Use this to set properties of the GravBeam like length
 /// and whether it is free or hooked.
 /// </summary>
-[ExecuteAlways]
+//[ExecuteAlways]
 [RequireComponent(typeof(ParticleSystem))]
 public class BeamInterface : MonoBehaviour {
     [Tooltip("The length of the beam, as shown by the gizmo")]
@@ -34,7 +34,7 @@ public class BeamInterface : MonoBehaviour {
     float scaleFactor;
 
     // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         beam = GetComponent<ParticleSystem>();
         wasHooked = isHooked;
         lengthBuf = length;
@@ -113,6 +113,7 @@ public class BeamInterface : MonoBehaviour {
         if (length < 0.01f)
             length = 0.01f;
         this.length = length;
-        transform.localScale.Set(transform.localScale.x, transform.localScale.y, transform.localScale.z * length / lengthBuf);
+        Debug.Log(length / lengthBuf);
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, length / lengthBuf);
     }
 }
