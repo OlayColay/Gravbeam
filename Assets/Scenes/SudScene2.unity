@@ -722,6 +722,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &549792060 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7573099956317608229, guid: 1b1c46809efbceb4da8e919cccef50f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7573099957070944910}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &579430904
 GameObject:
   m_ObjectHideFlags: 0
@@ -5628,6 +5634,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &627464568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7573099956199265218, guid: 1b1c46809efbceb4da8e919cccef50f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7573099957070944910}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &758076230
 GameObject:
   m_ObjectHideFlags: 0
@@ -6351,6 +6363,16 @@ PrefabInstance:
       propertyPath: BEAM_STRENGTH
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 7573099955712674281, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
+      propertyPath: BeamObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 549792060}
+    - target: {fileID: 7573099955712674281, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
+      propertyPath: BeamObject.Array.data[1]
+      value: 
+      objectReference: {fileID: 627464568}
     - target: {fileID: 7573099955712674282, guid: 1b1c46809efbceb4da8e919cccef50f0,
         type: 3}
       propertyPath: m_Name
