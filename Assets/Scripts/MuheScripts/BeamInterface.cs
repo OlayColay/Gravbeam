@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Use this to set properties of the GravBeam like length (under development)
-/// and whether it is free or hooked (under development).
+/// Use this to set properties of the GravBeam like length
+/// and whether it is free or hooked.
 /// </summary>
-[ExecuteAlways]
+//[ExecuteAlways]
 [RequireComponent(typeof(ParticleSystem))]
 public class BeamInterface : MonoBehaviour {
     [Tooltip("The length of the beam, as shown by the gizmo")]
-    public float length = 10f;
+    [SerializeField]
+    private float length = 10f;
     [Tooltip("Whether the beam is hooked onto a surface")]
     public bool isHooked = false;
     [Tooltip("Speed of the beam particles when hooked")]
@@ -33,7 +34,7 @@ public class BeamInterface : MonoBehaviour {
     float scaleFactor;
 
     // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         beam = GetComponent<ParticleSystem>();
         wasHooked = isHooked;
         lengthBuf = length;
@@ -72,7 +73,7 @@ public class BeamInterface : MonoBehaviour {
             trail.dieWithParticles = false;
             velocity.enabled = true;
             color.gradient = hookedColor;
-            lifetime.constant = 10f / hookedSpeed;
+            lifetime.constant = lengthBuf / hookedSpeed;
             mainParams.startSpeed = speed;
             wasHooked = true;
             mainParams.startLifetime = lifetime;
@@ -87,7 +88,7 @@ public class BeamInterface : MonoBehaviour {
             trail.dieWithParticles = true;
             velocity.enabled = false;
             color.gradient = freeColor;
-            lifetime.constant = (11.5f) / freeSpeed;
+            lifetime.constant = (lengthBuf + 1.5f) / freeSpeed;
             mainParams.startSpeed = speed;
             wasHooked = false;
             mainParams.startLifetime = lifetime;
@@ -99,10 +100,20 @@ public class BeamInterface : MonoBehaviour {
         //    mainParams.startLifetime = lifetime;
         //}
 
-        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, scaleFactor * transverseScale * length / lengthBuf);
+        //Debug.Log(transform.localScale.z * length);
+
+        //transform.localScale.Set(transform.localScale.x, transform.localScale.y, transform.localScale.z * length / lengthBuf);
         
         trail.colorOverLifetime = color;
 
         
+    }
+
+    public void SetLength(float length) {
+        if (length < 0.01f)
+            length = 0.01f;
+        this.length = length;
+        Debug.Log(length / lengthBuf);
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, length / lengthBuf);
     }
 }
