@@ -41,6 +41,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""e2adf864-50ce-423b-bd55-a3d931623c8e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -197,6 +205,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98a48ce3-15d0-41f9-af89-5f679ff8d5b5"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ad96b40-754f-4319-9b2c-decff07b2c3d"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -224,6 +254,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""0ed6aab5-a1a5-4ecd-8264-e197d75d389a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""82d1ec72-6282-4c7c-851c-a442d7e263ac"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -361,6 +399,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1fe071fe-f2ab-4a2d-b046-41e6094a111e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""506ab956-4cff-4c29-9278-cf1a7c84f725"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -372,11 +432,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Beam1 = m_Gameplay.FindAction("Beam1", throwIfNotFound: true);
         m_Gameplay_Beam2 = m_Gameplay.FindAction("Beam2", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         // Gravity
         m_Gravity = asset.FindActionMap("Gravity", throwIfNotFound: true);
         m_Gravity_Move = m_Gravity.FindAction("Move", throwIfNotFound: true);
         m_Gravity_Web = m_Gravity.FindAction("Web", throwIfNotFound: true);
         m_Gravity_Jump = m_Gravity.FindAction("Jump", throwIfNotFound: true);
+        m_Gravity_Pause = m_Gravity.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -429,6 +491,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Beam1;
     private readonly InputAction m_Gameplay_Beam2;
     private readonly InputAction m_Gameplay_Interact;
+    private readonly InputAction m_Gameplay_Pause;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -436,6 +499,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Beam1 => m_Wrapper.m_Gameplay_Beam1;
         public InputAction @Beam2 => m_Wrapper.m_Gameplay_Beam2;
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -454,6 +518,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
+                @Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -467,6 +534,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -478,6 +548,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gravity_Move;
     private readonly InputAction m_Gravity_Web;
     private readonly InputAction m_Gravity_Jump;
+    private readonly InputAction m_Gravity_Pause;
     public struct GravityActions
     {
         private @PlayerControls m_Wrapper;
@@ -485,6 +556,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Gravity_Move;
         public InputAction @Web => m_Wrapper.m_Gravity_Web;
         public InputAction @Jump => m_Wrapper.m_Gravity_Jump;
+        public InputAction @Pause => m_Wrapper.m_Gravity_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Gravity; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -503,6 +575,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnJump;
+                @Pause.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_GravityActionsCallbackInterface = instance;
             if (instance != null)
@@ -516,6 +591,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -525,11 +603,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnBeam1(InputAction.CallbackContext context);
         void OnBeam2(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IGravityActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnWeb(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
