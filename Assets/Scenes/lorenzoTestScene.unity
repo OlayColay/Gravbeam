@@ -499,7 +499,7 @@ Transform:
   m_LocalScale: {x: 0.92157644, y: 1.0551223, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!68 &28882857
 EdgeCollider2D:
@@ -754,11 +754,11 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-    - position: {x: -24.867748, y: 7.538463, z: 0}
+    - position: {x: -24.867748, y: 7.501169, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.12
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
@@ -824,7 +824,7 @@ MonoBehaviour:
   m_AdaptiveUV: 0
   m_StretchUV: 0
   m_WorldSpaceUV: 0
-  m_CornerAngleThreshold: 30
+  m_CornerAngleThreshold: 23.9
   m_ColliderDetail: 16
   m_ColliderOffset: 0.438
   m_UpdateCollider: 1
@@ -881,8 +881,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: b6592fbe7bfc63c4eba208bd52c9adad, type: 3}
   - {fileID: 21300000, guid: b6592fbe7bfc63c4eba208bd52c9adad, type: 3}
   m_LocalAABB:
-    m_Center: {x: -6.3173637, y: 2.7567067, z: -0.0004001}
-    m_Extent: {x: 18.550385, y: 8.697755, z: 0.0004001}
+    m_Center: {x: -6.3173637, y: 1.794518, z: -0.0004001}
+    m_Extent: {x: 18.550385, y: 7.735566, z: 0.0004001}
 --- !u!4 &99500281
 Transform:
   m_ObjectHideFlags: 0
@@ -913,8 +913,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -7.7898407, y: -5.623719}
-  - {x: -24.11527, y: 7.3368917}
+  - {x: -7.79235, y: -5.6238875}
+  - {x: -24.773685, y: 7.4755874}
   - {x: -14.056632, y: 8.831818}
   - {x: -10.710985, y: 9.222174}
   - {x: -10.718481, y: 9.202662}
@@ -924,7 +924,7 @@ EdgeCollider2D:
   - {x: 11.382262, y: -3.2953403}
   - {x: 11.551027, y: -4.3262925}
   - {x: -7.657174, y: -5.6148195}
-  - {x: -7.7898407, y: -5.623719}
+  - {x: -7.79235, y: -5.6238875}
 --- !u!1 &300700038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,7 +1805,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1044695214
 GameObject:
@@ -2030,7 +2030,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2606,7 +2606,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1755422459
 MonoBehaviour:
@@ -2858,6 +2858,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7573099955712674281, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
+      propertyPath: hasTwoBeams
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8050098936538015205, guid: 1b1c46809efbceb4da8e919cccef50f0,
         type: 3}
       propertyPath: m_Name
