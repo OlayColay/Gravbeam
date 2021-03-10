@@ -4253,7 +4253,7 @@ Transform:
   - {fileID: 1419366982}
   - {fileID: 564225176}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2001550487
 PrefabInstance:
@@ -4683,17 +4683,17 @@ TextMesh:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2141776382}
   m_Text: "Instructions:\n- A&D / Left Joystick to move\n- Space / (A) to jump\n-
-    Hold jump to jump higher\n- Slide on a wall by moving into it in\n\tmidair\n-
-    Wall jump by jumping while sliding on\n\ta wall\n- Scramble up a wall by starting
-    a wall\n\tslide while moving upwards (e.g. on a\n\tjump). It will let you get
-    higher while\n\tstaying on the wall!"
+    Hold jump to jump higher\n- Slide on a wall by moving into \n\tit in midair\n-
+    Wall jump by jumping while \n\tsliding on a wall\n- Scramble up a wall by starting
+    \n\ta wall slide while moving \n\tupwards (e.g. on a jump). It \n\twill let you
+    get higher while\n\tstaying on the wall!"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 13
+  m_FontSize: 17
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
@@ -4747,7 +4747,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2141776382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.76, y: 8.71, z: -8.3}
+  m_LocalPosition: {x: -0.76, y: 11.18, z: -8.3}
   m_LocalScale: {x: 0.345, y: 0.36753002, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4763,7 +4763,7 @@ PrefabInstance:
     - target: {fileID: 6255068616623566679, guid: 9236e924c0aa1df449d48b26724172c6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6255068616623566679, guid: 9236e924c0aa1df449d48b26724172c6,
         type: 3}

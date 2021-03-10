@@ -5,32 +5,28 @@ using UnityEngine;
 public class BeamScript : MonoBehaviour
 {
     PlayerControls controls;
+
     public float BEAM_LENGTH;
     public float BEAM_STRENGTH;
     public float BEAM_LOCATION_OFFSET;
     public bool hasTwoBeams;
 
+    public GameObject[] BeamObject = new GameObject[2];
 
-    public GameObject Beam1;
-    public GameObject Beam2;
-    BeamInterface Beam1Interface;
-    BeamInterface Beam2Interface;
+    BeamInterface[] BeamInterface = new BeamInterface[2];
 
+    Vector2[] beamDir = new Vector2[2];
 
-    Vector2 beamDir1;
-    Vector2 beamDir2;
-    float beamAttachedTime1;
-    float beamAttachedTime2;
+    float[] beamAttachedTime = new float[2];
 
-    Vector2 lastAttachedBeamDir1;
-    Vector2 lastAttachedBeamDir2;
-    Vector2 lastAttachedBeamEnd1;
-    Vector2 lastAttachedBeamEnd2;
-    float beamTimeFromLastAttached1;
-    float beamTimeFromLastAttached2;
+    //Vector2[] lastAttachedBeamDir = new Vector2[2];
 
-    bool BeamAttached1;
-    bool BeamAttached2;
+    //Vector2[] lastAttachedBeamEnd = new Vector2[2];
+
+    //float[] beamTimeFromLastAttached = new float[2];
+
+    bool[] beamAttached = new bool[2];
+
 
     Rigidbody2D rb;
 
@@ -48,23 +44,23 @@ public class BeamScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        Beam1Interface = Beam1.GetComponent<BeamInterface>();
-        Beam2Interface = Beam2.GetComponent<BeamInterface>();
-        Beam1Interface.isHooked = false;
-        Beam1Interface.length = 0;
-        Beam2Interface.isHooked = false;
-        Beam2Interface.length = 0;
+        BeamInterface[0] = BeamObject[0].GetComponent<BeamInterface>();
+        BeamInterface[1] = BeamObject[1].GetComponent<BeamInterface>();
+        BeamInterface[0].isHooked = false;
+        BeamInterface[0].SetLength(0);
+        BeamInterface[1].isHooked = false;
+        BeamInterface[1].SetLength(0);
 
         bool Beam1Attached=false;
         bool Beam2Attached=false;
 
         controls = new PlayerControls();
 
-        controls.Gameplay.Beam1.performed += ctx => beamDir1 = ctx.ReadValue<Vector2>();
-        controls.Gameplay.Beam1.canceled += ctx => beamDir1 = Vector2.zero;
+        controls.Gameplay.Beam1.performed += ctx => beamDir[0] = ctx.ReadValue<Vector2>();
+        controls.Gameplay.Beam1.canceled += ctx => beamDir[0] = Vector2.zero;
 
-        controls.Gameplay.Beam2.performed += ctx => beamDir2 = ctx.ReadValue<Vector2>();
-        controls.Gameplay.Beam2.canceled += ctx => beamDir2 = Vector2.zero;
+        controls.Gameplay.Beam2.performed += ctx => beamDir[1] = ctx.ReadValue<Vector2>();
+        controls.Gameplay.Beam2.canceled += ctx => beamDir[1] = Vector2.zero;
     }
 
     private void Update()
@@ -77,18 +73,18 @@ public class BeamScript : MonoBehaviour
     {
 
         int numOfBeamsAttached = 0;
-        if(BeamAttached1)
+        if(beamAttached[0])
         {
             numOfBeamsAttached++;
         }
-        if (BeamAttached2)
+        if (beamAttached[1])
         {
             numOfBeamsAttached++;
         }
 
-        doStuff(Beam1, Beam1Interface, beamDir1, ref beamAttachedTime1, ref BeamAttached1, numOfBeamsAttached) ;
+        doStuff(BeamObject[0], BeamInterface[0], beamDir[0], ref beamAttachedTime[0], ref beamAttached[0], numOfBeamsAttached) ;
         if(hasTwoBeams)
-            doStuff(Beam2, Beam2Interface, beamDir2, ref beamAttachedTime2, ref BeamAttached2, numOfBeamsAttached) ;
+            doStuff(BeamObject[1], BeamInterface[1], beamDir[1], ref beamAttachedTime[1], ref beamAttached[1], numOfBeamsAttached) ;
 
         //beam1 /= distance;
 
@@ -238,15 +234,16 @@ public class BeamScript : MonoBehaviour
             }
             else
             {
+                print("non hooked");
                 beamInterface.isHooked = false;
-                beamInterface.length = 0;
                 beamAttachedTime = 0;
 
             }
 
 
             //draw the beam
-            beamInterface.length = beamDirFinal.magnitude;
+            print(beamDirFinal);
+            beamInterface.SetLength(beamDirFinal.magnitude);
             Beam.transform.position = beamStartLoc;
             Beam.transform.LookAt(beamStartLoc + beamDirFinal);
             Debug.DrawLine(beamStartLoc, beamStartLoc + beamDirFinal, Color.cyan, 0.025f);
@@ -254,66 +251,10 @@ public class BeamScript : MonoBehaviour
 
 
 
-
-
-
-            //if(noneHit)
-            //{
-            //    //raycast to find nearest attachable object
-
-            //    bool anyHit = false;
-            //    float minDistance = 100f;
-            //    Vector2 endHitLoc = Vector2.zero;
-
-            //    int NUMBER_OF_RAYS = 24;
-            //    float angle = 0; //in radians!
-            //    for (int i = 0; i < NUMBER_OF_RAYS; i++)
-            //    {
-            //        float x = Mathf.Sin(angle);
-            //        float y = Mathf.Cos(angle);
-            //        angle += 2 * Mathf.PI / NUMBER_OF_RAYS; //add the right ammount of radians
-
-            //        Vector2 dir = new Vector2(x, y).normalized;
-            //        Vector2 extendedEndPoint;
-
-            //        //search for objects a small distance away from the max end point. Small distance is proportional to the max end point distance. about 1/5 of it? Must test.
-
-            //        RaycastHit2D hitExtended = Physics2D.Raycast(maxEndPoint, dir, distance / 2);
-
-            //        Debug.DrawLine(maxEndPoint, maxEndPoint + dir*(distance / 2), Color.red, 0.025f);
-
-            //        if (hitExtended.collider != null && hitExtended.collider.gameObject.tag == "Beamable")
-            //        {
-            //            if (hitExtended.distance < minDistance)
-            //            {
-            //                Debug.DrawLine(maxEndPoint, maxEndPoint + dir * hitExtended.distance, Color.yellow, 0.025f);
-
-            //                minDistance = hitExtended.distance;
-            //                endHitLoc = maxEndPoint + dir * hitExtended.distance;
-            //                anyHit = true;
-            //                rbOther = hitExtended.rigidbody;
-            //            }
-            //        }
-
-            //    }
-            //    if (anyHit)
-            //    {
-            //        beamDirFinal =  endHitLoc-beamStartLoc;//this is the vector representing the beam
-            //        forceStrength = GetForceStrength(beamDirFinal.magnitude, 1);
-            //    }
-            //    else
-            //    {
-            //        beamDirFinal = beamDir * BEAM_LENGTH;
-            //    }
-            //}
-
-            //that was all for a circle of rays. useless now haha
-
-
-
         }//if distance>0
         else
         {
+            beamInterface.SetLength(0);
             beamAttachedTime = 0;
         }
     }
@@ -402,7 +343,6 @@ public class BeamScript : MonoBehaviour
 
         float angle = Vector2.Angle(velocity, dirCen);
 
-        print(angle);
 
         //return BEAM_STRENGTH / 2 + BEAM_STRENGTH / distance / 2;
 
@@ -421,7 +361,6 @@ public class BeamScript : MonoBehaviour
 
 
 
-        print(forceCen);
 
         return returnForce;
 
