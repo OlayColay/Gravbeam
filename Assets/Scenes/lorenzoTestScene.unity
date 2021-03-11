@@ -499,7 +499,7 @@ Transform:
   m_LocalScale: {x: 0.92157644, y: 1.0551223, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!68 &28882857
 EdgeCollider2D:
@@ -1411,6 +1411,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &885556988 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7573099956199265218, guid: 1b1c46809efbceb4da8e919cccef50f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1990675532}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &990088860 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7573099956317608229, guid: 1b1c46809efbceb4da8e919cccef50f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1990675532}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &992864862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,7 +1817,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1044695214
 GameObject:
@@ -2030,7 +2042,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2606,7 +2618,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1755422459
 MonoBehaviour:
@@ -2858,6 +2870,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7573099955712674281, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
+      propertyPath: BeamObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 990088860}
+    - target: {fileID: 7573099955712674281, guid: 1b1c46809efbceb4da8e919cccef50f0,
+        type: 3}
+      propertyPath: BeamObject.Array.data[1]
+      value: 
+      objectReference: {fileID: 885556988}
     - target: {fileID: 8050098936538015205, guid: 1b1c46809efbceb4da8e919cccef50f0,
         type: 3}
       propertyPath: m_Name

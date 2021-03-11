@@ -11,7 +11,7 @@ public class BeamScript : MonoBehaviour
     public float BEAM_LOCATION_OFFSET;
     public bool hasTwoBeams;
 
-    public GameObject[] BeamObject = new GameObject[2];
+    GameObject[] BeamObject = new GameObject[2];
 
     BeamInterface[] BeamInterface = new BeamInterface[2];
 
@@ -42,6 +42,9 @@ public class BeamScript : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        BeamObject[0] = transform.GetChild(0).gameObject;
+        BeamObject[1] = transform.GetChild(1).gameObject;
+
         rb = GetComponent<Rigidbody2D>();
 
         BeamInterface[0] = BeamObject[0].GetComponent<BeamInterface>();
