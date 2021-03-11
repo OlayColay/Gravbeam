@@ -93,6 +93,10 @@ public class BeamInterface : MonoBehaviour {
         trail.colorOverLifetime = color;    // Put the color back into the module
     }
 
+    /// <summary>
+    /// Sets the length of the GravBeam
+    /// </summary>
+    /// <param name="length">The length of the gravbeam</param>
     public void SetLength(float length) {
 
         float xScale = 1;
