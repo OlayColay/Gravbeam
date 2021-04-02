@@ -28,7 +28,10 @@ public class Respawn : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        player.transform.position = spawnPoint.transform.position;
-        rb.velocity = Vector2.zero;
+        if (collision.tag == "Player")
+        {
+            player.transform.position = spawnPoint.transform.position;
+            rb.velocity = Vector2.zero;
+        }
     }
 }
