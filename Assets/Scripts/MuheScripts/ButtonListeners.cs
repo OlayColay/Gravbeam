@@ -40,4 +40,12 @@ public class ButtonListeners : MonoBehaviour {
         transform.parent.parent.Find("PauseMenu").gameObject.SetActive(true);
         transform.parent.gameObject.SetActive(false);
     }
+
+    public void OnVolumeChange(int volume) {
+        AudioListener.volume = (volume / 100.0f);
+    }
+
+    public void OnQualityChange(int qualityLevel) {
+        QualitySettings.SetQualityLevel(qualityLevel);
+    }
 }
