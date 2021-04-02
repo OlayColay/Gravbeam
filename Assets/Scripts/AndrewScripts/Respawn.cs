@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Respawn : MonoBehaviour
 {
@@ -28,7 +29,13 @@ public class Respawn : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        player.transform.position = spawnPoint.transform.position;
-        rb.velocity = Vector2.zero;
+        if (collision.tag == "Player")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            /*
+            player.transform.position = spawnPoint.transform.position;
+            rb.velocity = Vector2.zero;
+            */
+        }
     }
 }
