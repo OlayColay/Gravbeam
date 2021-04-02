@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Beamable
   - CamBound
+  - PauseMenu
+  - OptionsMenu
   layers:
   - Default
   - TransparentFX
