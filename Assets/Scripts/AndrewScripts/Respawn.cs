@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Respawn : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private Transform spawnPoint;
+    // [SerializeField] private Transform spawnPoint;
     Rigidbody2D rb;
     private void Awake()
     {
@@ -32,10 +32,10 @@ public class Respawn : MonoBehaviour
         if (collision.tag == "Player")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            /*
-            player.transform.position = spawnPoint.transform.position;
+
+            player.transform.position = GameObject.FindGameObjectWithTag("CheckpointController")
+                                            .transform.GetChild(Globals.curCheckpoint).position;
             rb.velocity = Vector2.zero;
-            */
         }
     }
 }

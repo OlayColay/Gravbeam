@@ -9,6 +9,7 @@ TagManager:
   - PauseMenu
   - OptionsMenu
   - Lethal
+  - CheckpointController
   layers:
   - Default
   - TransparentFX

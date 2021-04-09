@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelGoal : MonoBehaviour
 {
-    [Tooltip("The build index of the next level's scene. These can be found/edited in build settings")]
+    [Tooltip("The build index of the next level's scene. These can be found/edited in Build Settings")]
     [SerializeField] private int nextLevelNumber;
 
     void OnDrawGizmos()
@@ -22,12 +22,13 @@ public class LevelGoal : MonoBehaviour
         {
             PlayerPrefs.SetInt("currentLevel", nextLevelNumber);
             
-            // Debug.Log("Latest Level was " + PlayerPrefs.GetInt("latestLevel", 0));
+            // If the next level hasn't been reached before, update the latestLevel int
             if (nextLevelNumber > PlayerPrefs.GetInt("latestLevel", 0))
             {
                 PlayerPrefs.SetInt("latestLevel", nextLevelNumber);
             }
-            // Debug.Log("Latest Level is now " + PlayerPrefs.GetInt("latestLevel", 0));
+            
+            Globals.curCheckpoint = 0; // Reset checkpoint int so that you spawn at start of next level
 
             SceneManager.LoadScene(nextLevelNumber, LoadSceneMode.Single);
         }

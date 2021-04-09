@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4306237051603356332}
   - component: {fileID: 4306237051603356498}
   - component: {fileID: 4306237051603356499}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Goal (scale with Edit Collider)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
