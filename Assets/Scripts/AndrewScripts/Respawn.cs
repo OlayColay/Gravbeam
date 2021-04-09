@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class Respawn : MonoBehaviour
 {
     [SerializeField] private GameObject player;
@@ -13,29 +14,19 @@ public class Respawn : MonoBehaviour
         rb = player.GetComponent<Rigidbody2D>();
     }
 
-    /*
-    // Start is called before the first frame update
-    void Start()
+    private void OnDrawGizmos()
     {
-        
-    }
+        GetComponent<BoxCollider2D>().offset = Vector2.zero;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, GetComponent<BoxCollider2D>().size);
     }
-    */
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-            player.transform.position = GameObject.FindGameObjectWithTag("CheckpointController")
-                                            .transform.GetChild(Globals.curCheckpoint).position;
-            rb.velocity = Vector2.zero;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class LevelGoal : MonoBehaviour
 {
     [Tooltip("The build index of the next level's scene. These can be found/edited in Build Settings")]
