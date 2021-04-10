@@ -11,7 +11,7 @@ public class Checkpoint : MonoBehaviour
         //GetComponent<BoxCollider2D>().offset = Vector2.zero;
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(transform.position + (Vector3)GetComponent<BoxCollider2D>().offset, GetComponent<BoxCollider2D>().size);
+        Gizmos.DrawWireCube(transform.position + (Vector3)GetComponent<BoxCollider2D>().offset, GetComponent<BoxCollider2D>().size);    //Offset allowed
     }
 
     void OnTriggerEnter2D(Collider2D other)

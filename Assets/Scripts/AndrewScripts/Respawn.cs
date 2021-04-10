@@ -16,17 +16,17 @@ public class Respawn : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        GetComponent<BoxCollider2D>().offset = Vector2.zero;
+        //GetComponent<BoxCollider2D>().offset = Vector2.zero;
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, GetComponent<BoxCollider2D>().size);
+        Gizmos.DrawWireCube(transform.position + (Vector3)GetComponent<BoxCollider2D>().offset, GetComponent<BoxCollider2D>().size);    //Offset allowed
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);   //Reload the scene to restart the level
         }
     }
 }
