@@ -6,12 +6,16 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Respawn : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    private GameObject player;
     // [SerializeField] private Transform spawnPoint;
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
+    private LoadingScreen ls;
+
     private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         rb = player.GetComponent<Rigidbody2D>();
+        ls = GameObject.FindGameObjectWithTag("MainCamera").transform.GetChild(0).GetComponent<LoadingScreen>();
     }
 
     private void OnDrawGizmos()
@@ -26,7 +30,19 @@ public class Respawn : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            ls.triggerFadeIn = true;
+            player.GetComponent<PlatformerCharacter2D>().controls.Disable();
+            StartCoroutine(WaitForDeath());
         }
+    }
+
+    private IEnumerator WaitForDeath()
+    {        
+        while(ls.triggerFadeIn)
+        {
+            yield return null;
+        }
+        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
