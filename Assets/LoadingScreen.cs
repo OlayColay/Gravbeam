@@ -9,7 +9,7 @@ public class LoadingScreen : MonoBehaviour
     public bool triggerFadeOut = false;
 
     [SerializeField] private bool startOpaque = true;
-    [SerializeField] private float startingOpaquetoTransparentLag = 1f;
+    [SerializeField] private float startingOpaqueToTransparentLag = 1f;
     private SpriteRenderer sprite;
     private Color opaque;
     private Color transparent;
@@ -27,9 +27,9 @@ public class LoadingScreen : MonoBehaviour
         if (startOpaque)
         {
             sprite.color = opaque;
-            if (startingOpaquetoTransparentLag > 0f)
+            if (startingOpaqueToTransparentLag > 0f)
             {
-                StartCoroutine(WaitForFadeOutLag(startingOpaquetoTransparentLag));
+                StartCoroutine(WaitForFadeOutLag(startingOpaqueToTransparentLag));
             }
         }
         else
