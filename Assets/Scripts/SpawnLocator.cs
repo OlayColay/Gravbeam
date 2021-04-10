@@ -7,7 +7,7 @@ public class SpawnLocator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Sending player to checkpoint #" + Globals.curCheckpoint);
+        // Debug.Log("Sending player to checkpoint #" + Globals.curCheckpoint);
         transform.position = GameObject.FindGameObjectWithTag("CheckpointController")
                                         .transform.GetChild(Globals.curCheckpoint).position;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;

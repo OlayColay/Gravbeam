@@ -19,7 +19,7 @@ public class Checkpoint : MonoBehaviour
         if(other.tag == "Player" && Globals.curCheckpoint < transform.GetSiblingIndex())
         {
             Globals.curCheckpoint = transform.GetSiblingIndex();
-            Debug.Log("Checkpoint number is now " + Globals.curCheckpoint);
+            // Debug.Log("Checkpoint number is now " + Globals.curCheckpoint);
         }
     }
 }
