@@ -249,8 +249,20 @@ public class PlatformerCharacter2D : MonoBehaviour
     }
 
     public void Pause() {
-        Time.timeScale = 0;
-        GameObject.Find("Canvas").transform.Find("PauseMenu").gameObject.SetActive(true);
+        GameObject pauseMenu = GameObject.Find("Canvas").transform.Find("PauseMenu").gameObject;
+        GameObject optionsMenu = GameObject.Find("Canvas").transform.Find("OptionsMenu").gameObject;
+        bool paused = pauseMenu.activeSelf || optionsMenu.activeSelf;
+
+        if (!paused) {
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+        }
+        else {
+            Time.timeScale = 1f;
+            pauseMenu.SetActive(false);
+        }
+
+        optionsMenu.SetActive(false);
     }
 
 }
