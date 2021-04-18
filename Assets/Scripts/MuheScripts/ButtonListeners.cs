@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// This class handles UI button behavior
@@ -18,7 +19,9 @@ public class ButtonListeners : MonoBehaviour {
     }
 
     public void OnClickRestart() {
-        // TODO: Restart level
+        Globals.Reset();
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     /// <summary>
