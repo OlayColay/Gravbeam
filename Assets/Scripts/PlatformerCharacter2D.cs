@@ -84,6 +84,8 @@ public class PlatformerCharacter2D : MonoBehaviour
 
         controls.Gravity.Jump.started += ctx => Jump();
         controls.Gravity.Jump.canceled += ctx => JumpCancel();
+
+        controls.Gameplay.Pause.started += ctx => Pause();
     }
 
     private void OnEnable()
@@ -245,4 +247,10 @@ public class PlatformerCharacter2D : MonoBehaviour
         // Rotate by 180 degrees
         transform.Rotate(new Vector3(0,180,0));
     }
+
+    public void Pause() {
+        Time.timeScale = 0;
+        GameObject.Find("Canvas").transform.Find("PauseMenu").gameObject.SetActive(true);
+    }
+
 }
