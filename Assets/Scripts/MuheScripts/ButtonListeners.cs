@@ -13,6 +13,7 @@ public class ButtonListeners : MonoBehaviour {
     /// </summary>
     public void OnClickResume() {
         transform.parent.gameObject.SetActive(false);
+        Time.timeScale = 1f;
         // TODO: Resume game
     }
 
