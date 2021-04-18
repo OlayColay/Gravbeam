@@ -28,11 +28,21 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collision detected with " + collision.gameObject.name);
+        if (collision.gameObject.tag == "Player")
+        {
+            savedParent = collision.transform.parent;
+            collision.transform.parent = transform;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.transform.parent = transform;
+            collision.transform.parent = savedParent;
         }
     }
 }
