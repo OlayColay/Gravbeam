@@ -6,4 +6,8 @@ public static class Globals
     public static Vector2 curDashArrowVel;      // Current velocity from the last touched Dash Arrow
     public static GameObject curCamBound;
     public static int curCheckpoint = 0;        // Current checkpoint (start of level is 0)
+
+    public static void Reset() {
+        curCheckpoint = 0;
+    }
 }
