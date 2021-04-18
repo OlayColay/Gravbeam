@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// This class handles UI button behavior
@@ -41,11 +42,11 @@ public class ButtonListeners : MonoBehaviour {
         transform.parent.gameObject.SetActive(false);
     }
 
-    public void OnVolumeChange(int volume) {
-        AudioListener.volume = (volume / 100.0f);
+    public void OnVolumeChange(Slider volume) {
+        AudioListener.volume = (volume.value / 100.0f);
     }
 
-    public void OnQualityChange(int qualityLevel) {
-        QualitySettings.SetQualityLevel(qualityLevel);
+    public void OnQualityChange(Slider qualityLevel) {
+        QualitySettings.SetQualityLevel((int)qualityLevel.value);
     }
 }
