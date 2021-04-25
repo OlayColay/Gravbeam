@@ -21,6 +21,7 @@ public class ButtonListeners : MonoBehaviour {
     public void OnClickRestart() {
         Globals.Reset();
         Time.timeScale = 1f;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlatformerCharacter2D>().controls.Disable();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
