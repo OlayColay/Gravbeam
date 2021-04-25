@@ -40,7 +40,8 @@ public class PlatformerCharacter2D : MonoBehaviour
     [Tooltip("Multiplier for gravity when the parachute is active")]
     [SerializeField] private float parachuteMult = 0.25f;
 
-    PlayerControls controls;
+    public PlayerControls controls;
+    
     private float move = 0f;            // The value of horizontal movement (from -1 to 1)
     private Transform groundCheck;      // A position marking where to check if the player is grounded.
     const float groundedRadius = .5f;   // Radius of the overlap circle to determine if grounded
@@ -83,6 +84,8 @@ public class PlatformerCharacter2D : MonoBehaviour
 
         controls.Gravity.Jump.started += ctx => Jump();
         controls.Gravity.Jump.canceled += ctx => JumpCancel();
+
+        controls.Gameplay.Pause.started += ctx => Pause();
     }
 
     private void OnEnable()
@@ -244,4 +247,22 @@ public class PlatformerCharacter2D : MonoBehaviour
         // Rotate by 180 degrees
         transform.Rotate(new Vector3(0,180,0));
     }
+
+    public void Pause() {
+        GameObject pauseMenu = GameObject.Find("Canvas").transform.Find("PauseMenu").gameObject;
+        GameObject optionsMenu = GameObject.Find("Canvas").transform.Find("OptionsMenu").gameObject;
+        bool paused = pauseMenu.activeSelf || optionsMenu.activeSelf;
+
+        if (!paused) {
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+        }
+        else {
+            Time.timeScale = 1f;
+            pauseMenu.SetActive(false);
+        }
+
+        optionsMenu.SetActive(false);
+    }
+
 }

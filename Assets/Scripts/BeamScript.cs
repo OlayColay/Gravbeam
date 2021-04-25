@@ -237,7 +237,7 @@ public class BeamScript : MonoBehaviour
             }
             else
             {
-                print("non hooked");
+                // print("non hooked");
                 beamInterface.isHooked = false;
                 beamAttachedTime = 0;
 
@@ -245,7 +245,7 @@ public class BeamScript : MonoBehaviour
 
 
             //draw the beam
-            print(beamDirFinal);
+            // print(beamDirFinal);
             beamInterface.SetLength(beamDirFinal.magnitude);
             Beam.transform.position = beamStartLoc;
             Beam.transform.LookAt(beamStartLoc + beamDirFinal);

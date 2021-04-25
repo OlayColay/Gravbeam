@@ -8,6 +8,8 @@ TagManager:
   - CamBound
   - PauseMenu
   - OptionsMenu
+  - Lethal
+  - CheckpointController
   layers:
   - Default
   - TransparentFX
