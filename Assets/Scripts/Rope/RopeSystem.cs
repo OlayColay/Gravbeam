@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RopeSystem : MonoBehaviour
 {
@@ -51,15 +52,27 @@ public class RopeSystem : MonoBehaviour
     // Update is called once per frame
     void Update ()
 	{
-        var worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
-        var facingDirection = worldMousePosition - transform.position;
-        var aimAngle = Mathf.Atan2(facingDirection.y, facingDirection.x);
-        if (aimAngle < 0f)
+        float aimAngle = 0f;
+        Vector2 aimDirection = Vector2.zero;
+
+        if (Gamepad.current == null)
         {
-            aimAngle = Mathf.PI * 2 + aimAngle;
+            var worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
+            var facingDirection = worldMousePosition - transform.position;
+            aimAngle = Mathf.Atan2(facingDirection.y, facingDirection.x);
+            if (aimAngle < 0f)
+            {
+                aimAngle = Mathf.PI * 2 + aimAngle;
+            }
+
+            aimDirection = Quaternion.Euler(0, 0, aimAngle * Mathf.Rad2Deg) * Vector2.right;
+        }
+        else if (Gamepad.current.rightStick.ReadValue() != Vector2.zero)
+        {
+            aimDirection = Gamepad.current.rightStick.ReadValue();
+            aimAngle = Vector2.Angle(Vector2.right, aimDirection);
         }
 
-        var aimDirection = Quaternion.Euler(0, 0, aimAngle * Mathf.Rad2Deg) * Vector2.right;
         playerPosition = transform.position;
 
         if (!ropeAttached)
@@ -111,7 +124,7 @@ public class RopeSystem : MonoBehaviour
     /// <param name="aimDirection">The current direction for aiming based on mouse position</param>
     private void HandleInput(Vector2 aimDirection)
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) || (Gamepad.current != null && Gamepad.current.rightStick.IsPressed()))
         {
             if (ropeAttached) return;
             ropeRenderer.enabled = true;
