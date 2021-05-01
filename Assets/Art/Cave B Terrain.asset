@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af7181f404f1447c0a7a17b3070b952b, type: 3}
+  m_Name: Cave B Terrain
+  m_EditorClassIdentifier: 
+  m_Angles:
+  - m_Start: -45
+    m_End: 45
+    m_Order: 4
+    m_Sprites:
+    - {fileID: 21300000, guid: b670f0206b9247249b3143376b00a321, type: 3}
+  - m_Start: -135
+    m_End: -45
+    m_Order: 3
+    m_Sprites:
+    - {fileID: 21300000, guid: b670f0206b9247249b3143376b00a321, type: 3}
+  - m_Start: 135
+    m_End: 225
+    m_Order: 2
+    m_Sprites:
+    - {fileID: 21300000, guid: b670f0206b9247249b3143376b00a321, type: 3}
+  - m_Start: 45
+    m_End: 135
+    m_Order: 1
+    m_Sprites:
+    - {fileID: 21300000, guid: b670f0206b9247249b3143376b00a321, type: 3}
+  m_FillTexture: {fileID: 2800000, guid: ceb737365bd632d4c954eb46259f3bb3, type: 3}
+  m_CornerSprites:
+  - m_CornerType: 0
+    m_Sprites:
+    - {fileID: 21300000, guid: c174fdb2be11ff1459341b82744650fd, type: 3}
+  - m_CornerType: 1
+    m_Sprites:
+    - {fileID: 21300000, guid: 2e042f1ff3af1c9498a9a6947a2e588e, type: 3}
+  - m_CornerType: 2
+    m_Sprites:
+    - {fileID: 21300000, guid: 1bfeecd29f2ab234baa76370518a867b, type: 3}
+  - m_CornerType: 3
+    m_Sprites:
+    - {fileID: 21300000, guid: 18d737b027796614ba7f54bde89e4e1c, type: 3}
+  - m_CornerType: 4
+    m_Sprites:
+    - {fileID: 21300000, guid: 20f24b78097ca85409258a58c68cd4c5, type: 3}
+  - m_CornerType: 5
+    m_Sprites:
+    - {fileID: 21300000, guid: b002ef1b8ab80ad4ea2c1861ab3f68fd, type: 3}
+  - m_CornerType: 6
+    m_Sprites:
+    - {fileID: 21300000, guid: 1c01e1b73004d764c884778d2917a009, type: 3}
+  - m_CornerType: 7
+    m_Sprites:
+    - {fileID: 21300000, guid: 3619662ab7f071e4ebc881d02dea263e, type: 3}
+  m_FillOffset: 0
+  m_UseSpriteBorders: 1
