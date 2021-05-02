@@ -12,6 +12,8 @@ public class Checkpoint : MonoBehaviour
     void Awake()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
+        if (Globals.curCheckpoint >= transform.GetSiblingIndex())
+            sr.sprite = checkedWeb;
     }
 
     void OnDrawGizmos()
