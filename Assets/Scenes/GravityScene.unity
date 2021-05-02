@@ -2993,6 +2993,7 @@ GameObject:
   - component: {fileID: 1114384241}
   - component: {fileID: 1114384240}
   - component: {fileID: 1114384239}
+  - component: {fileID: 1114384244}
   m_Layer: 0
   m_Name: Moving Platform
   m_TagString: Untagged
@@ -3012,10 +3013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e16c90759f15245b5eaa8710b17299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positions:
-  - {x: 43, y: 19, z: -5}
-  - {x: 47, y: 19, z: -5}
-  timeBetweenEachPosition: 2
 --- !u!61 &1114384240
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3103,6 +3100,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &1114384244
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114384238}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a068dc1cfa389164db5ddb180c6c611d, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a068dc1cfa389164db5ddb180c6c611d, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1153338317
 GameObject:
   m_ObjectHideFlags: 0
