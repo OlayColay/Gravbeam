@@ -64,6 +64,9 @@ public class PlatformerCharacter2D : MonoBehaviour
     private bool isGliding = false;     // If the player is gliding with the parachute
     private float gravity;
 
+    [HideInInspector] public bool isSwinging = false;
+    [HideInInspector] public Vector2 ropeHook = Vector2.zero;
+
     private void Awake()
     {
         // Setting up references.

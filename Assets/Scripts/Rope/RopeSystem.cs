@@ -13,7 +13,7 @@ public class RopeSystem : MonoBehaviour
     public DistanceJoint2D ropeJoint;
     public Transform crosshair;
     public SpriteRenderer crosshairSprite;
-    public PlayerMovement playerMovement;
+    public PlatformerCharacter2D playerMovement;
     private bool ropeAttached;
     private Vector2 playerPosition;
     public List<Vector2> ropePositions = new List<Vector2>();
@@ -152,7 +152,7 @@ public class RopeSystem : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) || (Gamepad.current != null && Gamepad.current.buttonSouth.IsPressed()))
         {
             ResetRope();
         }
