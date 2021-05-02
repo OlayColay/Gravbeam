@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ColeScene.unity
     guid: 62bc09aebb5100f42a504590d68d8bf6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/lorenzoTestScene.unity
     guid: e6864adea96264700b303d439a4295b4
+  - enabled: 1
+    path: Assets/Scenes/GravityScene.unity
+    guid: 22fc52fd693991c49b292c65f9c27061
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 69343a7a9a6e4064090eaef5243022f5,
       type: 2}

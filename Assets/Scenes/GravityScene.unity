@@ -2448,8 +2448,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 57.46, y: 52.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1234594816}
+  m_Children: [{fileID: 1234594816}]
   m_Father: {fileID: 2090272713}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2599,7 +2598,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1125326246}
+      objectReference: {fileID: 0}
     - target: {fileID: 539748223772545367, guid: da541145c51a8074690ed330855cf78a,
         type: 3}
       propertyPath: m_Size.x
@@ -3052,24 +3051,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1125326246 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 586366251230067416, guid: c7a9b0614aa391b4ca7ea83be1156975,
-    type: 3}
-  m_PrefabInstance: {fileID: 7463734155493642088}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1125326254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125326246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1ec6d4c84215f943be562da78e48cf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1153338317
 GameObject:
   m_ObjectHideFlags: 0
@@ -3199,6 +3180,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537989729596517233, guid: b1ad8c513b6151941bd5d321eeff4ef6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1537989729596517237, guid: b1ad8c513b6151941bd5d321eeff4ef6,
         type: 3}
@@ -3919,7 +3905,7 @@ GameObject:
   - component: {fileID: 1499372082}
   - component: {fileID: 1499372081}
   - component: {fileID: 1499372080}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4744,6 +4730,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoints
       objectReference: {fileID: 0}
+    - target: {fileID: 8275809357195431298, guid: c0b4417f51f9a0e4ea0983a1b45ab4d2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0b4417f51f9a0e4ea0983a1b45ab4d2, type: 3}
 --- !u!1 &1832095617
@@ -5051,6 +5042,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EventSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 2541422045500107714, guid: eb9f2862794ea6641ac92b76b3e9d22e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb9f2862794ea6641ac92b76b3e9d22e, type: 3}
 --- !u!1001 &1999306187
@@ -5124,7 +5120,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1125326246}
+      objectReference: {fileID: 0}
     - target: {fileID: 539748223772545367, guid: da541145c51a8074690ed330855cf78a,
         type: 3}
       propertyPath: m_Size.x
@@ -5718,7 +5714,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1125326246}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da541145c51a8074690ed330855cf78a, type: 3}
 --- !u!1001 &2711610742184481977
@@ -5857,6 +5853,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Steam Vent
       objectReference: {fileID: 0}
+    - target: {fileID: 6255068616623566683, guid: 9236e924c0aa1df449d48b26724172c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9236e924c0aa1df449d48b26724172c6, type: 3}
 --- !u!1001 &7463734155493642088
@@ -5926,11 +5927,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundedSkreech
       objectReference: {fileID: 0}
-    - target: {fileID: 7463734154242988828, guid: c7a9b0614aa391b4ca7ea83be1156975,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.34
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 586366251230067422, guid: c7a9b0614aa391b4ca7ea83be1156975, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7a9b0614aa391b4ca7ea83be1156975, type: 3}
