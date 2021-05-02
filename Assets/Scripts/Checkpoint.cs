@@ -6,6 +6,14 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Checkpoint : MonoBehaviour
 {
+    private SpriteRenderer sr;
+    [SerializeField] private Sprite checkedWeb;
+
+    void Awake()
+    {
+        sr = GetComponentInChildren<SpriteRenderer>();
+    }
+
     void OnDrawGizmos()
     {
         //GetComponent<BoxCollider2D>().offset = Vector2.zero;
@@ -18,6 +26,7 @@ public class Checkpoint : MonoBehaviour
     {
         if(other.tag == "Player" && Globals.curCheckpoint < transform.GetSiblingIndex())
         {
+            sr.sprite = checkedWeb;
             Globals.curCheckpoint = transform.GetSiblingIndex();
             // Debug.Log("Checkpoint number is now " + Globals.curCheckpoint);
         }
