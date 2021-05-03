@@ -55,12 +55,10 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: skreech-idel
+  m_Name: skreech-idle
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: 6161047354262719321}
-  - {fileID: -2335901423967048844}
+  m_Transitions: [{fileID: 6161047354262719321}, {fileID: -2335901423967048844}]
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
