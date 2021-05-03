@@ -32,6 +32,11 @@ public class DashArrow : MonoBehaviour
             timeLeft = length;
 
             GetComponent<AudioSource>().Play(0);
+
+            if (o.GetComponent<PlatformerCharacter2D>() != null)
+            {
+                o.GetComponent<PlatformerCharacter2D>().ResetWallJumpAbility();
+            }
         }
     }
 

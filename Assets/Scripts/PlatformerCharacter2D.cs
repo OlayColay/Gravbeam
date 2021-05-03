@@ -113,8 +113,9 @@ public class PlatformerCharacter2D : MonoBehaviour
             if (colliders[i].gameObject != gameObject)
             {
                 // Debug.Log("Ground found: " + colliders[i].name);
-                isGrounded = canWJLeft = canWJRight = true;
+                isGrounded = true;
                 isGliding = false;
+                ResetWallJumpAbility();
             }
         }
         anim.SetBool("Ground", isGrounded);
@@ -268,4 +269,8 @@ public class PlatformerCharacter2D : MonoBehaviour
         optionsMenu.SetActive(false);
     }
 
+    public void ResetWallJumpAbility()
+    {
+        canWJLeft = canWJRight = true;
+    }
 }
