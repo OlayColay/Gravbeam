@@ -16,4 +16,12 @@ public class PauseMenu : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(firstSelectedButton);
         }
     }
+
+    private void Update()
+    {
+        if (Gamepad.current != null && Gamepad.current.bButton.wasPressedThisFrame)
+        {
+            firstSelectedButton.GetComponent<ButtonListeners>().OnClickResume();
+        }
+    }
 }

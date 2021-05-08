@@ -28,4 +28,12 @@ public class OptionsMenu : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(previousSelectedButton);
         }
     }
+
+    private void Update()
+    {
+        if (Gamepad.current != null && Gamepad.current.bButton.wasPressedThisFrame)
+        {
+            firstSelectedButton.GetComponent<ButtonListeners>().OnClickBack();
+        }
+    }
 }
