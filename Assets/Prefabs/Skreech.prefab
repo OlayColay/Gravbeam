@@ -123,8 +123,7 @@ MonoBehaviour:
   BEAM_LENGTH: 15
   BEAM_STRENGTH: 15
   BEAM_LOCATION_OFFSET: 2
-  Beam1: {fileID: 7573099956317608229}
-  Beam2: {fileID: 7573099956199265218}
+  hasTwoBeams: 0
 --- !u!58 &7573099955712674280
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -149,7 +148,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7573099955712674282}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a27c8680dc9c98141bf05ada28dfe52c, type: 2}
   m_CullingMode: 0
