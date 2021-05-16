@@ -7,13 +7,10 @@ public class LevelSelect : MonoBehaviour {
     [Tooltip("The level progress of the player. 0 if a new player")]
     [SerializeField] private int latestLevel;
 
-
-    void Awake() {
-        PlayerPrefs.GetInt("latestLevel", 0);
-    }
-
     // Start is called before the first frame update
     private void Start() {
+        latestLevel = PlayerPrefs.GetInt("latestLevel", 0);
+
         Button[] buttons = new Button[latestLevel+1];
         buttons[0] = transform.Find("Tutorial").GetComponent<Button>();
 

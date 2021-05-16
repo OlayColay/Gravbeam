@@ -15,7 +15,7 @@ public class ButtonListeners : MonoBehaviour {
     }
 
     public void OnClickLoadGame() {
-        // Level Select
+        SceneManager.LoadScene("LevelSelect", LoadSceneMode.Single);
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public class ButtonListeners : MonoBehaviour {
     public void OnClickQuit() {
         Globals.Reset();
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void OnClickQuitGame() {
