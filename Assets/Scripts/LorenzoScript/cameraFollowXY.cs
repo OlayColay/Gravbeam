@@ -20,7 +20,7 @@ public class cameraFollowXY : MonoBehaviour
         temp = playerTransform.position;
         temp.x = playerTransform.position.x;
         temp.y = playerTransform.position.y + 4;
-        temp.z = -1; // to show the scene
+        temp.z = -50; // to show the scene
 
 
         transform.position = temp;
