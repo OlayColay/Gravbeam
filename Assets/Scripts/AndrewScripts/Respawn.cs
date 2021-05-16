@@ -30,6 +30,12 @@ public class Respawn : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            // Remove Player's Forces and Velocitie if hit a spike (tag = lethal_freeze)
+            if (gameObject.tag == "Lethal_Freeze")
+            {
+                rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            }
+
             ls.triggerFadeIn = true;
             player.GetComponent<PlatformerCharacter2D>().controls.Disable();
             StartCoroutine(WaitForDeath());
