@@ -15,7 +15,19 @@ public class ButtonListeners : MonoBehaviour {
     }
 
     public void OnClickLoadGame() {
-        // Level Select
+        SceneManager.LoadScene("LevelSelect", LoadSceneMode.Single);
+    }
+
+    public void LoadLevel(int level) {
+        switch (level) {
+            case 0:
+                SceneManager.LoadScene("GravityScene", LoadSceneMode.Single);
+                break;
+
+            default:
+                Debug.Log("Level " + level + " not yet added!");
+                break;
+        }
     }
 
     /// <summary>
@@ -46,7 +58,7 @@ public class ButtonListeners : MonoBehaviour {
     public void OnClickQuit() {
         Globals.Reset();
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void OnClickQuitGame() {
