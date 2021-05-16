@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationTime: 1
-  doorLength: 1
+  doorLength: 5
 --- !u!61 &17605478
 BoxCollider2D:
   m_ObjectHideFlags: 0

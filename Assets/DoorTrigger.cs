@@ -13,7 +13,7 @@ public class DoorTrigger : MonoBehaviour
     {
         GetComponent<BoxCollider2D>().offset = Vector2.zero;
 
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(transform.position, GetComponent<BoxCollider2D>().size);
     }
 
@@ -22,7 +22,7 @@ public class DoorTrigger : MonoBehaviour
         if(other.tag == "Player" || other.tag == "Rock")
         {
             Transform door = transform.GetChild(0);
-            door.DOLocalMoveY(doorLength, animationTime);
+            door.DOLocalMove(new Vector2(door.localPosition.x, door.localPosition.y + doorLength), animationTime);
         }
     }
 }
