@@ -18,6 +18,18 @@ public class ButtonListeners : MonoBehaviour {
         SceneManager.LoadScene("LevelSelect", LoadSceneMode.Single);
     }
 
+    public void LoadLevel(int level) {
+        switch (level) {
+            case 0:
+                SceneManager.LoadScene("GravityScene", LoadSceneMode.Single);
+                break;
+
+            default:
+                Debug.Log("Level " + level + " not yet added!");
+                break;
+        }
+    }
+
     /// <summary>
     /// Resume gameplay
     /// </summary>
