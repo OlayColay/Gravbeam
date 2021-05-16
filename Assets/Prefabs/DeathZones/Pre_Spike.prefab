@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 785731671854066550}
   m_Layer: 0
   m_Name: Pre_Spike
-  m_TagString: Untagged
+  m_TagString: Lethal_Freeze
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
