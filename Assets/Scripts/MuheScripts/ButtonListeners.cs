@@ -8,6 +8,27 @@ using UnityEngine.SceneManagement;
 /// This class handles UI button behavior
 /// </summary>
 public class ButtonListeners : MonoBehaviour {
+    public void OnClickNewGame() {
+        PlayerPrefs.DeleteAll();
+
+        OnClickLoadGame();
+    }
+
+    public void OnClickLoadGame() {
+        SceneManager.LoadScene("LevelSelect", LoadSceneMode.Single);
+    }
+
+    public void LoadLevel(int level) {
+        switch (level) {
+            case 0:
+                SceneManager.LoadScene("GravityScene", LoadSceneMode.Single);
+                break;
+
+            default:
+                Debug.Log("Level " + level + " not yet added!");
+                break;
+        }
+    }
 
     /// <summary>
     /// Resume gameplay
@@ -35,8 +56,13 @@ public class ButtonListeners : MonoBehaviour {
     }
 
     public void OnClickQuit() {
-        // TODO: Quit to main menu
-        // Use SceneManager
+        Globals.Reset();
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+
+    public void OnClickQuitGame() {
+        Application.Quit();   // Or a "Do you really wanna quit?" dialog maybe
     }
 
     /// <summary>
