@@ -8,6 +8,15 @@ using UnityEngine.SceneManagement;
 /// This class handles UI button behavior
 /// </summary>
 public class ButtonListeners : MonoBehaviour {
+    public void OnClickNewGame() {
+        PlayerPrefs.DeleteAll();
+
+        OnClickLoadGame();
+    }
+
+    public void OnClickLoadGame() {
+        // Level Select
+    }
 
     /// <summary>
     /// Resume gameplay
@@ -35,8 +44,13 @@ public class ButtonListeners : MonoBehaviour {
     }
 
     public void OnClickQuit() {
-        // TODO: Quit to main menu
-        // Use SceneManager
+        Globals.Reset();
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void OnClickQuitGame() {
+        Application.Quit();   // Or a "Do you really wanna quit?" dialog maybe
     }
 
     /// <summary>
