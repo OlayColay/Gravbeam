@@ -247,6 +247,7 @@ public class BeamScript : MonoBehaviour
             //draw the beam
             // print(beamDirFinal);
             beamInterface.SetLength(beamDirFinal.magnitude);
+
             Beam.transform.position = beamStartLoc;
             Beam.transform.LookAt(beamStartLoc + beamDirFinal);
             Debug.DrawLine(beamStartLoc, beamStartLoc + beamDirFinal, Color.cyan, 0.025f);

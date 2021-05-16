@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4132508997030797149}
   - component: {fileID: 4132508997030797148}
   m_Layer: 0
-  m_Name: terrain shape template (1)
+  m_Name: Cave A Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

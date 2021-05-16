@@ -105,7 +105,7 @@ public class BeamInterface : MonoBehaviour {
         // If length gets too close to zero, set length so that scale doesn't become zero
         if (length < 0.1f) {
             length = 0.1f;
-            beam.Stop();
+            //beam.Stop();
 
             xScale = 0.00001f;
             yScale = 0.00001f;
