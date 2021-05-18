@@ -2386,6 +2386,7 @@ GameObject:
   - component: {fileID: 344484465}
   - component: {fileID: 344484467}
   - component: {fileID: 344484466}
+  - component: {fileID: 344484468}
   m_Layer: 0
   m_Name: cave A 3
   m_TagString: Untagged
@@ -2416,7 +2417,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344484464}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d71712ad9af80204c8bf20da8af455b2, type: 3}
   m_Name: 
@@ -2473,6 +2474,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &344484468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344484464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eabced5ebb0e5448ebcdf833b9ead36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 167011119}
+  parallaxEffect: 0.6
 --- !u!1001 &398003309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4386,11 +4401,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 579242747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d71712ad9af80204c8bf20da8af455b2, type: 3}
+  m_Script: {fileID: 11500000, guid: eabced5ebb0e5448ebcdf833b9ead36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 167011119}
-  parallaxEffect: 1
+  parallaxEffect: 2
 --- !u!212 &579242750
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8080,6 +8095,7 @@ GameObject:
   - component: {fileID: 1198340558}
   - component: {fileID: 1198340560}
   - component: {fileID: 1198340559}
+  - component: {fileID: 1198340561}
   m_Layer: 0
   m_Name: cave A 1
   m_TagString: Untagged
@@ -8112,7 +8128,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198340557}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d71712ad9af80204c8bf20da8af455b2, type: 3}
   m_Name: 
@@ -8169,6 +8185,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1198340561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198340557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eabced5ebb0e5448ebcdf833b9ead36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 167011119}
+  parallaxEffect: 0.2
 --- !u!1001 &1208995105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8519,6 +8549,7 @@ GameObject:
   - component: {fileID: 1241151217}
   - component: {fileID: 1241151219}
   - component: {fileID: 1241151218}
+  - component: {fileID: 1241151220}
   m_Layer: 0
   m_Name: cave A 2
   m_TagString: Untagged
@@ -8550,7 +8581,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241151216}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d71712ad9af80204c8bf20da8af455b2, type: 3}
   m_Name: 
@@ -8607,6 +8638,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1241151220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241151216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eabced5ebb0e5448ebcdf833b9ead36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 167011119}
+  parallaxEffect: 0.4
 --- !u!1001 &1272692646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11963,11 +12008,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1778142785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d71712ad9af80204c8bf20da8af455b2, type: 3}
+  m_Script: {fileID: 11500000, guid: eabced5ebb0e5448ebcdf833b9ead36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 167011119}
-  parallaxEffect: 0.8
+  parallaxEffect: 1
 --- !u!212 &1778142788
 SpriteRenderer:
   m_ObjectHideFlags: 0
