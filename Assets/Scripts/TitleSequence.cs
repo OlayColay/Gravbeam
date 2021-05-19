@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
+using DG.Tweening;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class TitleSequence : MonoBehaviour
@@ -28,26 +29,30 @@ public class TitleSequence : MonoBehaviour
         {
             Transform bgLayerOld = oldBackground.GetChild(i);
             Transform bgLayerNew = newBackground.GetChild(i);
+            
+            bgLayerOld.GetComponent<SpriteRenderer>().DOFade(0f, 10f);
             if (i == 0)
             {
-                StartCoroutine(FadeColorsLayer1(bgLayerOld.GetComponent<SpriteRenderer>(), bgLayerNew.GetComponent<SpriteRenderer>()));
+                bgLayerNew.GetComponent<SpriteRenderer>().DOFade(1f, 3f);
             }
             else
             {
-                StartCoroutine(FadeColors(bgLayerOld.GetComponent<SpriteRenderer>(), bgLayerNew.GetComponent<SpriteRenderer>()));
+                bgLayerNew.GetComponent<SpriteRenderer>().DOFade(1f, 10f);
             }
 
             for(int j = 0; j < bgLayerOld.childCount; j++)
             {
                 SpriteRenderer oldColor = bgLayerOld.GetChild(j).GetComponent<SpriteRenderer>();
                 SpriteRenderer newColor = bgLayerNew.GetChild(j).GetComponent<SpriteRenderer>();
+
+                oldColor.DOFade(0f, 10f);
                 if (i == 0)
                 {
-                    StartCoroutine(FadeColorsLayer1(oldColor, newColor));
+                    newColor.DOFade(1f, 3f);
                 }
                 else
                 {
-                    StartCoroutine(FadeColors(oldColor, newColor));
+                    newColor.DOFade(1f, 10f);
                 }
             }
         }
@@ -60,28 +65,6 @@ public class TitleSequence : MonoBehaviour
             // set color with i as alpha
             oldColor.color = new Color(1, 1, 1, 1 - i/10);
             // newColor.color = new Color(1, 1, 1, i/10);
-            yield return null;
-        }
-    }
-    private IEnumerator FadeColors(SpriteRenderer oldColor, SpriteRenderer newColor)
-    {
-        for (float i = 0f; i <= 10f; i += Time.deltaTime)
-        {
-            // set color with i as alpha
-            oldColor.color = new Color(1, 1, 1, 1 - i/10);
-            newColor.color = new Color(1, 1, 1, i/10);
-            yield return null;
-        }
-    }
-
-    // Different so that layer 1 doesn't appear transparent during transition
-    private IEnumerator FadeColorsLayer1(SpriteRenderer oldColor, SpriteRenderer newColor)
-    {
-        for (float i = 0f; i <= 10f; i += Time.deltaTime)
-        {
-            // set color with i as alpha
-            oldColor.color = new Color(1, 1, 1, 1 - i/10);
-            newColor.color = new Color(1, 1, 1, i/3);
             yield return null;
         }
 

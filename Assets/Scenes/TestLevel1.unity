@@ -624,7 +624,7 @@ PrefabInstance:
     - target: {fileID: 6478614958195244592, guid: 6df29e7e392fdcb4fae68a64cbba5535,
         type: 3}
       propertyPath: yViewSizeIsTriggerHeight
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6478614958195244595, guid: 6df29e7e392fdcb4fae68a64cbba5535,
         type: 3}
@@ -1214,7 +1214,7 @@ PrefabInstance:
     - target: {fileID: 6478614958195244592, guid: 6df29e7e392fdcb4fae68a64cbba5535,
         type: 3}
       propertyPath: yViewSizeIsTriggerHeight
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6478614958195244595, guid: 6df29e7e392fdcb4fae68a64cbba5535,
         type: 3}
@@ -1702,7 +1702,7 @@ PrefabInstance:
     - target: {fileID: 6478614958195244592, guid: 6df29e7e392fdcb4fae68a64cbba5535,
         type: 3}
       propertyPath: yViewSizeIsTriggerHeight
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6478614958195244595, guid: 6df29e7e392fdcb4fae68a64cbba5535,
         type: 3}
