@@ -19,15 +19,17 @@ public class ButtonListeners : MonoBehaviour {
     }
 
     public void LoadLevel(int level) {
-        switch (level) {
-            case 0:
-                SceneManager.LoadScene("GravityScene", LoadSceneMode.Single);
-                break;
+        // switch (level) {
+        //     case 0:
+        //         SceneManager.LoadScene(2, LoadSceneMode.Single);
+        //         break;
 
-            default:
-                Debug.Log("Level " + level + " not yet added!");
-                break;
-        }
+        //     default:
+        //         Debug.Log("Level " + level + " not yet added!");
+        //         break;
+        // }
+
+        SceneManager.LoadScene(level + 2, LoadSceneMode.Single);
     }
 
     /// <summary>

@@ -46,7 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yViewSizeIsTriggerHeight: 1
-  yViewSize: 10
+  yViewSizeInitial: 20
+  yViewSizeFinal: 20
+  interpolationTime: 5
   boundary: {fileID: 7395976008346250889}
 --- !u!61 &3062617295388946070
 BoxCollider2D:
