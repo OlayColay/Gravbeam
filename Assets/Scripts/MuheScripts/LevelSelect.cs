@@ -13,7 +13,7 @@ public class LevelSelect : MonoBehaviour {
 
         Button[] buttons = new Button[latestLevel+1];
         buttons[0] = transform.Find("Tutorial").GetComponent<Button>();
-
+        Button back = transform.Find("Back to Menu").GetComponent<Button>();
 
         for(int i = 1; i <= latestLevel; i++) {
             buttons[i] = transform.Find("Level " + i).GetComponent<Button>();
@@ -27,14 +27,14 @@ public class LevelSelect : MonoBehaviour {
             prevNavs.selectOnDown = buttons[i];
             buttons[i - 1].navigation = prevNavs;
         }
-
-        Navigation firstNavs = buttons[0].navigation;
-        firstNavs.selectOnUp = buttons[latestLevel];
-        buttons[0].navigation = firstNavs;
         
         Navigation lastNavs = buttons[latestLevel].navigation;
-        lastNavs.selectOnDown = buttons[0];
+        lastNavs.selectOnDown = back;
         buttons[latestLevel].navigation = lastNavs;
+
+        Navigation backNavs = back.navigation;
+        backNavs.selectOnUp = buttons[latestLevel];
+        back.navigation = backNavs;
     }
 
     // Update is called once per frame
