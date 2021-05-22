@@ -192,8 +192,12 @@ MonoBehaviour:
   wallScrambleMult: 1.5
   jumpDamper: 0
   parachuteMult: 0.25
+  hasGlider: 1
   isSwinging: 0
   ropeHook: {x: 0, y: 0}
+  isGrounded: 0
+  isWalled: 0
+  isSliding: 0
 --- !u!114 &1125326254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,6 +321,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ropeRenderer: {fileID: 6695719550044836438}
   ropeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  wrappingLayerMask:
     serializedVersion: 2
     m_Bits: 1024
   climbSpeed: 3

@@ -7,6 +7,7 @@ public class RopeSystem : MonoBehaviour
 {
     public LineRenderer ropeRenderer;
     public LayerMask ropeLayerMask;
+    public LayerMask wrappingLayerMask;
     public float climbSpeed = 3f;
     public GameObject ropeHingeAnchor;
     public DistanceJoint2D ropeJoint;
@@ -40,6 +41,7 @@ public class RopeSystem : MonoBehaviour
     private Vector2 GetClosestColliderPointFromRaycastHit(RaycastHit2D hit, PolygonCollider2D polyCollider)
     {
         // Transform polygoncolliderpoints to world space (default is local)
+//        Debug.Log(polyCollider.points);
         var distanceDictionary = polyCollider.points.ToDictionary<Vector2, float, Vector2>(
             position => Vector2.Distance(hit.point, polyCollider.transform.TransformPoint(position)), 
             position => polyCollider.transform.TransformPoint(position));
@@ -77,6 +79,7 @@ public class RopeSystem : MonoBehaviour
         if (!ropeAttached)
         {
             SetCrosshairPosition(aimAngle);
+            
             playerMovement.isSwinging = false;
 	    }
 	    else
@@ -92,29 +95,29 @@ public class RopeSystem : MonoBehaviour
             }
 
             // Wrap rope around points of colliders if there are raycast collisions between player position and their closest current wrap around collider / angle point.
-	        if (ropePositions.Count > 0)
-	        {
-	            var lastRopePoint = ropePositions.Last();
-                var playerToCurrentNextHit = Physics2D.Raycast(playerPosition, (lastRopePoint - playerPosition).normalized, Vector2.Distance(playerPosition, lastRopePoint) - 0.1f, ropeLayerMask);
-                if (playerToCurrentNextHit)
-                {
-                    var colliderWithVertices = playerToCurrentNextHit.collider as PolygonCollider2D;
-                    if (colliderWithVertices != null)
-                    {
-                        var closestPointToHit = GetClosestColliderPointFromRaycastHit(playerToCurrentNextHit, colliderWithVertices);
-                        if (wrapPointsLookup.ContainsKey(closestPointToHit))
-                        {
-                            // Reset the rope if it wraps around an 'already wrapped' position.
-                            ResetRope();
-                            return;
-                        }
-
-                        ropePositions.Add(closestPointToHit);
-                        wrapPointsLookup.Add(closestPointToHit, 0);
-                        distanceSet = false;
-                    }
-                }
-            }
+//	        if (ropePositions.Count > 0)
+//	        {
+//	            var lastRopePoint = ropePositions.Last();
+//                var playerToCurrentNextHit = Physics2D.Raycast(playerPosition, (lastRopePoint - playerPosition).normalized, Vector2.Distance(playerPosition, lastRopePoint) - 0.1f, wrappingLayerMask);
+//                if (playerToCurrentNextHit)
+//                {
+//                    var colliderWithVertices = playerToCurrentNextHit.collider as PolygonCollider2D;
+//                    if (colliderWithVertices != null)
+//                    {
+//                        var closestPointToHit = GetClosestColliderPointFromRaycastHit(playerToCurrentNextHit, colliderWithVertices);
+//                        if (wrapPointsLookup.ContainsKey(closestPointToHit))
+//                        {
+//                            // Reset the rope if it wraps around an 'already wrapped' position.
+//                            ResetRope();
+//                            return;
+//                        }
+//
+//                        ropePositions.Add(closestPointToHit);
+//                        wrapPointsLookup.Add(closestPointToHit, 0);
+//                        distanceSet = false;
+//                    }
+//                }
+//            }
         }
 
 	    UpdateRopePositions();
@@ -140,8 +143,9 @@ public class RopeSystem : MonoBehaviour
                 ropeAttached = true;
                 if (!ropePositions.Contains(hit.point))
                 {
+                Debug.Log(hit.point);
                     // Jump slightly to distance the player a little from the ground after grappling to something.
-                    transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
+                    transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 20f), ForceMode2D.Impulse);
                     ropePositions.Add(hit.point);
                     wrapPointsLookup.Add(hit.point, 0);
                     ropeJoint.distance = Vector2.Distance(playerPosition, hit.point);
