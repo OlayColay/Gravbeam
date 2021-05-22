@@ -202,11 +202,11 @@ public class RopeSystem : MonoBehaviour
     /// </summary>
     private void HandleRopeLength()
     {
-        if (((Gamepad.current != null && Gamepad.current.leftStick.y.ReadValue() > 0f) || Input.GetAxis("Vertical") > 0f) && ropeAttached)
+        if (((Gamepad.current != null && Gamepad.current.leftStick.y.ReadValue() > 0.5f) || Input.GetAxis("Vertical") > 0.5f) && ropeAttached)
         {
             ropeJoint.distance -= Time.deltaTime * climbSpeed;
         }
-        else if (((Gamepad.current != null && Gamepad.current.leftStick.y.ReadValue() < 0f) || Input.GetAxis("Vertical") < 0f) && ropeAttached)
+        else if (((Gamepad.current != null && Gamepad.current.leftStick.y.ReadValue() < -0.5f) || Input.GetAxis("Vertical") < -0.5f) && ropeAttached)
         {
             ropeJoint.distance += Time.deltaTime * climbSpeed;
         }
