@@ -145,7 +145,10 @@ public class RopeSystem : MonoBehaviour
                 {
                 Debug.Log(hit.point);
                     // Jump slightly to distance the player a little from the ground after grappling to something.
-                    transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 20f), ForceMode2D.Impulse);
+                    if(playerMovement.isGrounded)
+                    {
+                        transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+                    }
                     ropePositions.Add(hit.point);
                     wrapPointsLookup.Add(hit.point, 0);
                     ropeJoint.distance = Vector2.Distance(playerPosition, hit.point);
@@ -161,7 +164,7 @@ public class RopeSystem : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(1) || (Gamepad.current != null && Gamepad.current.buttonSouth.IsPressed()))
+        if (playerMovement.controls.Gravity.Jump.triggered || Input.GetMouseButton(1))
         {
             ResetRope();
         }
