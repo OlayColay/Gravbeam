@@ -44,7 +44,7 @@ public class MainMenuButton : MonoBehaviour {
     public void OnClickQuitToTitle() {
         Globals.Reset();
         Time.timeScale = 1f;
-        SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);
+        SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);   // Create a title screen first
     }
 
     public void OnClickQuitGame() {
