@@ -16,10 +16,16 @@ public class OptionsMenu : MonoBehaviour
         {
             previousSelectedButton = EventSystem.current.currentSelectedGameObject;
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(firstSelectedButton);
+            StartCoroutine(SelectFirstButton());
         }
     }
-    
+
+    private IEnumerator SelectFirstButton()
+    {
+        yield return new WaitForEndOfFrame();
+        EventSystem.current.SetSelectedGameObject(firstSelectedButton);
+    }
+
     private void OnDisable() 
     {
         if (EventSystem.current != null && Gamepad.current != null)

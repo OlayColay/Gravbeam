@@ -13,7 +13,7 @@ public class Respawn : MonoBehaviour
     private BoxCollider2D cl;
     private LoadingScreen ls;
     private Vector2 hitVelo = new Vector2(0f, 50f);
-    private int faceRight = 1;
+    // private int faceRight = 1;
 
     private bool isGravity;
 
