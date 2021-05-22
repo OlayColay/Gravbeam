@@ -11,6 +11,7 @@ public class TitleSequence : MonoBehaviour
     [SerializeField] private Transform newTerrain;
     [SerializeField] private Transform oldBackground;
     [SerializeField] private Transform newBackground;
+    [SerializeField] private SpriteRenderer titleSprite;
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
@@ -56,6 +57,8 @@ public class TitleSequence : MonoBehaviour
                 }
             }
         }
+
+        StartCoroutine(TitleFade());
     }
 
     private IEnumerator FadeColors(SpriteShapeRenderer oldColor/*, SpriteShapeRenderer newColor*/)
@@ -70,5 +73,12 @@ public class TitleSequence : MonoBehaviour
 
         oldTerrain.gameObject.SetActive(false);
         oldBackground.gameObject.SetActive(false);
+    }
+
+    private IEnumerator TitleFade()
+    {
+        titleSprite.DOFade(1f, 3f);
+        yield return new WaitForSeconds(7f);
+        titleSprite.DOFade(0f, 3f);
     }
 }
