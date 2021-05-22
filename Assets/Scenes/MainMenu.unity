@@ -2175,7 +2175,7 @@ GameObject:
   - component: {fileID: 8843122957887816485}
   - component: {fileID: 8843122957887816486}
   - component: {fileID: 8843122957887816487}
-  - component: {fileID: 8843122957887816484}
+  - component: {fileID: 8843122957887816482}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -2183,7 +2183,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8843122957887816484
+--- !u!114 &8843122957887816482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2192,7 +2192,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8843122957887816481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fe083e52d4033047b251bbed6286c11, type: 3}
+  m_Script: {fileID: 11500000, guid: 50bba512bb1016e42bdbb26543cb977a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!222 &8843122957887816485
@@ -2275,7 +2275,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8843122957887816484}
+      - m_Target: {fileID: 8843122957887816482}
         m_MethodName: OnClickOptions
         m_Mode: 1
         m_Arguments:
@@ -2443,7 +2443,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit
+  m_Text: 'Quit to Title
+
+'
 --- !u!1 &8843122958451469840
 GameObject:
   m_ObjectHideFlags: 0
@@ -2556,7 +2558,7 @@ GameObject:
   - component: {fileID: 8843122958492997629}
   - component: {fileID: 8843122958492997630}
   - component: {fileID: 8843122958492997631}
-  - component: {fileID: 8843122958492997628}
+  - component: {fileID: 8843122958492997626}
   m_Layer: 5
   m_Name: Load Game
   m_TagString: Untagged
@@ -2564,7 +2566,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8843122958492997628
+--- !u!114 &8843122958492997626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2573,7 +2575,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8843122958492997625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fe083e52d4033047b251bbed6286c11, type: 3}
+  m_Script: {fileID: 11500000, guid: 50bba512bb1016e42bdbb26543cb977a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!222 &8843122958492997629
@@ -2656,7 +2658,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8843122958492997628}
+      - m_Target: {fileID: 8843122958492997626}
         m_MethodName: OnClickLoadGame
         m_Mode: 1
         m_Arguments:
@@ -2739,7 +2741,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8843122958538581766}
+      - m_Target: {fileID: 8843122958538581764}
         m_MethodName: OnClickNewGame
         m_Mode: 1
         m_Arguments:
@@ -2782,7 +2784,7 @@ GameObject:
   - component: {fileID: 8843122958538581767}
   - component: {fileID: 8843122958538581760}
   - component: {fileID: 8843122958538581761}
-  - component: {fileID: 8843122958538581766}
+  - component: {fileID: 8843122958538581764}
   m_Layer: 5
   m_Name: New Game
   m_TagString: Untagged
@@ -2790,7 +2792,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8843122958538581766
+--- !u!114 &8843122958538581764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2799,7 +2801,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8843122958538581763}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fe083e52d4033047b251bbed6286c11, type: 3}
+  m_Script: {fileID: 11500000, guid: 50bba512bb1016e42bdbb26543cb977a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!222 &8843122958538581767
@@ -2822,14 +2824,26 @@ GameObject:
   - component: {fileID: 8843122959021557124}
   - component: {fileID: 8843122959021557125}
   - component: {fileID: 8843122959021557126}
-  - component: {fileID: 8843122959021557243}
+  - component: {fileID: 8843122959021557121}
   m_Layer: 5
-  m_Name: Quit
+  m_Name: Quit to Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8843122959021557121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8843122959021557120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50bba512bb1016e42bdbb26543cb977a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &8843122959021557124
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2910,8 +2924,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8843122959021557243}
-        m_MethodName: OnClickQuitGame
+      - m_Target: {fileID: 8843122959021557121}
+        m_MethodName: OnClickQuitToTitle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2941,18 +2955,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -103.79999}
   m_SizeDelta: {x: 194.3, y: 42.4}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8843122959021557243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8843122959021557120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fe083e52d4033047b251bbed6286c11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!223 &8843122959040123178
 Canvas:
   m_ObjectHideFlags: 0
