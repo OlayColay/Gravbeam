@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
-public class PauseMenu : MonoBehaviour
+public class TitleScreen : MonoBehaviour
 {
+    [SerializeField] Transform skreech;
     [SerializeField] private GameObject firstSelectedButton;
 
     private void OnEnable() 
@@ -19,15 +21,13 @@ public class PauseMenu : MonoBehaviour
 
     private IEnumerator SelectFirstButton()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSecondsRealtime(1f);
         EventSystem.current.SetSelectedGameObject(firstSelectedButton);
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        if (Gamepad.current != null && Gamepad.current.bButton.wasPressedThisFrame)
-        {
-            firstSelectedButton.GetComponent<ButtonListeners>().OnClickResume();
-        }
+        
     }
 }
