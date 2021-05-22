@@ -10,7 +10,7 @@ public class Respawn : MonoBehaviour
     private Animator am;
     // [SerializeField] private Transform spawnPoint;
     private Rigidbody2D rb;
-    private CapsuleCollider2D cc;
+    private BoxCollider2D cl;
     private LoadingScreen ls;
     private Vector2 hitVelo = new Vector2(0f, 50f);
     private int faceRight = 1;
@@ -22,7 +22,7 @@ public class Respawn : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         am = player.GetComponent<Animator>();
         rb = player.GetComponent<Rigidbody2D>();
-        cc = player.GetComponent<CapsuleCollider2D>();
+        cl = gameObject.GetComponent<BoxCollider2D>();
         ls = GameObject.FindGameObjectWithTag("MainCamera").transform.GetChild(0).GetComponent<LoadingScreen>();
     }
 
@@ -44,7 +44,7 @@ public class Respawn : MonoBehaviour
                 isGravity = false;
             else
                 isGravity = true;
-
+            cl.isTrigger = false;
             // Freeze Player if hit a spike (tag = lethal_freeze)
             am.SetBool("Dead", true);
             // gameObject.GetComponent<BoxCollider2D>().enabled = false;
@@ -62,7 +62,6 @@ public class Respawn : MonoBehaviour
                 if(isGravity)
                 {
                     rb.velocity = hitVelo;
-                    cc.enabled = false;
                 }
             }
 
