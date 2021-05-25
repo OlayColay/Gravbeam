@@ -40,6 +40,9 @@ public class PlatformerCharacter2D : MonoBehaviour
     [Tooltip("Multiplier for gravity when the parachute is active")]
     [SerializeField] private float parachuteMult = 0.25f;
 
+    [Tooltip("If Skreech has unlocked gliding")]
+    public bool hasGlider = true;
+
     public PlayerControls controls;
     
     private float move = 0f;            // The value of horizontal movement (from -1 to 1)
@@ -226,7 +229,7 @@ public class PlatformerCharacter2D : MonoBehaviour
                     }
                 }
             }
-            else if (!isGrounded && !isSliding)
+            else if (hasGlider && !isGrounded && !isSliding)
             {
                 isGliding = true;
             }

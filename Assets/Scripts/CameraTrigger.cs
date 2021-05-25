@@ -16,13 +16,13 @@ public class CameraTrigger : MonoBehaviour
     [SerializeField] private bool yViewSizeIsTriggerHeight = true;
     
     [Tooltip("The initial y-size of the new camera view, if it is NOT the trigger height")]
-    [SerializeField] private float yViewSizeInitial;
+    [SerializeField] private float yViewSizeInitial = 20f;
 
     [Tooltip("The final y-size of the new camera view, if it is NOT the trigger height")]
-    [SerializeField] private float yViewSizeFinal;
+    [SerializeField] private float yViewSizeFinal = 20f;
 
     [Tooltip("How long it should take to go from initial size to final size")]
-    [SerializeField] private float interpolationTime;
+    [SerializeField] private float interpolationTime = 0f;
 
     private Bounds managerBox;   // The BoxCollider2D of the parent object
     private Transform player;    // The player's transform

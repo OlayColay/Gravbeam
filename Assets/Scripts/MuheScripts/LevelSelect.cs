@@ -9,13 +9,14 @@ public class LevelSelect : MonoBehaviour {
 
     // Start is called before the first frame update
     private void Start() {
-        latestLevel = PlayerPrefs.GetInt("latestLevel", 0);
+        latestLevel = PlayerPrefs.GetInt("latestLevel", 2) - 1;
+        // Debug.Log(latestLevel);
 
-        Button[] buttons = new Button[latestLevel+1];
+        Button[] buttons = new Button[latestLevel];
         buttons[0] = transform.Find("Tutorial").GetComponent<Button>();
+        Button back = transform.Find("Back to Menu").GetComponent<Button>();
 
-
-        for(int i = 1; i <= latestLevel; i++) {
+        for(int i = 1; i < latestLevel; i++) {
             buttons[i] = transform.Find("Level " + i).GetComponent<Button>();
             buttons[i].interactable = true;
 
@@ -27,14 +28,14 @@ public class LevelSelect : MonoBehaviour {
             prevNavs.selectOnDown = buttons[i];
             buttons[i - 1].navigation = prevNavs;
         }
-
-        Navigation firstNavs = buttons[0].navigation;
-        firstNavs.selectOnUp = buttons[latestLevel];
-        buttons[0].navigation = firstNavs;
         
-        Navigation lastNavs = buttons[latestLevel].navigation;
-        lastNavs.selectOnDown = buttons[0];
-        buttons[latestLevel].navigation = lastNavs;
+        Navigation lastNavs = buttons[latestLevel - 1].navigation;
+        lastNavs.selectOnDown = back;
+        buttons[latestLevel - 1].navigation = lastNavs;
+
+        Navigation backNavs = back.navigation;
+        backNavs.selectOnUp = buttons[latestLevel - 1];
+        back.navigation = backNavs;
     }
 
     // Update is called once per frame
