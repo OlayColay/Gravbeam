@@ -73,16 +73,14 @@ public class RopeSystem : MonoBehaviour
             aimAngle = Vector2.Angle(Vector2.right, aimDirection);
         }
 
-        playerPosition = transform.position;
+        playerPosition = transform.Find("WallCheck").position;
 
         if (!ropeAttached)
         {
             SetCrosshairPosition(aimAngle);
-            playerMovement.isSwinging = false;
 	    }
 	    else
         {
-            playerMovement.isSwinging = true;
             playerMovement.ropeHook = ropePositions.Last();
             crosshairSprite.enabled = false;
 
@@ -132,6 +130,7 @@ public class RopeSystem : MonoBehaviour
             var hit = Physics2D.Raycast(playerPosition, aimDirection, ropeMaxCastDistance, ropeLayerMask);
             if (hit.collider != null)
             {
+                playerMovement.isSwinging = true;
                 ropeAttached = true;
                 if (!ropePositions.Contains(hit.point))
                 {
@@ -151,8 +150,7 @@ public class RopeSystem : MonoBehaviour
                 ropeJoint.enabled = false;
             }
         }
-
-        if (Input.GetMouseButton(1) || (Gamepad.current != null && Gamepad.current.buttonSouth.IsPressed()))
+        else if (ropeAttached && (Input.GetMouseButton(1) || playerMovement.controls.Gravity.Jump.triggered))
         {
             ResetRope();
         }

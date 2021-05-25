@@ -130,6 +130,7 @@ public class PlatformerCharacter2D : MonoBehaviour
                 isGliding = false;
             }
         }
+        anim.SetBool("Glide", isGliding);
 
         // If the player should be sliding down a wall...
         if (isWalled && !isGrounded /*&& move != 0*/ && ((facingRight && canWJRight) || (!facingRight && canWJLeft)))
@@ -176,6 +177,8 @@ public class PlatformerCharacter2D : MonoBehaviour
         else if (!facingRight && (rb.velocity.x > 1.0f || 
         (rb.velocity.x >= -0.001f && rb.velocity.x <= 0.001f && Globals.canControl && move > 0)))
             Flip();
+
+        anim.SetBool("Swing", isSwinging);
     }
 
     public void Move(float move)
