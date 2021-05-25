@@ -10,6 +10,7 @@ public class RopeSystem : MonoBehaviour
     public LayerMask ropeLayerMask;
     public float climbSpeed = 3f;
     public GameObject ropeHingeAnchor;
+    public Transform ropeRendererStart;
     public DistanceJoint2D ropeJoint;
     public Transform crosshair;
     public SpriteRenderer crosshairSprite;
@@ -165,8 +166,8 @@ public class RopeSystem : MonoBehaviour
         ropeAttached = false;
         playerMovement.isSwinging = false;
         ropeRenderer.positionCount = 2;
-        ropeRenderer.SetPosition(0, transform.position);
-        ropeRenderer.SetPosition(1, transform.position);
+        ropeRenderer.SetPosition(0, ropeRendererStart.position);
+        ropeRenderer.SetPosition(1, ropeRendererStart.position);
         ropePositions.Clear();
         wrapPointsLookup.Clear();
         ropeHingeAnchorSprite.enabled = false;
@@ -259,7 +260,7 @@ public class RopeSystem : MonoBehaviour
                 else
                 {
                     // Player position
-                    ropeRenderer.SetPosition(i, transform.position);
+                    ropeRenderer.SetPosition(i, ropeRendererStart.position);
                 }
             }
         }
