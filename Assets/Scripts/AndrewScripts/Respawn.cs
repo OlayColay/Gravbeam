@@ -37,7 +37,7 @@ public class Respawn : MonoBehaviour
             // Freeze Player if hit a spike (tag = lethal_freeze)
             am.SetBool("Dead", true);
             // gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            player.GetComponent<PlatformerCharacter2D>().enabled = false;
+//            player.GetComponent<PlatformerCharacter2D>().enabled = false;
             if (gameObject.tag == "Lethal_Freeze")
             {
                 rb.velocity = Vector2.zero;
@@ -51,7 +51,7 @@ public class Respawn : MonoBehaviour
             }
 
             ls.triggerFadeIn = true;
-            player.GetComponent<PlatformerCharacter2D>().controls.Disable();
+//            player.GetComponent<PlatformerCharacter2D>().controls.Disable();
             StartCoroutine(WaitForDeath());
         }
     }
