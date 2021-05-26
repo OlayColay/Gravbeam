@@ -29,7 +29,7 @@ public class ButtonListeners : MonoBehaviour {
         //         break;
         // }
 
-        SceneManager.LoadScene(level + 2, LoadSceneMode.Single);
+        SceneManager.LoadScene(level + 3, LoadSceneMode.Single);
     }
 
     /// <summary>
