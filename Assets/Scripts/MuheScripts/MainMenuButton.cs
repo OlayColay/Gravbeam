@@ -29,22 +29,27 @@ public class MainMenuButton : MonoBehaviour {
         //         break;
         // }
 
-        SceneManager.LoadScene(level + 2, LoadSceneMode.Single);
+        SceneManager.LoadScene(level + 3, LoadSceneMode.Single);
     }
 
     /// <summary>
     /// Go to options menu
-    /// <para>Use <see cref="OnClickBack"/> to return to pause menu</para>
     /// </summary>
     public void OnClickOptions() {
         transform.parent.parent.Find("OptionsMenu").gameObject.SetActive(true);
         transform.parent.gameObject.SetActive(false);
     }
 
+    public void QuitToMain() {
+        Globals.Reset();
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+
     public void OnClickQuitToTitle() {
         Globals.Reset();
         Time.timeScale = 1f;
-        SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);   // Create a title screen first
+        SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);
     }
 
     public void OnClickQuitGame() {
@@ -52,7 +57,7 @@ public class MainMenuButton : MonoBehaviour {
     }
 
     /// <summary>
-    /// Go back to pause menu from options menu
+    /// Go back to main menu from options menu
     /// </summary>
     public void OnClickBackToMain() {
         transform.parent.parent.Find("Menu").gameObject.SetActive(true);
