@@ -327,6 +327,7 @@ GameObject:
   m_Component:
   - component: {fileID: 383126981}
   - component: {fileID: 383126982}
+  - component: {fileID: 383126983}
   m_Layer: 0
   m_Name: solar system (1)
   m_TagString: Untagged
@@ -342,7 +343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383126980}
   m_LocalRotation: {x: -0, y: -0, z: 0.21874277, w: -0.97578263}
-  m_LocalPosition: {x: -49.61, y: -2.8, z: 0}
+  m_LocalPosition: {x: -45.5, y: -2.8, z: 0}
   m_LocalScale: {x: 1.7181714, y: 1.7181714, z: 1.7181714}
   m_Children: []
   m_Father: {fileID: 646089136}
@@ -398,6 +399,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &383126983
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383126980}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3ed43d0e40a42481dac6ef9a50216912, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &488399180
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +429,7 @@ GameObject:
   - component: {fileID: 488399181}
   - component: {fileID: 488399182}
   - component: {fileID: 488399183}
+  - component: {fileID: 488399184}
   m_Layer: 0
   m_Name: stars near
   m_TagString: Untagged
@@ -496,6 +517,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 2053909017}
   parallaxEffect: 0.7
+--- !u!95 &488399184
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488399180}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 72f607d53c13b4afa82e9c0bdac042b2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &519662821
 GameObject:
   m_ObjectHideFlags: 0
