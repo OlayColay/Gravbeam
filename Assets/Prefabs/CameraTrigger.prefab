@@ -46,7 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yViewSizeIsTriggerHeight: 1
-  yViewSize: 10
+  yViewSizeInitial: 100
+  yViewSizeFinal: 100
+  interpolationTime: 0
   boundary: {fileID: 7395976008346250889}
 --- !u!61 &3062617295388946070
 BoxCollider2D:
@@ -72,7 +74,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16, y: 9}
+  m_Size: {x: 39.34, y: 20.5}
   m_EdgeRadius: 0
 --- !u!1 &7395976008346250889
 GameObject:

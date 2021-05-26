@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468583524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.03, y: 0, z: 0}
+  m_LocalPosition: {x: 0.71, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 586366251230067395}
@@ -196,6 +196,9 @@ MonoBehaviour:
   hasGlider: 1
   isSwinging: 0
   ropeHook: {x: 0, y: 0}
+  isGrounded: 0
+  isWalled: 0
+  isSliding: 0
 --- !u!114 &1125326254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,7 +383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &809366765888326096
 Transform:
   m_ObjectHideFlags: 0

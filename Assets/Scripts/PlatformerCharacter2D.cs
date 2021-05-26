@@ -48,7 +48,6 @@ public class PlatformerCharacter2D : MonoBehaviour
     private float move = 0f;            // The value of horizontal movement (from -1 to 1)
     private Transform groundCheck;      // A position marking where to check if the player is grounded.
     const float groundedRadius = .5f;   // Radius of the overlap circle to determine if grounded
-    private bool isGrounded;            // Whether or not the player is grounded.
     private Transform ceilingCheck;     // A position marking where to check for ceilings
     const float ceilingRadius = .01f;   // Radius of the overlap circle to determine if the player can stand up
     private Animator anim;              // Reference to the player's animator component.
@@ -58,8 +57,6 @@ public class PlatformerCharacter2D : MonoBehaviour
     private bool canJumpMore = false;   // If the player can continue jumping upwards
     private Transform wallCheck;        // Position where a player touching a wall is checked
     private bool isJumping = false;     // If the player is holding the jump button down
-    private bool isWalled = false;      // If the player is touching a wall
-    private bool isSliding = false;     // If the player is sliding down a wall
     private bool isWallJumping = false; // If the player has jumped off a wall
     private float curJumpForce;         // Jump force that changes based on jumpDamper
     private bool canWJLeft = true;      // If the player can wall jump of a wall on the left
@@ -69,6 +66,9 @@ public class PlatformerCharacter2D : MonoBehaviour
 
     public bool isSwinging = false;
     [HideInInspector] public Vector2 ropeHook = Vector2.zero;
+    [HideInInspector] public bool isGrounded;            // Whether or not the player is grounded.
+    [HideInInspector] public bool isWalled = false;      // If the player is touching a wall
+    [HideInInspector] public bool isSliding = false;     // If the player is sliding down a wall
 
     private void Awake()
     {

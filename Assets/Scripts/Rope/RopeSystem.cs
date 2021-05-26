@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -85,6 +84,12 @@ public class RopeSystem : MonoBehaviour
             playerMovement.ropeHook = ropePositions.Last();
             crosshairSprite.enabled = false;
 
+            // If the player hits the ground, wall, or ceiling, detach the rope
+            if (playerMovement.isGrounded || playerMovement.isWalled)
+            {
+                ResetRope();
+            }
+
             // Wrap rope around points of colliders if there are raycast collisions between player position and their closest current wrap around collider / angle point.
 	        if (ropePositions.Count > 0)
 	        {
@@ -136,7 +141,10 @@ public class RopeSystem : MonoBehaviour
                 if (!ropePositions.Contains(hit.point))
                 {
                     // Jump slightly to distance the player a little from the ground after grappling to something.
-                    transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
+                    if(playerMovement.isGrounded)
+                    {
+                        playerMovement.Jump();
+                    }
                     ropePositions.Add(hit.point);
                     wrapPointsLookup.Add(hit.point, 0);
                     ropeJoint.distance = Vector2.Distance(playerPosition, hit.point);
@@ -196,11 +204,11 @@ public class RopeSystem : MonoBehaviour
     /// </summary>
     private void HandleRopeLength()
     {
-        if (((Gamepad.current != null && Gamepad.current.leftStick.y.ReadValue() > 0f) || Input.GetAxis("Vertical") > 0f) && ropeAttached)
+        if (((Gamepad.current != null && Gamepad.current.leftStick.y.ReadValue() > 0.5f) || Input.GetAxis("Vertical") > 0.5f) && ropeAttached)
         {
             ropeJoint.distance -= Time.deltaTime * climbSpeed;
         }
-        else if (((Gamepad.current != null && Gamepad.current.leftStick.y.ReadValue() < 0f) || Input.GetAxis("Vertical") < 0f) && ropeAttached)
+        else if (((Gamepad.current != null && Gamepad.current.leftStick.y.ReadValue() < -0.5f) || Input.GetAxis("Vertical") < -0.5f) && ropeAttached)
         {
             ropeJoint.distance += Time.deltaTime * climbSpeed;
         }
