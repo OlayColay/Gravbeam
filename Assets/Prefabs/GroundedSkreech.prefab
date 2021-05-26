@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468583524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.69, y: 0, z: 0}
+  m_LocalPosition: {x: 0.71, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 586366251230067395}
@@ -63,7 +63,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 586366251230067416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 1.2, z: 0.3}
+  m_LocalPosition: {x: -1.786, y: 0.35, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6023862777179509602}
@@ -73,6 +73,7 @@ Transform:
   - {fileID: 1468583525}
   - {fileID: 487126497691055437}
   - {fileID: 809366765888326096}
+  - {fileID: 6557823884957354771}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -139,8 +140,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.5
-  m_LinearDrag: 5
-  m_AngularDrag: 0
+  m_LinearDrag: 0.5
+  m_AngularDrag: 0.02
   m_GravityScale: 12
   m_Material: {fileID: 0}
   m_Interpolate: 2
@@ -184,15 +185,15 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1025
-  maxJumpTime: 0.38
+  maxJumpTime: 0.32
   minJumpTime: 0.15
   wallSlideSpeed: 3
   wallJumpMult: 0.75
-  wallJumpXForce: 100
+  wallJumpXForce: 50
   wallScrambleMult: 1.5
   jumpDamper: 0
   parachuteMult: 0.25
-  hasGlider: 0
+  hasGlider: 1
   isSwinging: 0
   ropeHook: {x: 0, y: 0}
   isGrounded: 0
@@ -323,11 +324,9 @@ MonoBehaviour:
   ropeLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  wrappingLayerMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  climbSpeed: 6
+  climbSpeed: 3
   ropeHingeAnchor: {fileID: 7770163109976168357}
+  ropeRendererStart: {fileID: 6557823884957354771}
   ropeJoint: {fileID: 2227730904939628668}
   crosshair: {fileID: 809366765888326096}
   crosshairSprite: {fileID: 6339721770498076550}
@@ -509,6 +508,36 @@ Transform:
   m_Father: {fileID: 586366251230067395}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7735300435852425183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6557823884957354771}
+  m_Layer: 0
+  m_Name: RopeStartPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6557823884957354771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7735300435852425183}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.39, y: 0.58, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 586366251230067395}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7770163109976168357
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,7 +564,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7770163109976168357}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.15}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.25}
   m_Children: []
   m_Father: {fileID: 586366251230067395}

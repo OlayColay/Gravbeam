@@ -179,8 +179,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0725ec46c9df440438cea7ac0552575d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 1
+  velocity: 20
   length: 1
+  setPositionToCenter: 1
 --- !u!82 &5352275983597936372
 AudioSource:
   m_ObjectHideFlags: 0

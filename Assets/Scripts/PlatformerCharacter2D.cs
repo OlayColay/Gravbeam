@@ -53,10 +53,10 @@ public class PlatformerCharacter2D : MonoBehaviour
     private Animator anim;              // Reference to the player's animator component.
     private Rigidbody2D rb;
     private bool facingRight = true;    // For determining which way the player is currently facing.
-    private bool isJumping = false;     // If the player is holding the jump button down
     private float jumpTimeCounter;      // Remaining time left in jump
     private bool canJumpMore = false;   // If the player can continue jumping upwards
     private Transform wallCheck;        // Position where a player touching a wall is checked
+    private bool isJumping = false;     // If the player is holding the jump button down
     private bool isWallJumping = false; // If the player has jumped off a wall
     private float curJumpForce;         // Jump force that changes based on jumpDamper
     private bool canWJLeft = true;      // If the player can wall jump of a wall on the left
@@ -64,12 +64,11 @@ public class PlatformerCharacter2D : MonoBehaviour
     private bool isGliding = false;     // If the player is gliding with the parachute
     private float gravity;
 
-    [HideInInspector] public bool isSwinging = false;
+    public bool isSwinging = false;
     [HideInInspector] public Vector2 ropeHook = Vector2.zero;
     [HideInInspector] public bool isGrounded;            // Whether or not the player is grounded.
     [HideInInspector] public bool isWalled = false;      // If the player is touching a wall
     [HideInInspector] public bool isSliding = false;     // If the player is sliding down a wall
-
 
     private void Awake()
     {
@@ -134,6 +133,7 @@ public class PlatformerCharacter2D : MonoBehaviour
                 isGliding = false;
             }
         }
+        anim.SetBool("Glide", isGliding);
 
         // If the player should be sliding down a wall...
         if (isWalled && !isGrounded /*&& move != 0*/ && ((facingRight && canWJRight) || (!facingRight && canWJLeft)))
@@ -151,7 +151,7 @@ public class PlatformerCharacter2D : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed, float.MaxValue));
 
         // If the player continues jumping...
-        if (canJumpMore && (isJumping || jumpTimeCounter < minJumpTime)) 
+        if (canJumpMore && (isJumping || jumpTimeCounter < minJumpTime) && !isSwinging) 
         {
             if (jumpTimeCounter < maxJumpTime * (isSliding ? wallScrambleMult : 1f))
             {
@@ -174,18 +174,23 @@ public class PlatformerCharacter2D : MonoBehaviour
         anim.SetFloat("vSpeed", rb.velocity.y);
 
         // If currently facing right and (getting forced left or moving left into a wall)...
+        if(!isSwinging)
+        {
         if (facingRight && (rb.velocity.x < -1.0f || 
         (rb.velocity.x >= -0.001f && rb.velocity.x <= 0.001f && Globals.canControl && move < 0)))
             Flip();
         else if (!facingRight && (rb.velocity.x > 1.0f || 
         (rb.velocity.x >= -0.001f && rb.velocity.x <= 0.001f && Globals.canControl && move > 0)))
             Flip();
+        }
+
+        anim.SetBool("Swing", isSwinging);
     }
 
     public void Move(float move)
     {
         // Only control the player if grounded or airControl is turned on
-        if (Globals.canControl && (isGrounded || airControl || isSliding))
+        if (Globals.canControl && (isGrounded || airControl || isSliding) &&!isSwinging)
         {
             // The Speed animator parameter is set to the absolute value of the horizontal input.
             anim.SetFloat("Speed", Mathf.Abs(move));
@@ -193,6 +198,16 @@ public class PlatformerCharacter2D : MonoBehaviour
             // Move the character
             if ((move > 0 && rb.velocity.x < maxSpeed) || (move < 0 && rb.velocity.x > -maxSpeed))
                 rb.AddForce(new Vector2(move * maxSpeed * 10, 0));
+        }
+        else if (isSwinging)
+        {
+
+            // The Speed animator parameter is set to the absolute value of the horizontal input.
+            // anim.SetFloat("Speed", Mathf.Abs(move));
+
+            // Move the character
+            if ((move > 0 && rb.velocity.x < maxSpeed ) || (move < 0 && rb.velocity.x > -maxSpeed))
+                rb.AddForce(move * Vector2.right * maxSpeed * 2, 0);
         }
     }
 
