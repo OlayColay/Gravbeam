@@ -91,29 +91,29 @@ public class RopeSystem : MonoBehaviour
             }
 
             // Wrap rope around points of colliders if there are raycast collisions between player position and their closest current wrap around collider / angle point.
-	        if (ropePositions.Count > 0)
-	        {
-	            var lastRopePoint = ropePositions.Last();
-                var playerToCurrentNextHit = Physics2D.Raycast(playerPosition, (lastRopePoint - playerPosition).normalized, Vector2.Distance(playerPosition, lastRopePoint) - 0.1f, ropeLayerMask);
-                if (playerToCurrentNextHit)
-                {
-                    var colliderWithVertices = playerToCurrentNextHit.collider as PolygonCollider2D;
-                    if (colliderWithVertices != null)
-                    {
-                        var closestPointToHit = GetClosestColliderPointFromRaycastHit(playerToCurrentNextHit, colliderWithVertices);
-                        if (wrapPointsLookup.ContainsKey(closestPointToHit))
-                        {
-                            // Reset the rope if it wraps around an 'already wrapped' position.
-                            ResetRope();
-                            return;
-                        }
-
-                        ropePositions.Add(closestPointToHit);
-                        wrapPointsLookup.Add(closestPointToHit, 0);
-                        distanceSet = false;
-                    }
-                }
-            }
+//	        if (ropePositions.Count > 0)
+//	        {
+//	            var lastRopePoint = ropePositions.Last();
+//                var playerToCurrentNextHit = Physics2D.Raycast(playerPosition, (lastRopePoint - playerPosition).normalized, Vector2.Distance(playerPosition, lastRopePoint) - 0.1f, ropeLayerMask);
+//                if (playerToCurrentNextHit)
+//                {
+//                    var colliderWithVertices = playerToCurrentNextHit.collider as PolygonCollider2D;
+//                    if (colliderWithVertices != null)
+//                    {
+//                        var closestPointToHit = GetClosestColliderPointFromRaycastHit(playerToCurrentNextHit, colliderWithVertices);
+//                        if (wrapPointsLookup.ContainsKey(closestPointToHit))
+//                        {
+//                            // Reset the rope if it wraps around an 'already wrapped' position.
+//                            ResetRope();
+//                            return;
+//                        }
+//
+//                        ropePositions.Add(closestPointToHit);
+//                        wrapPointsLookup.Add(closestPointToHit, 0);
+//                        distanceSet = false;
+//                    }
+//                }
+//            }
         }
 
 	    UpdateRopePositions();
