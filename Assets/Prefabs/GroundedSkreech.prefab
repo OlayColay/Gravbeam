@@ -193,7 +193,7 @@ MonoBehaviour:
   wallJumpXForce: 50
   wallScrambleMult: 1.5
   jumpDamper: 0
-  parachuteMult: 0.25
+  parachuteMult: 0.1
   hasGlider: 1
   isSwinging: 0
   ropeHook: {x: 0, y: 0}
@@ -325,7 +325,7 @@ MonoBehaviour:
   ropeLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  climbSpeed: 3
+  climbSpeed: 6
   ropeHingeAnchor: {fileID: 7770163109976168357}
   ropeRendererStart: {fileID: 6557823884957354771}
   ropeJoint: {fileID: 2227730904939628668}
@@ -690,7 +690,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: -100
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

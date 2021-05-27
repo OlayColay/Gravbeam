@@ -243,10 +243,26 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Web"",
-                    ""type"": ""Value"",
+                    ""name"": ""WebShoot"",
+                    ""type"": ""Button"",
                     ""id"": ""1b8163bf-7f51-430e-be74-1406c48d8d93"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""WebClimb"",
+                    ""type"": ""Value"",
+                    ""id"": ""56352519-110f-4cb9-9683-af25202fcd2c"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""WebCancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""85569356-1b9c-4ce5-a442-879140eec298"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -313,70 +329,48 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Arrow Keys"",
-                    ""id"": ""71c10d08-a25d-4de1-8aaa-0814d2184114"",
-                    ""path"": ""2DVector"",
+                    ""name"": """",
+                    ""id"": ""b4a65f48-d4b5-4f09-acc8-c2ecbabc0033"",
+                    ""path"": ""<Gamepad>/dpad/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Web"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Arrow Keys"",
+                    ""id"": ""74afb125-9403-4847-bb7b-8d9596440e33"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""a1e45872-3669-40ff-a98e-554064f6bd92"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Web"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""63c9f5b9-166d-40de-b660-7096dea05a17"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Web"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""36577c5b-a62f-4330-a76a-8ceecef9ced6"",
+                    ""name"": ""negative"",
+                    ""id"": ""f5e5a81d-8002-4be6-9244-1705cecd6789"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Web"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""right"",
-                    ""id"": ""1792f96f-f30c-4937-9d3c-8fc158179d28"",
+                    ""name"": ""positive"",
+                    ""id"": ""c92ee008-898e-47a5-82a7-421ebad9d243"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Web"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9b8c3bd5-0645-4d60-a548-7d4fd57ca219"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Web"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -421,6 +415,160 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""538400f0-8308-40a4-bae0-db86c7ca20d0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aab53d30-7216-4201-bafa-a9f17eb170fe"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f122e95-034c-4673-9e46-827ac0bc4bf9"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17901ae8-2315-4531-b048-ecac9239d8b5"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""71c96333-a17e-4a11-b1e8-94e9cb1247e3"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93d448f1-6657-4737-9c5e-5b1d9ff0ff1c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebCancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""571a5ed5-605b-4579-81f9-c2ddc49f5b90"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebCancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""83718503-cbe7-4686-b7ca-e2165d4b526d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebCancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""505930b0-41be-4585-810a-dff80df87c92"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebCancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""b6383830-b1b9-4a3a-82a3-2ac9a04ed633"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebClimb"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""b850a258-be94-4928-bedd-b6bb68e27f7c"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebClimb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""755c20ea-f488-4955-84d7-63e20224d483"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebClimb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea284345-1dec-4e3f-90bf-99d4a5720ea3"",
+                    ""path"": ""<Gamepad>/leftStick/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebClimb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""987312fd-bab6-4175-8c9b-42f2e0da0e5d"",
+                    ""path"": ""<Gamepad>/dpad/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebClimb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -436,7 +584,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         // Gravity
         m_Gravity = asset.FindActionMap("Gravity", throwIfNotFound: true);
         m_Gravity_Move = m_Gravity.FindAction("Move", throwIfNotFound: true);
-        m_Gravity_Web = m_Gravity.FindAction("Web", throwIfNotFound: true);
+        m_Gravity_WebShoot = m_Gravity.FindAction("WebShoot", throwIfNotFound: true);
+        m_Gravity_WebClimb = m_Gravity.FindAction("WebClimb", throwIfNotFound: true);
+        m_Gravity_WebCancel = m_Gravity.FindAction("WebCancel", throwIfNotFound: true);
         m_Gravity_Jump = m_Gravity.FindAction("Jump", throwIfNotFound: true);
         m_Gravity_Pause = m_Gravity.FindAction("Pause", throwIfNotFound: true);
     }
@@ -546,7 +696,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Gravity;
     private IGravityActions m_GravityActionsCallbackInterface;
     private readonly InputAction m_Gravity_Move;
-    private readonly InputAction m_Gravity_Web;
+    private readonly InputAction m_Gravity_WebShoot;
+    private readonly InputAction m_Gravity_WebClimb;
+    private readonly InputAction m_Gravity_WebCancel;
     private readonly InputAction m_Gravity_Jump;
     private readonly InputAction m_Gravity_Pause;
     public struct GravityActions
@@ -554,7 +706,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         private @PlayerControls m_Wrapper;
         public GravityActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gravity_Move;
-        public InputAction @Web => m_Wrapper.m_Gravity_Web;
+        public InputAction @WebShoot => m_Wrapper.m_Gravity_WebShoot;
+        public InputAction @WebClimb => m_Wrapper.m_Gravity_WebClimb;
+        public InputAction @WebCancel => m_Wrapper.m_Gravity_WebCancel;
         public InputAction @Jump => m_Wrapper.m_Gravity_Jump;
         public InputAction @Pause => m_Wrapper.m_Gravity_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Gravity; }
@@ -569,9 +723,15 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnMove;
-                @Web.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnWeb;
-                @Web.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnWeb;
-                @Web.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnWeb;
+                @WebShoot.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebShoot;
+                @WebShoot.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebShoot;
+                @WebShoot.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebShoot;
+                @WebClimb.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebClimb;
+                @WebClimb.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebClimb;
+                @WebClimb.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebClimb;
+                @WebCancel.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebCancel;
+                @WebCancel.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebCancel;
+                @WebCancel.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebCancel;
                 @Jump.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnJump;
@@ -585,9 +745,15 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Web.started += instance.OnWeb;
-                @Web.performed += instance.OnWeb;
-                @Web.canceled += instance.OnWeb;
+                @WebShoot.started += instance.OnWebShoot;
+                @WebShoot.performed += instance.OnWebShoot;
+                @WebShoot.canceled += instance.OnWebShoot;
+                @WebClimb.started += instance.OnWebClimb;
+                @WebClimb.performed += instance.OnWebClimb;
+                @WebClimb.canceled += instance.OnWebClimb;
+                @WebCancel.started += instance.OnWebCancel;
+                @WebCancel.performed += instance.OnWebCancel;
+                @WebCancel.canceled += instance.OnWebCancel;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -608,7 +774,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     public interface IGravityActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnWeb(InputAction.CallbackContext context);
+        void OnWebShoot(InputAction.CallbackContext context);
+        void OnWebClimb(InputAction.CallbackContext context);
+        void OnWebCancel(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
     }

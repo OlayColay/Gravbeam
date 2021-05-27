@@ -30,7 +30,7 @@ public class Respawn : MonoBehaviour
         //GetComponent<BoxCollider2D>().offset = Vector2.zero;
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + (Vector3)GetComponent<BoxCollider2D>().offset, GetComponent<BoxCollider2D>().size);    //Offset allowed
+        Gizmos.DrawWireCube(transform.position + (Vector3)GetComponent<BoxCollider2D>().offset, GetComponent<BoxCollider2D>().size * transform.localScale);    //Offset allowed
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
