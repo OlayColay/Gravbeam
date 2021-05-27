@@ -325,7 +325,7 @@ MonoBehaviour:
   ropeLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  climbSpeed: 3
+  climbSpeed: 6
   ropeHingeAnchor: {fileID: 7770163109976168357}
   ropeRendererStart: {fileID: 6557823884957354771}
   ropeJoint: {fileID: 2227730904939628668}

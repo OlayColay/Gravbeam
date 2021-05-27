@@ -245,6 +245,8 @@ public class PlatformerCharacter2D : MonoBehaviour
             else if (hasGlider && !isGrounded && !isSliding)
             {
                 isGliding = true;
+                // Prevent gliding upwards
+                rb.velocity = new Vector2(rb.velocity.x, Mathf.Min(rb.velocity.y, 0f));
             }
         }
     }
