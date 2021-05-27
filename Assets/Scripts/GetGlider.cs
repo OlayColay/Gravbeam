@@ -10,6 +10,7 @@ public class GetGlider : MonoBehaviour
         if (other.tag == "Player")
         {
             other.GetComponent<PlatformerCharacter2D>().hasGlider = true;
+            Destroy(gameObject);
         }
     }
 }
