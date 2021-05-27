@@ -50,9 +50,9 @@ public class BeamScript : MonoBehaviour
         BeamInterface[0] = BeamObject[0].GetComponent<BeamInterface>();
         BeamInterface[1] = BeamObject[1].GetComponent<BeamInterface>();
         BeamInterface[0].isHooked = false;
-//        BeamInterface[0].SetLength(0);
+        BeamInterface[0].SetLength(0);
         BeamInterface[1].isHooked = false;
-//        BeamInterface[1].SetLength(0);
+        BeamInterface[1].SetLength(0);
 
         bool Beam1Attached=false;
         bool Beam2Attached=false;
