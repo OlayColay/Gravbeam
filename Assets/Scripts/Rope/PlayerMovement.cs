@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpInput;
     private float horizontalInput;
 
-    void Awake()
+    void Start()
     {
         playerSprite = GetComponent<SpriteRenderer>();
         rBody = GetComponent<Rigidbody2D>();

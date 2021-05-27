@@ -36,7 +36,8 @@ public class BeamInterface : MonoBehaviour {
     void Awake() {
         beam = GetComponent<ParticleSystem>();
         wasHooked = isHooked;
-        lengthUnit = length;
+        Debug.Log(length);
+        lengthUnit = 8.7f;
     }
 
     void OnDrawGizmosSelected() {
@@ -99,6 +100,7 @@ public class BeamInterface : MonoBehaviour {
     /// <param name="length">The length of the gravbeam</param>
     public void SetLength(float length) {
 
+
         float xScale = 1;
         float yScale = 1;
 
@@ -110,8 +112,13 @@ public class BeamInterface : MonoBehaviour {
             xScale = 0.00001f;
             yScale = 0.00001f;
         }
+        if(lengthUnit < 0.1f)
+        {
+            lengthUnit = 8.7f;
+        }
 
         this.length = length;
+
         transform.localScale = new Vector3(xScale, yScale, length / lengthUnit);
     }
 }

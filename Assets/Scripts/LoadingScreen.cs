@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
+
+[RequireComponent(typeof(SpriteRenderer))]
+
 public class LoadingScreen : MonoBehaviour
 {
     public bool triggerFadeIn = false;
@@ -10,6 +13,9 @@ public class LoadingScreen : MonoBehaviour
 
     [SerializeField] private bool startOpaque = true;
     [SerializeField] private float startingOpaqueToTransparentLag = 1f;
+    
+    [SerializeField] private bool isGravity = true;
+    
     private SpriteRenderer sprite;
     private Color opaque;
     private Color transparent;
@@ -29,7 +35,14 @@ public class LoadingScreen : MonoBehaviour
             sprite.color = opaque;
             if (startingOpaqueToTransparentLag > 0f)
             {
-                StartCoroutine(WaitForFadeOutLag(startingOpaqueToTransparentLag));
+               if (isGravity)
+               {
+               StartCoroutine(WaitForFadeOutLag(startingOpaqueToTransparentLag));
+               }
+               else
+               {
+               StartCoroutine(WaitForFadeOutLagNoGrav(startingOpaqueToTransparentLag));
+               }
             }
         }
         else
@@ -70,4 +83,15 @@ public class LoadingScreen : MonoBehaviour
         triggerFadeOut = true;
         player.GetComponent<PlatformerCharacter2D>().controls.Enable();
     }
+    
+    private IEnumerator WaitForFadeOutLagNoGrav(float lag)
+    {        
+//        player.GetComponent<BeamScript>().controls.Disable();
+        yield return new WaitForSecondsRealtime(lag);
+        
+        triggerFadeOut = true;
+//        player.GetComponent<BeamScript>().controls.Enable();
+    }
+    
+    
 }
