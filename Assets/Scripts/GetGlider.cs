@@ -7,7 +7,7 @@ public class GetGlider : MonoBehaviour
 {
     private void Start() 
     {
-        if (PlayerPrefs.GetInt("gotGlider", 0) == 1)
+        if (Globals.curCheckpoint >= 1)
         {
             FindObjectOfType<PlatformerCharacter2D>().hasGlider = true;
             Destroy(gameObject);
@@ -19,7 +19,6 @@ public class GetGlider : MonoBehaviour
         if (other.tag == "Player")
         {
             other.GetComponent<PlatformerCharacter2D>().hasGlider = true;
-            PlayerPrefs.SetInt("gotGlider", 1);
             Destroy(gameObject);
         }
     }

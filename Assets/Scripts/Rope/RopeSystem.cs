@@ -79,7 +79,7 @@ public class RopeSystem : MonoBehaviour
         {
             SetCrosshairPosition(aimAngle);
         }
-        else
+        else if (ropePositions.Any())
         {
             playerMovement.ropeHook = ropePositions.Last();
             crosshairSprite.enabled = false;
@@ -129,7 +129,7 @@ public class RopeSystem : MonoBehaviour
     /// <param name="aimDirection">The current direction for aiming based on mouse position</param>
     private void HandleInput(Vector2 aimDirection)
     {
-        if (Input.GetMouseButton(0) || (Gamepad.current != null && Gamepad.current.rightStick.IsPressed()))
+        if (playerMovement.controls.Gravity.WebShoot.triggered)
         {
             if (ropeAttached) return;
             ropeRenderer.enabled = true;
@@ -137,21 +137,7 @@ public class RopeSystem : MonoBehaviour
             var hit = Physics2D.Raycast(playerPosition, aimDirection, ropeMaxCastDistance, ropeLayerMask);
             if (hit.collider != null)
             {
-                playerMovement.isSwinging = true;
-                ropeAttached = true;
-                if (!ropePositions.Contains(hit.point))
-                {
-                    // Jump slightly to distance the player a little from the ground after grappling to something.
-                    if (playerMovement.isGrounded)
-                    {
-                        playerMovement.Jump();
-                    }
-                    ropePositions.Add(hit.point);
-                    wrapPointsLookup.Add(hit.point, 0);
-                    ropeJoint.distance = Vector2.Distance(playerPosition, hit.point);
-                    ropeJoint.enabled = true;
-                    ropeHingeAnchorSprite.enabled = true;
-                }
+                StartCoroutine(AttachRope(hit.point));
             }
             else
             {
@@ -160,9 +146,29 @@ public class RopeSystem : MonoBehaviour
                 ropeJoint.enabled = false;
             }
         }
-        else if (ropeAttached && (Input.GetMouseButton(1) || playerMovement.controls.Gravity.Jump.triggered))
+        else if (ropeAttached && playerMovement.controls.Gravity.WebCancel.triggered)
         {
             ResetRope();
+        }
+    }
+
+    private IEnumerator<WaitForSeconds> AttachRope(Vector2 hitpoint)
+    {
+        playerMovement.isSwinging = true;
+        ropeAttached = true;
+        if (!ropePositions.Contains(hitpoint))
+        {
+            // Jump slightly to distance the player a little from the ground after grappling to something.
+            if (playerMovement.isGrounded)
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2Int(0, 15), ForceMode2D.Impulse);
+                yield return new WaitForSeconds(0.25f);
+            }
+            ropePositions.Add(hitpoint);
+            wrapPointsLookup.Add(hitpoint, 0);
+            ropeJoint.distance = Vector2.Distance(playerPosition, hitpoint);
+            ropeJoint.enabled = true;
+            ropeHingeAnchorSprite.enabled = true;
         }
     }
 
@@ -205,11 +211,12 @@ public class RopeSystem : MonoBehaviour
     /// </summary>
     private void HandleRopeLength()
     {
-        if (((Gamepad.current != null && Gamepad.current.leftStick.y.ReadValue() > 0.5f) || Input.GetAxis("Vertical") > 0.5f) && ropeAttached)
+        float webClimb = playerMovement.controls.Gravity.WebClimb.ReadValue<float>();
+        if (webClimb > 0.5f && ropeAttached)
         {
             ropeJoint.distance -= Time.deltaTime * climbSpeed;
         }
-        else if (((Gamepad.current != null && Gamepad.current.leftStick.y.ReadValue() < -0.5f) || Input.GetAxis("Vertical") < -0.5f) && ropeAttached)
+        else if (webClimb < -0.5f && ropeAttached)
         {
             ropeJoint.distance += Time.deltaTime * climbSpeed;
         }
