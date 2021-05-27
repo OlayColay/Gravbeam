@@ -98,6 +98,10 @@ public class BeamInterface : MonoBehaviour {
     /// </summary>
     /// <param name="length">The length of the gravbeam</param>
     public void SetLength(float length) {
+        if (length>100000000000 || length / lengthUnit > 10000000)
+        {
+            transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+        }
 
         float xScale = 1;
         float yScale = 1;
@@ -112,6 +116,7 @@ public class BeamInterface : MonoBehaviour {
         }
 
         this.length = length;
+
         transform.localScale = new Vector3(xScale, yScale, length / lengthUnit);
     }
 }
