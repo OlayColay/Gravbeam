@@ -193,7 +193,7 @@ MonoBehaviour:
   wallJumpXForce: 50
   wallScrambleMult: 1.5
   jumpDamper: 0
-  parachuteMult: 0.25
+  parachuteMult: 0.1
   hasGlider: 1
   isSwinging: 0
   ropeHook: {x: 0, y: 0}
