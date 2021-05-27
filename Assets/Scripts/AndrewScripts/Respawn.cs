@@ -42,7 +42,8 @@ public class Respawn : MonoBehaviour
                 isGravity = false;
             else
                 isGravity = true;
-            cl.isTrigger = false;
+            if (gameObject.tag == "Lethal_Freeze")
+                cl.isTrigger = false;
             // Freeze Player if hit a spike (tag = lethal_freeze)
             am.SetBool("Dead", true);
             // gameObject.GetComponent<BoxCollider2D>().enabled = false;
