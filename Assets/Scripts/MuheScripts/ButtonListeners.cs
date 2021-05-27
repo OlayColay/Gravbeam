@@ -38,7 +38,6 @@ public class ButtonListeners : MonoBehaviour {
     public void OnClickResume() {
         transform.parent.gameObject.SetActive(false);
         Time.timeScale = 1f;
-        // TODO: Resume game
     }
 
     public void OnClickRestart() {
@@ -60,6 +59,7 @@ public class ButtonListeners : MonoBehaviour {
     public void OnClickQuit() {
         Globals.Reset();
         Time.timeScale = 1f;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlatformerCharacter2D>().controls.Disable();
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
