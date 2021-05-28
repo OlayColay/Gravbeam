@@ -21,17 +21,25 @@ public class LevelGoal : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            PlayerPrefs.SetInt("currentLevel", nextLevelNumber);
-            
-            // If the next level hasn't been reached before, update the latestLevel int
-            if (nextLevelNumber > PlayerPrefs.GetInt("latestLevel", 0))
-            {
-                PlayerPrefs.SetInt("latestLevel", nextLevelNumber);
-            }
-            
-            Globals.curCheckpoint = 0; // Reset checkpoint int so that you spawn at start of next level
-
-            SceneManager.LoadScene(nextLevelNumber, LoadSceneMode.Single);
+            StartCoroutine(NextLevel());
+            FindObjectOfType<Camera>().transform.GetChild(0).GetComponent<LoadingScreen>().FadeIn();
         }
+    }
+
+    private IEnumerator NextLevel()
+    {
+        yield return new WaitForSeconds(1f);
+
+        PlayerPrefs.SetInt("currentLevel", nextLevelNumber);
+        
+        // If the next level hasn't been reached before, update the latestLevel int
+        if (nextLevelNumber > PlayerPrefs.GetInt("latestLevel", 0))
+        {
+            PlayerPrefs.SetInt("latestLevel", nextLevelNumber);
+        }
+        
+        Globals.curCheckpoint = 0; // Reset checkpoint int so that you spawn at start of next level
+
+        SceneManager.LoadScene(nextLevelNumber, LoadSceneMode.Single);
     }
 }

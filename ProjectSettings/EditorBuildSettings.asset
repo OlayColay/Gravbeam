@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/GravityTutorial.unity
     guid: a5cec08b58f1ced478c3bdf1c93d847e
   - enabled: 1
-    path: Assets/Scenes/Levels/movingBG_test_scene.unity
+    path: Assets/Scenes/Levels/Level1.unity
     guid: 275b53fb1e6e9429cb1aed06f8625b1a
   - enabled: 1
     path: Assets/Scenes/GravityScene.unity

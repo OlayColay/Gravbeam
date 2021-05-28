@@ -41,7 +41,12 @@ public class Respawn : MonoBehaviour
             if (script == null)
                 isGravity = false;
             else
+            {
                 isGravity = true;
+                script.controls.Gravity.Disable();
+                player.GetComponent<RopeSystem>().ResetRope();
+                player.GetComponent<RopeSystem>().enabled = false;
+            }
             if (gameObject.tag == "Lethal_Freeze")
                 cl.isTrigger = false;
             // Freeze Player if hit a spike (tag = lethal_freeze)
@@ -64,7 +69,7 @@ public class Respawn : MonoBehaviour
                 }
             }
 
-            ls.triggerFadeIn = true;
+            ls.FadeIn();
             // player.GetComponent<PlatformerCharacter2D>().controls.Disable();
             StartCoroutine(WaitForDeath());
         }
@@ -72,10 +77,7 @@ public class Respawn : MonoBehaviour
 
     private IEnumerator WaitForDeath()
     {        
-        while(ls.triggerFadeIn)
-        {
-            yield return null;
-        }
+        yield return new WaitForSeconds(1f);
         
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

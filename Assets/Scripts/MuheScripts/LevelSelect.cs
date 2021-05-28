@@ -9,7 +9,7 @@ public class LevelSelect : MonoBehaviour {
 
     // Start is called before the first frame update
     private void Start() {
-        latestLevel = PlayerPrefs.GetInt("latestLevel", 2) - 1;
+        latestLevel = PlayerPrefs.GetInt("latestLevel", 3) - 2;
         // Debug.Log(latestLevel);
 
         Button[] buttons = new Button[latestLevel];
