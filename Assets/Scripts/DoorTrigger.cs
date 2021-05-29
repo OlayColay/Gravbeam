@@ -19,7 +19,7 @@ public class DoorTrigger : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player" || other.tag == "Rock")
+        if(other.tag == "Player" || other.tag == "Beamable")
         {
             Transform door = transform.GetChild(0);
             door.DOLocalMove(new Vector2(door.localPosition.x, door.localPosition.y + doorLength), animationTime);
