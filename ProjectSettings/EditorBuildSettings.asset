@@ -21,10 +21,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Level1.unity
     guid: 275b53fb1e6e9429cb1aed06f8625b1a
   - enabled: 1
-    path: Assets/Scenes/Levels/NoGravLevel1.unity
+    path: Assets/Scenes/Levels/Level2.unity
     guid: e49bb846562ba4c25a64cd22e4c9126c
   - enabled: 1
-    path: Assets/Scenes/GravityScene.unity
+    path: Assets/Scenes/Levels/SecretScene.unity
     guid: 22fc52fd693991c49b292c65f9c27061
   - enabled: 0
     path: Assets/Scenes/lorenzoTestScene.unity
