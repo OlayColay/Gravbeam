@@ -166,7 +166,10 @@ public class PlatformerCharacter2D : MonoBehaviour
             canJumpMore = isJumping = isWallJumping = false;
 
         if (isGliding)
+        {
             rb.gravityScale = gravity * parachuteMult;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, -10));
+        }
         else
             rb.gravityScale = gravity;
 
