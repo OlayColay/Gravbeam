@@ -64,6 +64,8 @@ public class BeamScript : MonoBehaviour
 
         controls.Gameplay.Beam2.performed += ctx => beamDir[1] = ctx.ReadValue<Vector2>();
         controls.Gameplay.Beam2.canceled += ctx => beamDir[1] = Vector2.zero;
+        
+        controls.Gameplay.Pause.started += ctx => Pause();
     }
 
     private void Update()
@@ -294,8 +296,22 @@ public class BeamScript : MonoBehaviour
         return mousePosition - transform.position;
     }
 
+    public void Pause() {
+        GameObject pauseMenu = GameObject.Find("Canvas").transform.Find("PauseMenu").gameObject;
+        GameObject optionsMenu = GameObject.Find("Canvas").transform.Find("OptionsMenu").gameObject;
+        bool paused = pauseMenu.activeSelf || optionsMenu.activeSelf;
 
+        if (!paused) {
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+        }
+        else {
+            Time.timeScale = 1f;
+            pauseMenu.SetActive(false);
+        }
 
+        optionsMenu.SetActive(false);
+    }
 
     float GetForceStrength(Vector2 vectorToAttachPoint, Vector2 velocity, float amountOfTimeAttached, int numOfBeamsAttached)
     {
