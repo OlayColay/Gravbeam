@@ -119,6 +119,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""7be778f4-39cf-4b1e-aacd-86b44b6c3b58"",
+                    ""path"": ""<Joystick>/stick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Beam1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""Arrow Keys"",
                     ""id"": ""52ec4498-ba15-467b-b253-ca7fe8c9be3f"",
                     ""path"": ""2DVector"",
@@ -186,6 +197,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""cf9a18c5-47c8-4a03-b7cd-e3d7de86b66f"",
+                    ""path"": ""<HID::HORI CO.,LTD. HORIPAD S>/hat"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Beam2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""72832bdc-21a5-4ecc-a9d6-5ddb8d92f5b6"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -199,6 +221,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""835128d7-4999-4d0b-abc4-1f4aedbe32dd"",
                     ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53c8b12f-0e1d-4b7f-b216-0ca24e81d2ad"",
+                    ""path"": ""<HID::HORI CO.,LTD. HORIPAD S>/button3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -227,6 +260,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0ba6276-4f49-490c-b5ef-f8681b1ca0ce"",
+                    ""path"": ""<HID::HORI CO.,LTD. HORIPAD S>/button10"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -247,6 +291,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""1b8163bf-7f51-430e-be74-1406c48d8d93"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""WebAim"",
+                    ""type"": ""Value"",
+                    ""id"": ""7108773d-0e4b-4c5c-8daa-e00c724bad91"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -373,6 +425,39 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""Horipad"",
+                    ""id"": ""1ccd9d04-e53f-4f39-84ad-be62a4b63a4f"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""f53f585d-775c-43b3-a32d-94587a5a30f3"",
+                    ""path"": ""<HID::HORI CO.,LTD. HORIPAD S>/hat/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""a07bea45-7bb3-4fca-8f94-19073301073d"",
+                    ""path"": ""<HID::HORI CO.,LTD. HORIPAD S>/hat/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""438da936-4599-4a31-9f54-3967a6ea5649"",
                     ""path"": ""<Keyboard>/space"",
@@ -396,6 +481,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""0e191f8b-9d2b-416d-a7c8-c3ccdc2e9896"",
+                    ""path"": ""<HID::HORI CO.,LTD. HORIPAD S>/button3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1fe071fe-f2ab-4a2d-b046-41e6094a111e"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -409,6 +505,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""506ab956-4cff-4c29-9278-cf1a7c84f725"",
                     ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c2dab7a-3b38-4682-bfbb-c92e6a67635d"",
+                    ""path"": ""<HID::HORI CO.,LTD. HORIPAD S>/button10"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -473,6 +580,50 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""ecd8afb8-3735-4d5f-8140-58d6e356536e"",
+                    ""path"": ""<Joystick>/stick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""33a20bd8-6df2-4f12-b192-b58a6e47ff89"",
+                    ""path"": ""<Joystick>/stick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7f9a41d-4c71-4848-98be-0d3e032d71c6"",
+                    ""path"": ""<Joystick>/stick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a10e2a47-c8de-4595-935c-38cccfada691"",
+                    ""path"": ""<Joystick>/stick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""93d448f1-6657-4737-9c5e-5b1d9ff0ff1c"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
@@ -508,6 +659,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""505930b0-41be-4585-810a-dff80df87c92"",
                     ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebCancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e996e1c2-2f3d-4dd7-980b-6040f08e0de7"",
+                    ""path"": ""<HID::HORI CO.,LTD. HORIPAD S>/button3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -569,6 +731,39 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""WebClimb"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ce976fb-0124-47c2-9396-50be357d17ec"",
+                    ""path"": ""<HID::HORI CO.,LTD. HORIPAD S>/hat/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebClimb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d66338b-2ec0-4185-bf76-a6734cde38bd"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebAim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""771e958a-d990-4d6b-9e52-b1ad270c4daa"",
+                    ""path"": ""<Joystick>/stick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WebAim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -585,6 +780,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gravity = asset.FindActionMap("Gravity", throwIfNotFound: true);
         m_Gravity_Move = m_Gravity.FindAction("Move", throwIfNotFound: true);
         m_Gravity_WebShoot = m_Gravity.FindAction("WebShoot", throwIfNotFound: true);
+        m_Gravity_WebAim = m_Gravity.FindAction("WebAim", throwIfNotFound: true);
         m_Gravity_WebClimb = m_Gravity.FindAction("WebClimb", throwIfNotFound: true);
         m_Gravity_WebCancel = m_Gravity.FindAction("WebCancel", throwIfNotFound: true);
         m_Gravity_Jump = m_Gravity.FindAction("Jump", throwIfNotFound: true);
@@ -697,6 +893,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private IGravityActions m_GravityActionsCallbackInterface;
     private readonly InputAction m_Gravity_Move;
     private readonly InputAction m_Gravity_WebShoot;
+    private readonly InputAction m_Gravity_WebAim;
     private readonly InputAction m_Gravity_WebClimb;
     private readonly InputAction m_Gravity_WebCancel;
     private readonly InputAction m_Gravity_Jump;
@@ -707,6 +904,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public GravityActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gravity_Move;
         public InputAction @WebShoot => m_Wrapper.m_Gravity_WebShoot;
+        public InputAction @WebAim => m_Wrapper.m_Gravity_WebAim;
         public InputAction @WebClimb => m_Wrapper.m_Gravity_WebClimb;
         public InputAction @WebCancel => m_Wrapper.m_Gravity_WebCancel;
         public InputAction @Jump => m_Wrapper.m_Gravity_Jump;
@@ -726,6 +924,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @WebShoot.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebShoot;
                 @WebShoot.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebShoot;
                 @WebShoot.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebShoot;
+                @WebAim.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebAim;
+                @WebAim.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebAim;
+                @WebAim.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebAim;
                 @WebClimb.started -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebClimb;
                 @WebClimb.performed -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebClimb;
                 @WebClimb.canceled -= m_Wrapper.m_GravityActionsCallbackInterface.OnWebClimb;
@@ -748,6 +949,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @WebShoot.started += instance.OnWebShoot;
                 @WebShoot.performed += instance.OnWebShoot;
                 @WebShoot.canceled += instance.OnWebShoot;
+                @WebAim.started += instance.OnWebAim;
+                @WebAim.performed += instance.OnWebAim;
+                @WebAim.canceled += instance.OnWebAim;
                 @WebClimb.started += instance.OnWebClimb;
                 @WebClimb.performed += instance.OnWebClimb;
                 @WebClimb.canceled += instance.OnWebClimb;
@@ -775,6 +979,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnWebShoot(InputAction.CallbackContext context);
+        void OnWebAim(InputAction.CallbackContext context);
         void OnWebClimb(InputAction.CallbackContext context);
         void OnWebCancel(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);

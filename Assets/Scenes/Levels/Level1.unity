@@ -6189,6 +6189,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: EventSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 2541422045500107715, guid: eb9f2862794ea6641ac92b76b3e9d22e,
+        type: 3}
+      propertyPath: m_MoveAction
+      value: 
+      objectReference: {fileID: 3710738434707379630, guid: ca9f5fa95ffab41fb9a615ab714db018,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb9f2862794ea6641ac92b76b3e9d22e, type: 3}
 --- !u!1 &361694461

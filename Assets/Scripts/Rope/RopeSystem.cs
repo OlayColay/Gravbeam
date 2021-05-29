@@ -70,7 +70,7 @@ public class RopeSystem : MonoBehaviour
         float aimAngle = 0f;
         Vector2 aimDirection = Vector2.zero;
 
-        if (Gamepad.current == null)
+        if (Gamepad.current == null && Joystick.current == null)
         {
             var worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
             var facingDirection = worldMousePosition - transform.position;
@@ -82,9 +82,9 @@ public class RopeSystem : MonoBehaviour
 
             aimDirection = Quaternion.Euler(0, 0, aimAngle * Mathf.Rad2Deg) * Vector2.right;
         }
-        else if (Gamepad.current.rightStick.ReadValue() != Vector2.zero)
+        else if (playerMovement.controls.Gravity.WebAim.ReadValue<Vector2>() != Vector2.zero)
         {
-            aimDirection = Gamepad.current.rightStick.ReadValue();
+            aimDirection = playerMovement.controls.Gravity.WebAim.ReadValue<Vector2>();
             aimAngle = Vector2.Angle(Vector2.right, aimDirection);
         }
 

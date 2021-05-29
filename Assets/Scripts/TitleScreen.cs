@@ -12,7 +12,7 @@ public class TitleScreen : MonoBehaviour
 
     private void OnEnable() 
     {
-        if (EventSystem.current != null && Gamepad.current != null)
+        if (EventSystem.current != null && (Gamepad.current != null || Joystick.current != null))
         {
             EventSystem.current.SetSelectedGameObject(null);
             StartCoroutine(SelectFirstButton());

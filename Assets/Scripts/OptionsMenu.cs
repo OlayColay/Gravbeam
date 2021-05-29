@@ -12,7 +12,7 @@ public class OptionsMenu : MonoBehaviour
 
     private void OnEnable() 
     {
-        if (EventSystem.current != null && Gamepad.current != null)
+        if (EventSystem.current != null && (Gamepad.current != null || Joystick.current != null))
         {
             previousSelectedButton = EventSystem.current.currentSelectedGameObject;
             EventSystem.current.SetSelectedGameObject(null);
@@ -28,7 +28,7 @@ public class OptionsMenu : MonoBehaviour
     
     private void OnDisable() 
     {
-        if (EventSystem.current != null && Gamepad.current != null)
+        if (EventSystem.current != null && (Gamepad.current != null || Joystick.current != null))
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(previousSelectedButton);
