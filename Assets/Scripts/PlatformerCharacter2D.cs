@@ -43,7 +43,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     [Tooltip("If Skreech has unlocked gliding")]
     public bool hasGlider = true;
 
-    public PlayerControls controls;
+    [HideInInspector] public PlayerControls controls;
     
     private float move = 0f;            // The value of horizontal movement (from -1 to 1)
     private Transform groundCheck;      // A position marking where to check if the player is grounded.

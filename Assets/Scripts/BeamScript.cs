@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BeamScript : MonoBehaviour
 {
-    PlayerControls controls;
+    [HideInInspector] public PlayerControls controls;
 
     public float BEAM_LENGTH;
     public float BEAM_STRENGTH;
