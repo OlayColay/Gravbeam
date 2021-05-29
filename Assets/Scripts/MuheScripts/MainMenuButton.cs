@@ -8,6 +8,15 @@ using UnityEngine.SceneManagement;
 /// This class handles UI button behavior
 /// </summary>
 public class MainMenuButton : MonoBehaviour {
+    public void Awake() {
+        if(gameObject.name == "VolumeSlider") {
+            gameObject.GetComponent<Slider>().value = AudioListener.volume * 100;
+        }
+        else if (gameObject.name == "QualitySlider") {
+            gameObject.GetComponent<Slider>().value = QualitySettings.GetQualityLevel();
+        }
+    }
+
     public void OnClickNewGame() {
         PlayerPrefs.DeleteAll();
 
