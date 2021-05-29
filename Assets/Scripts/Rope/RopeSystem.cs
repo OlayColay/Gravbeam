@@ -24,6 +24,7 @@ public class RopeSystem : MonoBehaviour
     private Dictionary<Vector2, int> wrapPointsLookup = new Dictionary<Vector2, int>();
     private SpriteRenderer ropeHingeAnchorSprite;
     private bool webStart = false;
+    private PlayerControls ropeControls;
 
     void Awake()
     {
@@ -32,7 +33,18 @@ public class RopeSystem : MonoBehaviour
         ropeHingeAnchorRb = ropeHingeAnchor.GetComponent<Rigidbody2D>();
         ropeHingeAnchorSprite = ropeHingeAnchor.GetComponent<SpriteRenderer>();
 
-        playerMovement.controls.Gravity.WebShoot.started += ctx => StartCoroutine(StartWeb());
+        ropeControls = new PlayerControls();
+        ropeControls.Gravity.WebShoot.started += ctx => StartCoroutine(StartWeb());
+    }
+
+    void OnEnable()
+    {
+        ropeControls.Enable();
+    }
+
+    void OnDisable()
+    {
+        ropeControls.Disable();
     }
 
     /// <summary>
