@@ -8,7 +8,22 @@ using UnityEngine.SceneManagement;
 /// This class handles UI button behavior
 /// </summary>
 public class ButtonListeners : MonoBehaviour {
+    private PlatformerCharacter2D player;
+    private BeamScript ZeroGPlayer;
+    private PlayerControls controls;
+
     public void Awake() {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlatformerCharacter2D>();
+
+        if (player != null) {
+            controls = player.controls;
+        }
+        else {
+            BeamScript ZeroGPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<BeamScript>();
+            controls = ZeroGPlayer.controls;
+        }
+
+
         if (gameObject.name == "VolumeSlider") {
             gameObject.GetComponent<Slider>().value = AudioListener.volume * 100;
         }
@@ -68,7 +83,9 @@ public class ButtonListeners : MonoBehaviour {
     public void OnClickQuit() {
         Globals.Reset();
         Time.timeScale = 1f;
-        // GameObject.FindGameObjectWithTag("Player").GetComponent<PlatformerCharacter2D>().controls.Disable();
+
+        controls.Disable();
+
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
