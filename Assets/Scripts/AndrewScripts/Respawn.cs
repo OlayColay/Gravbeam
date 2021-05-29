@@ -55,18 +55,20 @@ public class Respawn : MonoBehaviour
             // player.GetComponent<PlatformerCharacter2D>().enabled = false;
             if (gameObject.tag == "Lethal_Freeze")
             {
-                rb.velocity = Vector2.zero;
-                // if (player.transform.rotation.y != 0f)
-                //    faceRight = -1;
-                // else
-                //     faceRight = 1;
-                // hitVelo.x = faceRight * 20f;
-                // rb.velocity = hitVelo;
-                // rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                if (isGravity)
-                {
-                    rb.velocity = hitVelo;
-                }
+                // rb.velocity = Vector2.zero;
+                // // if (player.transform.rotation.y != 0f)
+                // //    faceRight = -1;
+                // // else
+                // //     faceRight = 1;
+                // // hitVelo.x = faceRight * 20f;
+                // // rb.velocity = hitVelo;
+                // // rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                // if (isGravity)
+                // {
+                //     rb.velocity = hitVelo;
+                // }
+                player.GetComponent<ParticleSystem>().Play(false);
+                player.GetComponent<SpriteRenderer>().enabled = false;
             }
 
             ls.FadeIn();
