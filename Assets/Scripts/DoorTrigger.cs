@@ -21,6 +21,7 @@ public class DoorTrigger : MonoBehaviour
     {
         if(other.tag == "Player" || other.tag == "Beamable")
         {
+            this.GetComponent<SpriteRenderer>().enabled = false;
             Transform door = transform.GetChild(0);
             door.DOLocalMove(new Vector2(door.localPosition.x, door.localPosition.y + doorLength), animationTime);
             GetComponent<BoxCollider2D>().enabled = false;
