@@ -23,6 +23,7 @@ public class RopeSystem : MonoBehaviour
     private bool isColliding;
     private Dictionary<Vector2, int> wrapPointsLookup = new Dictionary<Vector2, int>();
     private SpriteRenderer ropeHingeAnchorSprite;
+    private bool webStart = false;
 
     void Awake()
     {
@@ -30,6 +31,8 @@ public class RopeSystem : MonoBehaviour
         playerPosition = transform.position;
         ropeHingeAnchorRb = ropeHingeAnchor.GetComponent<Rigidbody2D>();
         ropeHingeAnchorSprite = ropeHingeAnchor.GetComponent<SpriteRenderer>();
+
+        playerMovement.controls.Gravity.WebShoot.started += ctx => StartCoroutine(StartWeb());
     }
 
     /// <summary>
@@ -129,7 +132,7 @@ public class RopeSystem : MonoBehaviour
     /// <param name="aimDirection">The current direction for aiming based on mouse position</param>
     private void HandleInput(Vector2 aimDirection)
     {
-        if (playerMovement.controls.Gravity.WebShoot.triggered)
+        if (webStart)
         {
             if (ropeAttached) return;
             ropeRenderer.enabled = true;
@@ -146,7 +149,7 @@ public class RopeSystem : MonoBehaviour
                 ropeJoint.enabled = false;
             }
         }
-        else if (ropeAttached && playerMovement.controls.Gravity.WebCancel.triggered)
+        else if (playerMovement.controls.Gravity.WebCancel.triggered)
         {
             ResetRope();
         }
@@ -371,5 +374,12 @@ public class RopeSystem : MonoBehaviour
     private void OnTriggerExit2D(Collider2D colliderOnExit)
     {
         isColliding = false;
+    }
+
+    private IEnumerator<WaitForEndOfFrame> StartWeb()
+    {
+        webStart = true;
+        yield return new WaitForEndOfFrame();
+        webStart = false;
     }
 }
