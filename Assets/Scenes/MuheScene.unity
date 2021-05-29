@@ -6464,6 +6464,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3427889010225583868, guid: ae1c11c4d84720c4cbf0811cbc2ab14a,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.0001
+      objectReference: {fileID: 0}
     - target: {fileID: 3948063886684160499, guid: ae1c11c4d84720c4cbf0811cbc2ab14a,
         type: 3}
       propertyPath: m_Name
