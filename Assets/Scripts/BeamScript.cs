@@ -302,12 +302,11 @@ public class BeamScript : MonoBehaviour
         bool paused = pauseMenu.activeSelf || optionsMenu.activeSelf;
 
         if (!paused) {
-            Time.timeScale = 0;
             pauseMenu.SetActive(true);
+            controls.Gameplay.Disable();
         }
         else {
-            Time.timeScale = 1f;
-            pauseMenu.SetActive(false);
+            FindObjectOfType<ButtonListeners>().GetComponent<ButtonListeners>().OnClickResume();
         }
 
         optionsMenu.SetActive(false);

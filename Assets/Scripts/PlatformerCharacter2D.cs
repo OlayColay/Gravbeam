@@ -72,6 +72,8 @@ public class PlatformerCharacter2D : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1f;
+        
         // Setting up references.
         groundCheck = transform.Find("GroundCheck");
         ceilingCheck = transform.Find("CeilingCheck");
@@ -280,17 +282,18 @@ public class PlatformerCharacter2D : MonoBehaviour
     }
 
     public void Pause() {
-        GameObject pauseMenu = GameObject.Find("Canvas").transform.Find("PauseMenu").gameObject;
-        GameObject optionsMenu = GameObject.Find("Canvas").transform.Find("OptionsMenu").gameObject;
+        GameObject pauseMenu = FindObjectOfType<CanvasGroup>().transform.GetChild(0).gameObject;
+        GameObject optionsMenu = FindObjectOfType<CanvasGroup>().transform.GetChild(1).gameObject;
         bool paused = pauseMenu.activeSelf || optionsMenu.activeSelf;
 
+        Debug.Log(pauseMenu);
+
         if (!paused) {
-            Time.timeScale = 0;
             pauseMenu.SetActive(true);
+            controls.Gravity.Disable();
         }
         else {
-            Time.timeScale = 1f;
-            pauseMenu.SetActive(false);
+            FindObjectOfType<ButtonListeners>().GetComponent<ButtonListeners>().OnClickResume();
         }
 
         optionsMenu.SetActive(false);

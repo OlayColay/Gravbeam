@@ -52,7 +52,6 @@ public class ButtonListeners : MonoBehaviour {
         //         Debug.Log("Level " + level + " not yet added!");
         //         break;
         // }
-
         SceneManager.LoadScene(level + 3, LoadSceneMode.Single);
     }
 
@@ -60,14 +59,16 @@ public class ButtonListeners : MonoBehaviour {
     /// Resume gameplay
     /// </summary>
     public void OnClickResume() {
+        controls.Enable();
         transform.parent.gameObject.SetActive(false);
         Time.timeScale = 1f;
     }
 
     public void OnClickRestart() {
+        controls.Disable();
         Globals.Reset();
         Time.timeScale = 1f;
-        // GameObject.FindGameObjectWithTag("Player").GetComponent<PlatformerCharacter2D>().controls.Disable();
+        GameObject.FindObjectOfType<CanvasGroup>().transform.GetChild(0).gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

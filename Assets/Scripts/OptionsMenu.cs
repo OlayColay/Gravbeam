@@ -12,11 +12,19 @@ public class OptionsMenu : MonoBehaviour
 
     private void OnEnable() 
     {
+        Time.timeScale = 0f;
+
         if (EventSystem.current != null && (Gamepad.current != null || Joystick.current != null))
         {
             previousSelectedButton = EventSystem.current.currentSelectedGameObject;
             EventSystem.current.SetSelectedGameObject(null);
             StartCoroutine(SelectFirstButton());
+        }
+
+        PlatformerCharacter2D platformerControls = FindObjectOfType<PlatformerCharacter2D>();
+        if (platformerControls != null)
+        {
+            platformerControls.controls.Gravity.Disable();
         }
     }
 
