@@ -36,7 +36,7 @@ public class BeamInterface : MonoBehaviour {
     void Awake() {
         beam = GetComponent<ParticleSystem>();
         wasHooked = isHooked;
-        Debug.Log(length);
+        // Debug.Log(length);
         lengthUnit = 8.7f;
     }
 

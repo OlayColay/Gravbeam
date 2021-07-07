@@ -286,7 +286,7 @@ public class PlatformerCharacter2D : MonoBehaviour
         GameObject optionsMenu = FindObjectOfType<CanvasGroup>().transform.GetChild(1).gameObject;
         bool paused = pauseMenu.activeSelf || optionsMenu.activeSelf;
 
-        Debug.Log(pauseMenu);
+        // Debug.Log(pauseMenu);
 
         if (!paused) {
             pauseMenu.SetActive(true);

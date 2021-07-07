@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class RopeSystem : MonoBehaviour
 {
@@ -176,8 +177,10 @@ public class RopeSystem : MonoBehaviour
             // Jump slightly to distance the player a little from the ground after grappling to something.
             if (playerMovement.isGrounded)
             {
+                playerMovement.controls.Gravity.Disable();  // To prevent glitches with jumping at the same time
                 GetComponent<Rigidbody2D>().AddForce(new Vector2Int(0, 15), ForceMode2D.Impulse);
                 yield return new WaitForSeconds(0.25f);
+                playerMovement.controls.Gravity.Enable();
             }
             ropePositions.Add(hitpoint);
             wrapPointsLookup.Add(hitpoint, 0);

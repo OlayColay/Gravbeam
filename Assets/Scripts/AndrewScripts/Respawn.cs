@@ -39,23 +39,27 @@ public class Respawn : MonoBehaviour
         {
             PlatformerCharacter2D script = player.GetComponent<PlatformerCharacter2D>();
             if (script == null)
+            {
                 isGravity = false;
+                player.GetComponent<BeamScript>().controls.Disable();
+            }
             else
             {
                 isGravity = true;
-                script.controls.Gravity.Disable();
+                script.controls.Disable();
                 player.GetComponent<RopeSystem>().ResetRope();
                 player.GetComponent<RopeSystem>().enabled = false;
             }
-            if (gameObject.tag == "Lethal_Freeze")
-                cl.isTrigger = false;
             // Freeze Player if hit a spike (tag = lethal_freeze)
-            am.SetBool("Dead", true);
             // gameObject.GetComponent<BoxCollider2D>().enabled = false;
             // player.GetComponent<PlatformerCharacter2D>().enabled = false;
             if (gameObject.tag == "Lethal_Freeze")
             {
-                // rb.velocity = Vector2.zero;
+                cl.isTrigger = false;
+                am.SetBool("Dead", true);
+
+                rb.simulated = false;
+
                 // // if (player.transform.rotation.y != 0f)
                 // //    faceRight = -1;
                 // // else

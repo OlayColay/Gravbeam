@@ -8307,7 +8307,7 @@ PrefabInstance:
     - target: {fileID: 4132508997030797150, guid: 24a48f37bae068d40ad93d50b53cb09a,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4132508997030797150, guid: 24a48f37bae068d40ad93d50b53cb09a,
         type: 3}
@@ -16869,6 +16869,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GroundedSkreech
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067263724942069591, guid: c7a9b0614aa391b4ca7ea83be1156975,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7463734154516516966, guid: c7a9b0614aa391b4ca7ea83be1156975,
         type: 3}

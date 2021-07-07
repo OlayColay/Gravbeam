@@ -27,10 +27,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/SecretScene.unity
     guid: 22fc52fd693991c49b292c65f9c27061
   - enabled: 0
-    path: Assets/Scenes/lorenzoTestScene.unity
+    path: Assets/Scenes/Archived/lorenzoTestScene.unity
     guid: e6864adea96264700b303d439a4295b4
   - enabled: 0
-    path: Assets/Scenes/ColeScene.unity
+    path: Assets/Scenes/Archived/ColeScene.unity
     guid: 62bc09aebb5100f42a504590d68d8bf6
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 69343a7a9a6e4064090eaef5243022f5,

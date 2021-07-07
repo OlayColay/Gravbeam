@@ -42,6 +42,8 @@ public class BeamScript : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        Time.timeScale = 1f;
+
         BeamObject[0] = transform.GetChild(0).gameObject;
         BeamObject[1] = transform.GetChild(1).gameObject;
 
