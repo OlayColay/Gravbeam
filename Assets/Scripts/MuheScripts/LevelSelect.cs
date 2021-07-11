@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class LevelSelect : MonoBehaviour {
     [Tooltip("The level progress of the player. 0 if a new player")]
     [SerializeField] private int latestLevel;
+    [SerializeField] private Scrollbar scrollbar;
     private Transform levelScrollPane;
 
     // Start is called before the first frame update
@@ -43,6 +45,28 @@ public class LevelSelect : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        
+        GameObject selected = EventSystem.current.currentSelectedGameObject;
+        if (selected == null) return;
+        if (selected.transform.parent != levelScrollPane) return;
+        RectTransform selectedRectTransform = selected.GetComponent<RectTransform>();
+        RectTransform contentRect = levelScrollPane.GetComponent<RectTransform>();
+
+        float scrollViewMinY = -65;
+        float scrollViewMaxY = 65;
+        // Debug.Log(selectedRectTransform.anchoredPosition.y);
+ 
+        float selectedPositionY = selectedRectTransform.anchoredPosition.y;
+        // Debug.Log(selectedPositionY);
+ 
+        // If selection above scroll view
+        if (selectedPositionY > scrollViewMaxY)
+        {
+            scrollbar.value += 0.02f;
+        }
+        // If selection below scroll view
+        else if (selectedPositionY < scrollViewMinY)
+        {
+            scrollbar.value -= 0.02f;
+        }
     }
 }
