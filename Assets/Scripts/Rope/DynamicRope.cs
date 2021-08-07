@@ -19,7 +19,7 @@ public class DynamicRope : MonoBehaviour
         {
             int index = Random.Range(0, prefabRopeSegs.Length);
             GameObject newSeg = Instantiate(prefabRopeSegs[index]);
-            newSeg.transform.parent = transform;
+            newSeg.transform.SetParent(transform);
             newSeg.transform.position = transform.position;
             HingeJoint2D hj = newSeg.GetComponent<HingeJoint2D>();
             hj.connectedBody = prevBod;

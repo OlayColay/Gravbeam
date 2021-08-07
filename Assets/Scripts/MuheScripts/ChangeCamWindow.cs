@@ -64,7 +64,7 @@ public class ChangeCamWindow : MonoBehaviour {
         // Standard assets camera tracking code
         m_LastTargetPosition = playerTransform.position;
         m_OffsetZ = (transform.position - playerTransform.position).z;
-        transform.parent = null;
+        transform.SetParent(null);
     }
 
     // Update is called once per frame
